@@ -25,6 +25,7 @@ const Settings = () => {
     { id: 18, title: "Array.from() and Array.of()", items: ["Convert iterable to array", "Create array from values"] },
     { id: 19, title: "Object Utility Methods", items: ["Object.keys()", "Object.values()", "Object.entries()", "Object.assign()"] },
     { id: 20, title: "Optional Chaining & Nullish Coalescing", items: ["obj?.prop", "a ?? b"] },
+    { id: 21, title: "Optional Chaining & Nullish Coalescing", items: ["obj?.prop", "a ?? b"] },
   ];
 
   
