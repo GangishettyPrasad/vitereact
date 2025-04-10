@@ -40,3 +40,41 @@
 .read-the-docs {
   color: #888;
 }
+
+/* j */
+
+
+/* tableStyles.css */
+
+/* tableFix.css */
+
+/* Prevent row dragging and allow only text selection */
+/* Disable row dragging and allow full text selection */
+/* Completely remove drag/move/select issues */
+.rdt_TableRow, .rdt_TableCell {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-user-drag: none !important;
+  cursor: default;
+}
+
+/* Allow text inside only .no-select to be selectable */
+/* Prevent entire row dragging behavior */
+.rdt_TableRow, .rdt_TableCell {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-user-drag: none !important;
+  cursor: default;
+}
+
+/* But allow the text inside to be selected */
+.no-drag-select {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -webkit-user-drag: none !important;
+  cursor: text !important;
+}
+
+

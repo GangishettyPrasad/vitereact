@@ -37,6 +37,7 @@ export default function Home() {
         
         <MenuItem onClick={handleClose}><Link   to = '/componentreact'>componentreact</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link   to = '/Propsreact'>Propsreact</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link   to = '/reactdatatable'>ReactDataTable</Link></MenuItem>
       </Menu>
     </div>
   );
