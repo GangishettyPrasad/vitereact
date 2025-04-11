@@ -70,17 +70,24 @@ var a = {
         <li><Link   to = '/AsyncAwaitGuide'>AsyncAwaitGuide</Link></li>
         <li><Link   to = '/PromiseChainingGuide'>PromiseChainingGuide</Link></li>
         <li><Link   to = '/ReactCoreGuide'>ReactCoreGuide</Link></li>
+        <li><Link   to = '/JSXRenderingGuide'>JSXRenderingGuide</Link></li>
+        <li><Link   to = '/JSXConditionalRenderingGuide'>JSXConditionalRenderingGuide</Link></li>
+        <li><Link   to = '/PropsGuide'>PropsGuide</Link></li>
+        <li><Link   to = '/UseStateCompleteGuide'>UseStateCompleteGuide</Link></li>
+        <li><Link   to = '/FullReactUseStateAndJSXExamples'>FullReactUseStateAndJSXExamples</Link></li>
+        <li><Link   to = '/UseEffectMasterGuide'>UseEffectMasterGuide</Link></li>
+        <li><Link   to = '/UseEffectFullVisualDoc'>UseEffectFullVisualDoc</Link></li>
         
 
 
 
 
-
+       
 
        
        
         
-        <li><Link   to = '/ReactCoreGuide'>ReactCoreGuide</Link></li>
+        <li><Link   to = '/UseEffectFullVisualDoc'>UseEffectFullVisualDoc</Link></li>
 
         
       </ul>
