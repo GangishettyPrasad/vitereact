@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@mui/material';
 import { FcAssistant } from "react-icons/fc";
 import { SlPencil } from "react-icons/sl";
-const Settings = () => {
+const Index = () => {
 
   const es6Checklist = [
     { id: 1, title: "Variable Declarations", items: ["let", "const", "Temporal Dead Zone"] },
@@ -87,4 +87,4 @@ var a = {
   );
 };
 
-export default Settings;
+export default Index;

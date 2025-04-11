@@ -45,7 +45,7 @@ const Component_react = (props) => {
             </div>
            
 
-            <h5> back to react <Link   to = '/'>componentreact</Link> </h5>
+            <h5> back to react <Link   to = '/'>react</Link> </h5>
 
 
 

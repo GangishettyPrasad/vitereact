@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { FcAutomotive } from "react-icons/fc";
+import { Link } from 'react-router-dom';
 const ReactDataTable = () => {
     
     
@@ -194,6 +195,8 @@ const handleChange = ({ selectedRows }) => {
 		paginationComponentOptions={paginationComponentOptions}
 
       />
+
+<h5> back to react <Link   to = '/myTabs'>react</Link> </h5>
     </div>
   );
 };
