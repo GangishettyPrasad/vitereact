@@ -2,6 +2,8 @@ import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@mui/material';
+import { FcAssistant } from "react-icons/fc";
+import { SlPencil } from "react-icons/sl";
 const Settings = () => {
 
   const es6Checklist = [
@@ -28,13 +30,17 @@ const Settings = () => {
     { id: 21, title: "Optional Chaining & Nullish Coalescing", items: ["obj?.prop", "a ?? b"] },
   ];
 
-  
+var a = {
+  width : '30px',
+  height : '30px',
+  color : 'yellow',
+}
 
   return (
     <div>
-      <h2>JavaScript</h2>
+      <h2><FcAssistant style={a}/>JavaScript  </h2>
       <ol>
-        <h3>topics</h3>
+        <h3>topics <SlPencil style={{color : "blue"}}/> </h3>
       </ol>
       <ul>
         <li><Link   to = '/componentreact'>intro</Link></li>
