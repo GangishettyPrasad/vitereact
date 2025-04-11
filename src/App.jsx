@@ -35,6 +35,10 @@ function App() {
           <Route path="/css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
           <Route path="/jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
           <Route path="/git" element={<> <h3>GIT Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
+          <Route path="/html" element={ <> <h3>Html Page Still Not Started </h3> <h4>Please Wait ......</h4></> } />
+          <Route path="/css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
+          <Route path="/jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
+          <Route path="/git" element={<> <h3>GIT Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
 
