@@ -38,6 +38,13 @@ import PromisesAsyncGuidee from './component/JS/PromisesAsyncGuidee';
 import AsyncAwaitGuide from './component/JS/AsyncAwaitGuide';
 import PromiseChainingGuide from './component/JS/PromiseChainingGuide';
 import ReactCoreGuide from './component/JS/ReactCoreGuide';
+import JSXRenderingGuide from './component/JS/JSXRenderingGuide';
+import JSXConditionalRenderingGuide from './component/JS/JSXConditionalRenderingGuide';
+import PropsGuide from './component/JS/PropsGuide';
+import UseStateCompleteGuide from './component/JS/UseStateCompleteGuide';
+import FullReactUseStateAndJSXExamples from './component/JS/FullReactUseStateAndJSXExamples';
+import UseEffectMasterGuide from './component/JS/UseEffectMasterGuide';
+import UseEffectFullVisualDoc from './component/JS/UseEffectFullVisualDoc';
 
 
 function App() {
@@ -90,8 +97,16 @@ function App() {
           <Route path="AsyncAwaitGuide" element={  <AsyncAwaitGuide />} />
           <Route path="PromiseChainingGuide" element={  <PromiseChainingGuide />} />
           <Route path="ReactCoreGuide" element={  <ReactCoreGuide />} />
+          <Route path="JSXRenderingGuide" element={  <JSXRenderingGuide />} />
+          <Route path="JSXConditionalRenderingGuide" element={  <JSXConditionalRenderingGuide />} />
+          <Route path="PropsGuide" element={  <PropsGuide />} />
+          <Route path="UseStateCompleteGuide" element={  <UseStateCompleteGuide />} />
+          <Route path="FullReactUseStateAndJSXExamples" element={  <FullReactUseStateAndJSXExamples />} />
+
+          <Route path="UseEffectMasterGuide" element={  <UseEffectMasterGuide />} />
+          <Route path="UseEffectFullVisualDoc" element={  <UseEffectFullVisualDoc />} />
           
-            
+          
           
         </Routes>
        
