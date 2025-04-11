@@ -43,21 +43,46 @@ var a = {
         <h3>topics <SlPencil style={{color : "blue"}}/> </h3>
       </ol>
       <ul>
-        <li><Link   to = '/componentreact'>intro</Link></li>
+        <li><Link   to = '/JsArrayMethodsDemo'>JsArrayMethodsDemo</Link></li>
 
-        <li><Link   to = '/componentreact'>data types</Link></li>
-        <li><Link   to = '/componentreact'>operators</Link></li>
-        <li><Link   to = '/componentreact'>expresssions</Link></li>
-        <li><Link   to = '/componentreact'>statements</Link></li>
-        <li><Link   to = '/componentreact'>expresssions vs statements </Link></li>
-        <li><Link   to = '/componentreact'>varaiables</Link></li>
-        <li><Link   to = '/componentreact'>conditional statement</Link></li>
-        <li><Link   to = '/componentreact'>iterational statements</Link></li>
-        <li><Link   to = '/componentreact'>arrays</Link></li>
-        <li><Link   to = '/componentreact'>objects</Link></li>
-        <li><Link   to = '/componentreact'>events</Link></li>
-        <li><Link   to = '/componentreact'>es6</Link></li>
-        <li><Link   to = '/componentreact'>componentreact</Link></li>
+        <li><Link   to = '/ReactArrayMethods'>ReactArrayMethods</Link></li>
+
+        <li><Link   to = '/SpreadOperatorGuide'>SpreadOperatorGuide</Link></li>
+        <li><Link   to = '/MapMethodGuide'>MapMethodGuide</Link></li>
+        <li><Link   to = '/FilterGuide'>FilterGuide</Link></li>
+        <li><Link   to = '/DestructuringGuide'>DestructuringGuide </Link></li>
+        <li><Link   to = '/SpreadOperatorGuidee'>SpreadOperatorGuidee</Link></li>
+        <li><Link   to = '/ArraysGuide'>ArraysGuide</Link></li>
+        <li><Link   to = '/JSObjectsGuide'>JSObjectsGuide</Link></li>
+        <li><Link   to = '/FunctionsGuide'>FunctionsGuide</Link></li>
+        <li><Link   to = '/NestedArraysWithObjects'>NestedArraysWithObjects</Link></li>
+        <li><Link   to = '/EventsGuide'>EventsGuide</Link></li>
+        <li><Link   to = '/NestedArraysWithObjectsGuide'>NestedArraysWithObjectsGuide</Link></li>
+        <li><Link   to = '/ExecutionContextGuide'>ExecutionContextGuide</Link></li>
+        <li><Link   to = '/ReactStateGuide'>ReactStateGuide</Link></li>
+        <li><Link   to = '/AdvancedCrudGuide'>AdvancedCrudGuide</Link></li>
+        <li><Link   to = '/OptionalChainingGuide'>OptionalChainingGuide</Link></li>
+        <li><Link   to = '/PromisesAsyncGuide'>PromisesAsyncGuide</Link></li>
+        <li><Link   to = '/NestedCRUDGuide'>NestedCRUDGuide</Link></li>
+        <li><Link   to = '/OptionalChainingGuidee'>OptionalChainingGuidee</Link></li>
+        <li><Link   to = '/NullishCoalescingGuide'>NullishCoalescingGuide</Link></li>
+        <li><Link   to = '/PromisesAsyncGuidee'>PromisesAsyncGuidee</Link></li>
+        <li><Link   to = '/AsyncAwaitGuide'>AsyncAwaitGuide</Link></li>
+        <li><Link   to = '/PromiseChainingGuide'>PromiseChainingGuide</Link></li>
+        <li><Link   to = '/ReactCoreGuide'>ReactCoreGuide</Link></li>
+        
+
+
+
+
+
+
+       
+       
+        
+        <li><Link   to = '/ReactCoreGuide'>ReactCoreGuide</Link></li>
+
+        
       </ul>
 
 
