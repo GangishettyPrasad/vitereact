@@ -30,16 +30,22 @@ function App() {
           <Route path="/reactdatatable" element={<ReactDataTable />} />
           <Route path="/reacthookform" element={<ReactHookForm />} />
           <Route path="/tabs" element={<Tabs />} />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 347aefccb7f2a948b07df3aa319d8b03b7689042
           <Route path="/html" element={ <> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></> } />
           <Route path="/css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
           <Route path="/jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
           <Route path="/git" element={<> <h3>GIT Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
+<<<<<<< HEAD
           <Route path="/html" element={ <> <h3>Html Page Still Not Started </h3> <h4>Please Wait ......</h4></> } />
           <Route path="/css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
           <Route path="/jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
           <Route path="/git" element={<> <h3>GIT Page Still Not Started </h3> <h4>Please Wait ......</h4></>} />
 
+=======
+>>>>>>> 347aefccb7f2a948b07df3aa319d8b03b7689042
           <Route path="*" element={<Navigate to="/" replace />} />
 
 
