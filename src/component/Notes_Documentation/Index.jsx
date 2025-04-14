@@ -114,6 +114,8 @@ var a = {
         <li><Link   to = '/FullReactUseStateAndJSXExamples'>FullReactUseStateAndJSXExamples</Link></li>
         <li><Link   to = '/UseEffectMasterGuide'>UseEffectMasterGuide</Link></li>
         <li><Link   to = '/UseEffectFullVisualDoc'>UseEffectFullVisualDoc</Link></li>
+      <li><Link   to = '/GitDailyWorkflowGuide'>GitDailyWorkflowGuide</Link></li>
+
       </ul>
 
 
