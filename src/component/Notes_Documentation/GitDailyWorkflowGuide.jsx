@@ -22,7 +22,9 @@ const GitDailyWorkflowGuide = () => {
   git commit -m "Completed feature XYZ"
   git push origin prasadlatest11`}
           </pre>
-          <p className="text-gray-700 mt-2">మీ changes GitHubకి పంపారు. ఇప్పుడు PR తయారు చేయవచ్చు.</p>
+          <p className="text-gray-700 mt-2">మీ changes GitHubకి పంపారు. ఇప్పుడు PR తయారు చేయవచ్చు..</p>
+          <p className="text-gray-700 mt-2">మీ changes GitHubకి పంపారు. ఇప్పుడు PR తయారు చేయవచ్చు..</p>
+
         </section>
   
         {/* Day 3 */}
