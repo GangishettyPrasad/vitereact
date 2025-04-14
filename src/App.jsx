@@ -60,6 +60,7 @@ import ShoppingCartt from './component/Notes_Documentation/ShoppingCart';
 import ExampleComponent from './component/Notes_Documentation/ExampleComponent';
 import ArrayMethodsDeepGuide from './component/Notes_Documentation/ArrayMethodsDeepGuide';
 import ModulesGuideUI from './component/Notes_Documentation/ModulesGuideUI';
+import GitDailyWorkflowGuide from './component/Notes_Documentation/GitDailyWorkflowGuide';
 
 
 
@@ -139,8 +140,9 @@ function App() {
           <Route path="ArrayMethodsDeep" element={  <ArrayMethodsDeepGuide />} />
           <Route path="ModulesGuideUI" element={  <ModulesGuideUI />} />
 
+          <Route path="GitDailyWorkflowGuide" element={  <GitDailyWorkflowGuide />} />
       
-                
+                    
           
         </Routes>
        
