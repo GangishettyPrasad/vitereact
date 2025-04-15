@@ -92,6 +92,161 @@ users.forEach(({ name }) => {
         <li>Array & Object structure మీద ఆధారపడి correct destructuring చేయాలి</li>
         <li>Nested objects లో error avoid చేయడానికి careful గా destructure చేయాలి</li>
       </ul>
+
+      <>
+      <div style={{ padding: '20px', background: '#f9f9f9', borderRadius: '10px', fontFamily: 'sans-serif' }}>
+      <h2 style={{ color: '#4A90E2' }}>📘 React Hook Form – Object Destructuring & JSX Spread</h2>
+
+      <h3>✅ 1. What is Object Destructuring?</h3>
+      <p>
+        Object destructuring is used to extract values from an object and assign them to variables.
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+        {`const person = { name: "Prasad", age: 26 };
+const { name, age } = person;`}
+      </pre>
+
+      <h3>✅ 2. Destructuring in JSX Props</h3>
+      <p>
+        Instead of accessing props like <code>props.name</code>, you can destructure them directly:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+        {`const Welcome = ({ name }) => {
+  return <h1>Hello, {name}</h1>;
+};`}
+      </pre>
+
+      <h3>✅ 3. Spread Syntax in JSX</h3>
+      <p>
+        You can use the spread operator <code>{`{...}`}</code> to inject all props from an object:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+        {`const inputProps = {
+  name: "firstName",
+  onChange: () => {},
+  onBlur: () => {},
+  ref: someRef
+};
+
+<input {...inputProps} />`}
+      </pre>
+
+      <h3>✅ 4. React Hook Form Example</h3>
+      <p>
+        In React Hook Form, <code>register()</code> returns an object. When you spread that into your input:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+        {`<input {...register("firstName", { required: true })} />`}
+      </pre>
+      <p>
+        It is same as manually writing:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+        {`<input
+  name="firstName"
+  onChange={...}
+  onBlur={...}
+  ref={...}
+/>`}
+      </pre>
+
+      <h3>💡 Summary (Telugu)</h3>
+      <ul>
+        <li><strong>register()</strong> method object return చేస్తుంది</li>
+        <li><strong>{`<input {...object} />`}</strong> అనేది object లోని properties అన్నిటిని JSX లో spread చేస్తుంది</li>
+        <li>ఈ విధంగా React Hook Form field full integration అవుతుంది</li>
+      </ul>
+    </div>
+
+
+    <div style={{ padding: '20px', background: '#fdfdfd', borderRadius: '10px', fontFamily: 'sans-serif' }}>
+      <h2 style={{ color: '#4A90E2' }}>📘 React Hook Form – Full Explanation</h2>
+
+      <h3>✅ 1. What is Object Destructuring?</h3>
+      <p>
+        Object destructuring allows you to pull multiple properties from an object easily:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const person = { name: "Prasad", age: 26 };
+const { name, age } = person;`}
+      </pre>
+
+      <h3>✅ 2. Destructuring in JSX Props</h3>
+      <p>
+        Instead of using <code>props.name</code>, you can directly destructure in function parameters:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const Welcome = ({ name }) => {
+  return <h1>Hello, {name}</h1>;
+};`}
+      </pre>
+
+      <h3>✅ 3. Spread Syntax in JSX</h3>
+      <p>
+        Spread operator <code>{`{...}`}</code> is used to apply all properties of an object to an element.
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const inputProps = {
+  name: "firstName",
+  onChange: () => {},
+  onBlur: () => {},
+  ref: someRef
+};
+
+<input {...inputProps} />`}
+      </pre>
+
+      <h3>✅ 4. React Hook Form – Key Example</h3>
+      <p>
+        <strong>useForm()</strong> returns several useful methods like <code>register</code>, <code>handleSubmit</code>, <code>watch</code>, and <code>formState.errors</code>
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const {
+  register,       // 👉 input fields ని React Hook Form కి connect చేయడం
+  handleSubmit,   // 👉 form submit handle చేయడానికి
+  watch,          // 👉 field values live గా చూడటానికి
+  formState: { errors }  // 👉 form లో errors handle చేయడానికి
+} = useForm();`}
+      </pre>
+
+      <h3>✅ 5. Spread with register() → Input Integration</h3>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`<input {...register("firstName", { required: true })} />`}
+      </pre>
+      <p>This is equal to writing manually:</p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`<input
+  name="firstName"
+  onChange={...}
+  onBlur={...}
+  ref={...}
+/>`}
+      </pre>
+
+      <h3>✅ 6. Special Case: Only Getting `register` from useForm()</h3>
+      <p>
+        If you're only using <code>register</code> method from <code>useForm</code>, you can destructure like this:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const { register } = useForm();`}
+      </pre>
+      <p>
+        Or even like this:
+      </p>
+      <pre style={{ background: '#eee', padding: '10px', borderRadius: '5px' }}>
+{`const register = useForm().register;`}
+      </pre>
+
+      <h3>🧠 Telugu Explanation Summary:</h3>
+      <ul>
+        <li><strong>useForm()</strong> అనే hook ని form logic కోసం use చేస్తాం</li>
+        <li><strong>register()</strong> → input ని React Hook Form కి connect చేస్తుంది</li>
+        <li><strong>...spread</strong> → input మీద object లోని properties ని apply చేస్తుంది</li>
+        <li><strong>const  register </strong> → useForm return object నుండి కొన్ని మాత్రమే తీసుకోవడం</li>
+      </ul>
+    </div>
+      
+      </>
     </div>
   );
 };
