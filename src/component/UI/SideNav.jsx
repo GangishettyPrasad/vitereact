@@ -21,12 +21,12 @@ const drawerWidth = 240;
 
 const SideNav = () => {
   const menuItems = [
-    { text: 'HTML', path: '/html', icon: <FaSquareJs /> },
-    { text: 'CSS', path: '/css', icon: <FaSquareJs /> },
-    { text: 'JavaScript', path: '/jsindex', icon: <FaSquareJs /> },
-    { text: 'JSX', path: '/jsx', icon: <PiFileJsxBold /> },
-    { text: 'React', path: '/mytabs', icon: <RiReactjsFill /> },
-    { text: 'GIT', path: '/git', icon: <FaGit /> },
+    { text: 'HTML', path: '/dashboard/html', icon: <FaSquareJs /> },
+    { text: 'CSS', path: '/dashboard/css', icon: <FaSquareJs /> },
+    { text: 'JavaScript', path: '/dashboard/jsindex', icon: <FaSquareJs /> },
+    { text: 'JSX', path: '/dashboard/jsx', icon: <PiFileJsxBold /> },
+    { text: 'React', path: '/dashboard/mytabs', icon: <RiReactjsFill /> },
+    { text: 'GIT', path: '/dashboard/git', icon: <FaGit /> },
   ];
 
   return (

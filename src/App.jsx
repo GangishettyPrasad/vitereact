@@ -6,7 +6,6 @@ import Component_react from './component/react/component/Component_react';
 import Propsreact from './component/react/component/Propsreact';
 import ReactDataTable from './component/reactdatatable/ReactDataTable';
 
-import { Tabs } from '@mui/material';
 import Index from './component/Notes_Documentation/Index';
 
 import ReactHookForm from './component/UseForm/ReactHookForm';
@@ -55,98 +54,196 @@ import ArrowFunctionsGuide from './component/Notes_Documentation/ArrowFunctionsG
 import TemplateLiteralsGuide from './component/Notes_Documentation/TemplateLiteralsGuide';
 import Destructuring from './component/Notes_Documentation/Destructuring';
 import SpreadOperatorExample from './component/Notes_Documentation/SpreadOperatorExample';
-import { ShoppingCart } from '@mui/icons-material';
+
 import ShoppingCartt from './component/Notes_Documentation/ShoppingCart';
 import ExampleComponent from './component/Notes_Documentation/ExampleComponent';
 import ArrayMethodsDeepGuide from './component/Notes_Documentation/ArrayMethodsDeepGuide';
 import ModulesGuideUI from './component/Notes_Documentation/ModulesGuideUI';
 import GitDailyWorkflowGuide from './component/Notes_Documentation/GitDailyWorkflowGuide';
+import Login from './component/login/Login';
+import ProtectedRoute from './component/login/ProtectedRoute';
+import LoginWithGuide from './component/Notes_Documentation/LoginWithGuide';
+import Rlogin from './component/login/Rlogin';
+import RProtectedRoute from './component/login/RProtectedRoute';
+import dashboardRoutes from './component/dashboardRoutes';
+import Authentication from './component/Notes_Documentation/Authentication';
+import RoleBasedRoutingGuide from './component/Notes_Documentation/RoleBasedRoutingGuide';
+import MRoleBasedRoutingGuide from './component/Notes_Documentation/MRoleBasedRoutingGuide';
+import LoginPageGuide from './component/Notes_Documentation/LoginPageGuide';
+import ProtectedRouteGuide from './component/Notes_Documentation/ProtectedRouteGuide';
+import AppJSGuide from './component/Notes_Documentation/AppJSGuide';
+import DynamicRoutesGuide from './component/Notes_Documentation/DynamicRoutesGuide';
 
 
 
 function App() {
   document.title = "Prasad";
   return (
+  
     <Router>
-      <Layout>
-        <Routes>
+      <Routes>
 
-          <Route path="/" element={<DefaultHome />} /> {/* ✅ Default Route */}
+        {/* NORMAL USER  */}
 
-          <Route path="/myTabs" element={<MyTabs />} />
-          <Route path="/Propsreact" element={<Propsreact />} />
-          <Route path="/jsindex" element={<Index />} />
-          <Route path="/componentreact" element={<Component_react />} />
-          <Route path="/reactdatatable" element={<ReactDataTable />} />
-          <Route path="/reacthookform" element={<ReactHookForm />} />
-          <Route path="/tabs" element={<Tabs />} />
-          <Route path="/html" element={ <> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></> } />
-          <Route path="/css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
-          <Route path="/jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
-          <Route path="/git" element={  <GitGuide />} />
 
-         
-          <Route path="*" element={<Navigate to="/" replace />} />
-{/* js  */}
+        {/* <Route path="/"  element={<Login />} />   */}  
+        {/* <Route path="/dashboard"  element={<ProtectedRoute><Layout /></ProtectedRoute>} > */}
+        
+        {/* <Route path="/dashboard"  element={<RProtectedRoute><Layout /></RProtectedRoute>} >
 
-          <Route path="JsArrayMethodsDemo" element={  <JsArrayMethodsDemo />} />
-          <Route path="ReactArrayMethods" element={  <ReactArrayMethods />} />
-          <Route path="SpreadOperatorGuide" element={  <SpreadOperatorGuide />} />
-          <Route path="MapMethodGuide" element={  <MapMethodGuide />} />
-          <Route path="FilterGuide" element={  <FilterGuide />} />
-          <Route path="DestructuringGuide" element={  <DestructuringGuide />} />
-          <Route path="SpreadOperatorGuidee" element={  <SpreadOperatorGuidee />} />
-          <Route path="ArraysGuide" element={  <ArraysGuide />} />
-          <Route path="JSObjectsGuide" element={  <JSObjectsGuide />} />
-          <Route path="FunctionsGuide" element={  <FunctionsGuide />} />
-          <Route path="NestedArraysWithObjects" element={  <NestedArraysWithObjects />} />
-          <Route path="EventsGuide" element={  <EventsGuide />} />
-          <Route path="NestedArraysWithObjectsGuide" element={  <NestedArraysWithObjectsGuide />} />
-          <Route path="ExecutionContextGuide" element={  <ExecutionContextGuide />} />
-          <Route path="ReactStateGuide" element={  <ReactStateGuide />} />
-          <Route path="AdvancedCrudGuide" element={  <AdvancedCrudGuide />} />
-          <Route path="OptionalChainingGuide" element={  <OptionalChainingGuide />} />
-          <Route path="PromisesAsyncGuide" element={  <PromisesAsyncGuide />} />
-          <Route path="NestedCRUDGuide" element={  <NestedCRUDGuide />} />
-          <Route path="OptionalChainingGuidee" element={  <OptionalChainingGuidee />} />
-          <Route path="NullishCoalescingGuide" element={  <NullishCoalescingGuide />} />
-          <Route path="PromisesAsyncGuidee" element={  <PromisesAsyncGuidee />} />
-          <Route path="AsyncAwaitGuide" element={  <AsyncAwaitGuide />} />
-          <Route path="PromiseChainingGuide" element={  <PromiseChainingGuide />} />
-          <Route path="ReactCoreGuide" element={  <ReactCoreGuide />} />
-          <Route path="JSXRenderingGuide" element={  <JSXRenderingGuide />} />
-          <Route path="JSXConditionalRenderingGuide" element={  <JSXConditionalRenderingGuide />} />
-          <Route path="PropsGuide" element={  <PropsGuide />} />
-          <Route path="UseStateCompleteGuide" element={  <UseStateCompleteGuide />} />
-          <Route path="FullReactUseStateAndJSXExamples" element={  <FullReactUseStateAndJSXExamples />} />
-
-          <Route path="UseEffectMasterGuide" element={  <UseEffectMasterGuide />} />
-          <Route path="UseEffectFullVisualDoc" element={  <UseEffectFullVisualDoc />} />
-          <Route path="NestedObjectsWithArrays" element={  <NestedObjectsWithArrays />} />
-          <Route path="NestedObjeExplanation" element={  <NestedObjeExplanation />} />
-
-          <Route path="NestedArraysWithObjectsGuide_exmp" element={  <NestedArraysWithObjectsGuide_exmp />} />
+           html  
+          <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} />
           
-          <Route path="NestedArraysInReact" element={  <NestedArraysInReact />} />
-          <Route path="NestedObjInReact" element={  <NestedObjInReact />} />
-          <Route path="VariableDeclarations" element={  <VariableDeclarations />} />
-          <Route path="ArrowFunctionsGuide" element={  <ArrowFunctionsGuide />} />
-          <Route path="TemplateLiteralsGuide" element={  <TemplateLiteralsGuide />} />
-            
-          <Route path="Destructuring" element={  <Destructuring />} />
-          <Route path="SpreadOperatorExample" element={  <SpreadOperatorExample />} />
-          <Route path="ShoppingCart" element={  <ShoppingCartt />} />
-          <Route path="ExampleComponent" element={  <ExampleComponent />} />
-          <Route path="ArrayMethodsDeep" element={  <ArrayMethodsDeepGuide />} />
-          <Route path="ModulesGuideUI" element={  <ModulesGuideUI />} />
+          React 
+          <Route path="myTabs" element={<MyTabs />} /> </Route> */}
 
-          <Route path="GitDailyWorkflowGuide" element={  <GitDailyWorkflowGuide />} />
+          
       
-                    
-          
-        </Routes>
-       
-      </Layout>
+        {/* MULTIPLE USERS  */}
+        <Route path="/"  element={<Rlogin />} /> 
+
+        
+        {/* 🚫 Unauthorized Page */}
+        <Route path="/unauthorized" element={<h2>🚫 Access Denied</h2>} />
+
+        
+        {/* 🛡️ Protected Dashboard (admin + user) */}
+        <Route  path="/dashboard"  element={ <RProtectedRoute allowedRoles={['admin', 'user']}>
+                                                <Layout />
+                                             </RProtectedRoute>  } >
+
+
+        {/* 📚 Common Routes (both admin & user) */}
+
+
+        <Route path="jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> 
+        <Route path="Authentication" element={<Authentication />} />
+
+        {/* 👤 User-only Page */}
+
+
+        <Route path="html"  element={
+                                      <RProtectedRoute allowedRoles={['user']}>
+                                      <> <h3>HTML USER Page Still Not Started </h3> <h4>Please Waitt .....</h4></>
+                                      </RProtectedRoute>
+                                    } />
+
+          {/* 👑 Admin-only Pages */}
+
+          <Route  path="css"  element={
+                                        <RProtectedRoute allowedRoles={['admin']}>
+                                        <> <h3>CSS ADMIN Page Still Not Started </h3> <h4>Please Waitt .....</h4></>
+                                        </RProtectedRoute>
+                                        }  />   
+                 
+
+          {/* Auto load routes from config */}
+
+          {dashboardRoutes.map(({ path, element, roles }, index) => (
+            <Route
+              key={index}
+              path={path}
+              element={
+                <RProtectedRoute allowedRoles={roles}>
+                  {element}
+                </RProtectedRoute>
+              }
+            />
+          ))}
+
+
+           {/* js  */}
+
+
+            <Route path="JsArrayMethodsDemo" element={  <JsArrayMethodsDemo />} />
+            <Route path="ReactArrayMethods" element={  <ReactArrayMethods />} />
+            <Route path="SpreadOperatorGuide" element={  <SpreadOperatorGuide />} />
+            <Route path="MapMethodGuide" element={  <MapMethodGuide />} />
+            <Route path="FilterGuide" element={  <FilterGuide />} />
+            <Route path="DestructuringGuide" element={  <DestructuringGuide />} />
+            <Route path="SpreadOperatorGuidee" element={  <SpreadOperatorGuidee />} />
+            <Route path="ArraysGuide" element={  <ArraysGuide />} />
+            <Route path="JSObjectsGuide" element={  <JSObjectsGuide />} />
+            <Route path="FunctionsGuide" element={  <FunctionsGuide />} />
+            <Route path="NestedArraysWithObjects" element={  <NestedArraysWithObjects />} />
+            <Route path="EventsGuide" element={  <EventsGuide />} />
+            <Route path="NestedArraysWithObjectsGuide" element={  <NestedArraysWithObjectsGuide />} />
+            <Route path="ExecutionContextGuide" element={  <ExecutionContextGuide />} />
+            <Route path="ReactStateGuide" element={  <ReactStateGuide />} />
+            <Route path="AdvancedCrudGuide" element={  <AdvancedCrudGuide />} />
+            <Route path="OptionalChainingGuide" element={  <OptionalChainingGuide />} />
+            <Route path="PromisesAsyncGuide" element={  <PromisesAsyncGuide />} />
+            <Route path="NestedCRUDGuide" element={  <NestedCRUDGuide />} />
+            <Route path="OptionalChainingGuidee" element={  <OptionalChainingGuidee />} />
+            <Route path="NullishCoalescingGuide" element={  <NullishCoalescingGuide />} />
+            <Route path="PromisesAsyncGuidee" element={  <PromisesAsyncGuidee />} />
+            <Route path="AsyncAwaitGuide" element={  <AsyncAwaitGuide />} />
+            <Route path="PromiseChainingGuide" element={  <PromiseChainingGuide />} />
+            <Route path="ReactCoreGuide" element={  <ReactCoreGuide />} />
+            <Route path="JSXRenderingGuide" element={  <JSXRenderingGuide />} />
+            <Route path="JSXConditionalRenderingGuide" element={  <JSXConditionalRenderingGuide />} />
+            <Route path="PropsGuide" element={  <PropsGuide />} />
+            <Route path="UseStateCompleteGuide" element={  <UseStateCompleteGuide />} />
+            <Route path="FullReactUseStateAndJSXExamples" element={  <FullReactUseStateAndJSXExamples />} />
+
+            <Route path="UseEffectMasterGuide" element={  <UseEffectMasterGuide />} />
+            <Route path="UseEffectFullVisualDoc" element={  <UseEffectFullVisualDoc />} />
+            <Route path="NestedObjectsWithArrays" element={  <NestedObjectsWithArrays />} />
+            <Route path="NestedObjeExplanation" element={  <NestedObjeExplanation />} />
+
+            <Route path="NestedArraysWithObjectsGuide_exmp" element={  <NestedArraysWithObjectsGuide_exmp />} />
+            
+            <Route path="NestedArraysInReact" element={  <NestedArraysInReact />} />
+            <Route path="NestedObjInReact" element={  <NestedObjInReact />} />
+            <Route path="VariableDeclarations" element={  <VariableDeclarations />} />
+            <Route path="ArrowFunctionsGuide" element={  <ArrowFunctionsGuide />} />
+            <Route path="TemplateLiteralsGuide" element={  <TemplateLiteralsGuide />} />
+              
+            <Route path="Destructuring" element={  <Destructuring />} />
+            <Route path="SpreadOperatorExample" element={  <SpreadOperatorExample />} />
+            <Route path="ShoppingCart" element={  <ShoppingCartt />} />
+            <Route path="ExampleComponent" element={  <ExampleComponent />} />
+            <Route path="ArrayMethodsDeep" element={  <ArrayMethodsDeepGuide />} />
+            <Route path="ModulesGuideUI" element={  <ModulesGuideUI />} />
+
+            <Route path="GitDailyWorkflowGuide" element={  <GitDailyWorkflowGuide />} /> 
+            <Route path="LoginWithGuide" element={  <LoginWithGuide />} /> 
+            <Route path="RoleBasedRoutingGuide" element={  <RoleBasedRoutingGuide />} /> 
+            <Route path="MRoleBasedRoutingGuide" element={  <MRoleBasedRoutingGuide />} /> 
+            <Route path="LoginPageGuide" element={  <LoginPageGuide />} /> 
+            <Route path="ProtectedRouteGuide" element={  <ProtectedRouteGuide />} /> 
+            <Route path="AppJSGuide" element={  <AppJSGuide />} /> 
+            <Route path="DynamicRoutesGuide" element={  <DynamicRoutesGuide />} /> 
+
+            
+             
+              
+          {/* html  */}
+           {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
+          {/* css  */} 
+           {/* <Route path="css" element={<> <h3>CSS Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
+          {/* js */}   
+           {/* <Route path="jsindex" element={<Index />} />  */}
+          {/* jsx */}  
+           
+          {/* GIT */}  
+           {/* <Route path="git" element={  <GitGuide />} />  */}
+          {/* React */} 
+          {/* <Route path="myTabs" element={<MyTabs />} /> */}
+ 
+            {/* REACT  */}
+            {/* <Route path="Propsreact" element={<Propsreact />} />
+            <Route path="componentreact" element={<Component_react />} />
+            <Route path="reactdatatable" element={<ReactDataTable />} />
+            <Route path="reacthookform" element={<ReactHookForm />} />  */}
+           
+           {/* <Route path="/" element={<DefaultHome />} /> ✅ Default Route */}
+
+
+        </Route>
+      
+        </Routes>    
+    
     </Router>
   );
 }
