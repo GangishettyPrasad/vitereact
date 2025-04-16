@@ -23,33 +23,33 @@ var a = {
       
       <ul>
 
-        <li><Link   to = '/ArraysGuide'>Arrays Guide</Link></li>
-        <li><Link   to = '/NestedArraysWithObjects'>NestedArraysWithObjects</Link></li>
-        <li><Link   to = '/NestedArraysWithObjectsGuide'>NestedArraysWithObjectsGuide</Link></li>
-        <li><Link   to = '/NestedArraysWithObjectsGuide_exmp'>NestedArraysWithObjectsGuide_exmp</Link></li>
-        <li><Link   to = '/NestedArraysInReact'>NestedArraysInReact</Link></li>
-        <li><Link   to = '/JsArrayMethodsDemo'> Intro Js ArrayMethods </Link></li>
-        <li><Link   to = '/ReactArrayMethods'>How to Use In React  _ArrayMethods</Link></li>
-        <li><Link   to = '/MapMethodGuide'>MapMethodGuide</Link></li>
-        <li><Link   to = '/FilterGuide'>FilterGuide</Link></li>
-        <li><Link   to = '/ArrayMethodsDeep'>ArrayMethods Reaming</Link></li>
+        <li><Link   to = '/dashboard/ArraysGuide'>Arrays Guide</Link></li>
+        <li><Link   to = '/dashboard/NestedArraysWithObjects'>NestedArraysWithObjects</Link></li>
+        <li><Link   to = '/dashboard/NestedArraysWithObjectsGuide'>NestedArraysWithObjectsGuide</Link></li>
+        <li><Link   to = '/dashboard/NestedArraysWithObjectsGuide_exmp'>NestedArraysWithObjectsGuide_exmp</Link></li>
+        <li><Link   to = '/dashboard/NestedArraysInReact'>NestedArraysInReact</Link></li>
+        <li><Link   to = '/dashboard/JsArrayMethodsDemo'> Intro Js ArrayMethods </Link></li>
+        <li><Link   to = '/dashboard/ReactArrayMethods'>How to Use In React  _ArrayMethods</Link></li>
+        <li><Link   to = '/dashboard/MapMethodGuide'>MapMethodGuide</Link></li>
+        <li><Link   to = '/dashboard/FilterGuide'>FilterGuide</Link></li>
+        <li><Link   to = '/dashboard/ArrayMethodsDeep'>ArrayMethods Reaming</Link></li>
 
         
 <br/><br/>
-        <li><Link   to = '/JSObjectsGuide'> Objects Guide</Link></li>
-        <li><Link   to = '/NestedObjeExplanation'>NestedObjeExplanation</Link></li>
+        <li><Link   to = '/dashboard/JSObjectsGuide'> Objects Guide</Link></li>
+        <li><Link   to = '/dashboard/NestedObjeExplanation'>NestedObjeExplanation</Link></li>
 
-        <li><Link   to = '/NestedObjectsWithArrays'>NestedObjectsWithArrays</Link></li>
-        <li><Link   to = '/NestedObjInReact'>NestedObjInReact</Link></li>
+        <li><Link   to = '/dashboard/NestedObjectsWithArrays'>NestedObjectsWithArrays</Link></li>
+        <li><Link   to = '/dashboard/NestedObjInReact'>NestedObjInReact</Link></li>
 <br/><br/> 
 
-        <li><Link   to = '/AdvancedCrudGuide'>AdvancedCrudGuide</Link></li>
-        <li><Link   to = '/NestedCRUDGuide'>NestedCRUDGuide</Link></li>
+        <li><Link   to = '/dashboard/AdvancedCrudGuide'>AdvancedCrudGuide</Link></li>
+        <li><Link   to = '/dashboard/NestedCRUDGuide'>NestedCRUDGuide</Link></li>
 
 <br/><br/> 
 
-        <li><Link   to = '/FunctionsGuide'>FunctionsGuide</Link></li>
-        <li><Link   to = '/EventsGuide'>EventsGuide</Link></li>
+        <li><Link   to = '/dashboard/FunctionsGuide'>FunctionsGuide</Link></li>
+        <li><Link   to = '/dashboard/EventsGuide'>EventsGuide</Link></li>
 <br/>
         
       </ul>
@@ -64,34 +64,34 @@ var a = {
       </ol>
       
       <ul>
-      <li><Link   to = '/VariableDeclarations'>VariableDeclarations</Link></li>
-      <li><Link   to = '/ArrowFunctionsGuide'>ArrowFunctionsGuide</Link></li>
-      <li><Link   to = '/TemplateLiteralsGuide'>TemplateLiteralsGuide</Link></li>
+      <li><Link   to = '/dashboard/VariableDeclarations'>VariableDeclarations</Link></li>
+      <li><Link   to = '/dashboard/ArrowFunctionsGuide'>ArrowFunctionsGuide</Link></li>
+      <li><Link   to = '/dashboard/TemplateLiteralsGuide'>TemplateLiteralsGuide</Link></li>
 
-      <li><Link   to = '/Destructuring'>Destructuring</Link></li>
+      <li><Link   to = '/dashboard/Destructuring'>Destructuring</Link></li>
  
-      <li><Link   to = '/SpreadOperatorExample'>SpreadOperatorExample</Link></li>
-      <li><Link   to = '/ShoppingCart'>ShoppingCart example</Link></li>
-      <li><Link   to = '/ExampleComponent'>obj literals and enhanced objs</Link></li>
+      <li><Link   to = '/dashboard/SpreadOperatorExample'>SpreadOperatorExample</Link></li>
+      <li><Link   to = '/dashboard/ShoppingCart'>ShoppingCart example</Link></li>
+      <li><Link   to = '/dashboard/ExampleComponent'>obj literals and enhanced objs</Link></li>
 
       
       
-        <li><Link   to = '/SpreadOperatorGuide'>SpreadOperatorGuide</Link></li>
-        <li><Link   to = '/DestructuringGuide'>DestructuringGuide </Link></li>
-        <li><Link   to = '/SpreadOperatorGuidee'>SpreadOperatorGuidee</Link></li>
+        <li><Link   to = '/dashboard/SpreadOperatorGuide'>SpreadOperatorGuide</Link></li>
+        <li><Link   to = '/dashboard/DestructuringGuide'>DestructuringGuide </Link></li>
+        <li><Link   to = '/dashboard/SpreadOperatorGuidee'>SpreadOperatorGuidee</Link></li>
 
 <br/><br/> 
-        <li><Link   to = '/OptionalChainingGuide'>OptionalChainingGuide</Link></li>
-        <li><Link   to = '/OptionalChainingGuidee'>OptionalChainingGuidee</Link></li>
-        <li><Link   to = '/NullishCoalescingGuide'>NullishCoalescingGuide</Link></li>
+        <li><Link   to = '/dashboard/OptionalChainingGuide'>OptionalChainingGuide</Link></li>
+        <li><Link   to = '/dashboard/OptionalChainingGuidee'>OptionalChainingGuidee</Link></li>
+        <li><Link   to = '/dashboard/NullishCoalescingGuide'>NullishCoalescingGuide</Link></li>
 
 
-        <li><Link   to = '/ExecutionContextGuide'>ExecutionContextGuide</Link></li>
+        <li><Link   to = '/dashboard/ExecutionContextGuide'>ExecutionContextGuide</Link></li>
     
-        <li><Link   to = '/PromisesAsyncGuide'>PromisesAsyncGuide</Link></li>
-        <li><Link   to = '/PromisesAsyncGuidee'>PromisesAsyncGuidee</Link></li>
-        <li><Link   to = '/AsyncAwaitGuide'>AsyncAwaitGuide</Link></li>
-        <li><Link   to = '/PromiseChainingGuide'>PromiseChainingGuide</Link></li>
+        <li><Link   to = '/dashboard/PromisesAsyncGuide'>PromisesAsyncGuide</Link></li>
+        <li><Link   to = '/dashboard/PromisesAsyncGuidee'>PromisesAsyncGuidee</Link></li>
+        <li><Link   to = '/dashboard/AsyncAwaitGuide'>AsyncAwaitGuide</Link></li>
+        <li><Link   to = '/dashboard/PromiseChainingGuide'>PromiseChainingGuide</Link></li>
 
       </ul>
 
@@ -102,29 +102,44 @@ var a = {
       </ol>
       
       <ul>
-      <li><Link   to = '/ReactStateGuide'>ReactStateGuide</Link></li>
-      <li><Link   to = '/ModulesGuideUI'>ModulesGuideUI</Link></li>
+      <li><Link   to = '/dashboard/ReactStateGuide'>ReactStateGuide</Link></li>
+      <li><Link   to = '/dashboard/ModulesGuideUI'>ModulesGuideUI</Link></li>
 
       
-        <li><Link   to = '/ReactCoreGuide'>ReactCoreGuide</Link></li>
-        <li><Link   to = '/JSXRenderingGuide'>JSXRenderingGuide</Link></li>
-        <li><Link   to = '/JSXConditionalRenderingGuide'>JSXConditionalRenderingGuide</Link></li>
-        <li><Link   to = '/PropsGuide'>PropsGuide</Link></li>
-        <li><Link   to = '/UseStateCompleteGuide'>UseStateCompleteGuide</Link></li>
-        <li><Link   to = '/FullReactUseStateAndJSXExamples'>FullReactUseStateAndJSXExamples</Link></li>
-        <li><Link   to = '/UseEffectMasterGuide'>UseEffectMasterGuide</Link></li>
-        <li><Link   to = '/UseEffectFullVisualDoc'>UseEffectFullVisualDoc</Link></li>
-      <li><Link   to = '/GitDailyWorkflowGuide'>GitDailyWorkflowGuide</Link></li>
+        <li><Link   to = '/dashboard/ReactCoreGuide'>ReactCoreGuide</Link></li>
+        <li><Link   to = '/dashboard/JSXRenderingGuide'>JSXRenderingGuide</Link></li>
+        <li><Link   to = '/dashboard/JSXConditionalRenderingGuide'>JSXConditionalRenderingGuide</Link></li>
+        <li><Link   to = '/dashboard/PropsGuide'>PropsGuide</Link></li>
+        <li><Link   to = '/dashboard/UseStateCompleteGuide'>UseStateCompleteGuide</Link></li>
+        <li><Link   to = '/dashboard/FullReactUseStateAndJSXExamples'>FullReactUseStateAndJSXExamples</Link></li>
+        <li><Link   to = '/dashboard/UseEffectMasterGuide'>UseEffectMasterGuide</Link></li>
+        <li><Link   to = '/dashboard/UseEffectFullVisualDoc'>UseEffectFullVisualDoc</Link></li>
+      <li><Link   to = '/dashboard/GitDailyWorkflowGuide'>GitDailyWorkflowGuide</Link></li>
 
       </ul>
 
 
+      <h2><FcAssistant style={a}/>  Genral   </h2>
+      <ol>
+        <h3>Topics <SlPencil style={{color : "blue"}}/> </h3>
+      </ol>
+      
+      <ul>
+      <li><Link   to = '/dashboard/LoginWithGuide'>LoginWithGuide</Link></li>
+      <li><Link   to = '/dashboard/Authentication'>Authentication</Link></li>
+      <li><Link   to = '/dashboard/RoleBasedRoutingGuide'>RoleBasedRoutingGuide</Link></li>
+      <li><Link   to = '/dashboard/MRoleBasedRoutingGuide'>MRoleBasedRoutingGuide</Link></li>
+      <li><Link   to = '/dashboard/LoginPageGuide'>1.LoginPageGuide</Link></li>
+      <li><Link   to = '/dashboard/ProtectedRouteGuide'>2.ProtectedRouteGuide</Link></li>
+      <li><Link   to = '/dashboard/AppJSGuide'>3.AppJSGuide</Link></li>
 
-
-
+      <li><Link   to = '/dashboard/DynamicRoutesGuide'>4.DynamicRoutesGuide</Link></li>
+      
+       
+      </ul>
    
       
-
+      
     
 
    

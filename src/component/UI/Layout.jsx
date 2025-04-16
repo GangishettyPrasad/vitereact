@@ -3,10 +3,11 @@ import React from 'react';
 import { Box, Toolbar } from '@mui/material';
 import TopHeader from './TopHeader';
 import SideNav from './SideNav';
+import { Outlet } from 'react-router-dom'; // 👈 import Outlet
 
 const drawerWidth = 240;
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <TopHeader />
@@ -21,7 +22,7 @@ const Layout = ({ children }) => {
           marginTop: '64px', // height of AppBar
         }}
       >
-        {children}
+        <Outlet /> {/* 👈 This renders the nested route components */}
       </Box>
     </Box>
   );

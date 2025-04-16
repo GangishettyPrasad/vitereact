@@ -23,8 +23,8 @@ var a = {
 
        
         <ul>
-          <li> <Link   to = '/componentreact'>Componentreact</Link></li>
-          <li><Link   to = '/Propsreact'>Propsreact</Link></li>
+          <li> <Link   to = '/dashboard/componentreact'>Componentreact</Link></li>
+          <li><Link   to = '/dashboard/Propsreact'>Propsreact</Link></li>
         </ul>
 
     </div>
