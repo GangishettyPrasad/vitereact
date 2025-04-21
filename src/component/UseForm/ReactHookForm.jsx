@@ -7,7 +7,9 @@ import { useForm } from "react-hook-form"
 const ReactHookForm = ()=>{
 
     const {register,handleSubmit,watch,formState:{errors}} =useForm()
-      const onSubmit = (data) => console.log(data)
+      const onSubmitt = (data) =>{
+        console.log(data ,'form data')
+      } 
     
     //  console.log(watch("example")) // watch input value by passing the name of it
     const designationNames = [{name : "prasad"}]
@@ -21,16 +23,16 @@ const ReactHookForm = ()=>{
 
 
              {/* "handleSubmit" will validate your inputs before invoking "onSubmit"  */}
-             <form onSubmit={handleSubmit(onSubmit)}>
+             <form onSubmit={handleSubmit(onSubmitt)}>
     
-            <input type ="text" {...register('firstname' , {required:true , minLength : 10 , maxLength:15})}/>  {errors.firstname && <>please enter</>}<br/>
-            <input type="number" {...register("age", { min: 18, max: 99 })} />  {errors.age && <>please enter</>}<br/>
+            <input type ="text" {...register('firstname' , {required:true , minLength : 10 , maxLength:15})}/>  {errors.firstname && <>please enter min 10 to 15</>}<br/>
+            <input type="number" {...register("age", { min: 18, max: 99 })} />  {errors.age && <>please enter age min : 18 to 99</>}<br/>
           
             <input 
            
              disabled={workInfoOnBtnClick ? true : false}
              {...register("designation", {
-                required: "This field is required",
+               // required: "This field is required",
               //  pattern: /^[A-Za-z]+$/i ,
                 pattern: {
                     value: /^[A-Za-z][A-Za-z-\s]+$/,
@@ -73,7 +75,7 @@ const ReactHookForm = ()=>{
             <input type='text'
                 placeholder='Phone' autoComplete="off"
                 {...register("phoneOnB_P", {
-                    required: "This field is required",
+                //    required: "This field is required",
                     pattern: {
                         value:
                             /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/,
