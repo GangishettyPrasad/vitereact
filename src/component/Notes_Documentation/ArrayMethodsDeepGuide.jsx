@@ -7,7 +7,7 @@ const ArrayMethodsDeepGuide = () => {
 
   const users = [
     { name: 'Ravi', gender: 'male' },
-    { name: 'Sneha', gender: 'female' },
+    { name: 'mounika', gender: 'female' },
     { name: 'Ajay', gender: 'male' },
   ];
 

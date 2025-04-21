@@ -19,7 +19,7 @@ const NestedArraysWithObjects = () => {
   },
   {
     id: 2,
-    name: "Sneha",
+    name: "mounika",
     skills: [
       { type: "frontend", tech: "Vue" },
       { type: "backend", tech: "Django" }
@@ -78,7 +78,7 @@ const NestedArraysWithObjects = () => {
   return user;
 });`}</code>
       </pre>
-      <p>👉 Sneha నుండి Django remove చేసాం using <code>filter()</code>.</p>
+      <p>👉 mounika నుండి Django remove చేసాం using <code>filter()</code>.</p>
 
       <h3 style={{ color: '#0d7c8c' }}>5️⃣ Update a Nested Skill</h3>
       <pre>

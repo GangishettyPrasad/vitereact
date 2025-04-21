@@ -62,7 +62,7 @@ const addItem = () => {
 
       <h3 style={{ color: '#00695c' }}>1️⃣1️⃣ Arrays with Objects (Real-time)</h3>
       <pre><code>{`const users = [
-  { id: 1, name: "Sneha" },
+  { id: 1, name: "mounika" },
   { id: 2, name: "Prasad" }
 ];
 

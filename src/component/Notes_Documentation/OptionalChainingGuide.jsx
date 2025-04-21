@@ -3,7 +3,7 @@ import React from 'react';
 const OptionalChainingGuide = () => {
   const user = {
     id: 1,
-    name: 'Sneha',
+    name: 'mounika',
     address: {
       city: 'Hyderabad',
       country: 'India',

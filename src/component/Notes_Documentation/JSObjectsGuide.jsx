@@ -20,7 +20,7 @@ console.log(person['age']); // 25`}</code></pre>
 
       <h3 style={{ color: '#198754' }}>3️⃣ Nested Objects Access</h3>
       <pre><code>{`const user = {
-  name: 'Sneha',
+  name: 'mounika',
   address: {
     city: 'Hyderabad',
     pincode: 500001

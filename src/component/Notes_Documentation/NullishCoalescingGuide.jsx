@@ -8,7 +8,7 @@ const NullishCoalescingGuide = () => {
   const data = {
     user: {
       name: null,
-      email: 'sneha@example.com',
+      email: 'mounika@example.com',
     },
   };
 
