@@ -12,7 +12,7 @@ const NestedCRUDGuide = () => {
     },
     {
       id: 2,
-      name: "Sneha",
+      name: "mounika",
       tasks: [
         { id: 103, title: "Test App", completed: false }
       ]

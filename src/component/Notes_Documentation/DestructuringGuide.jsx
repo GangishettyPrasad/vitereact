@@ -40,7 +40,7 @@ console.log(name); // "prasad"`}</code></pre>
 
       <h3 style={{ color: '#00695c' }}>5️⃣ Nested Destructuring</h3>
       <pre><code>{`const employee = {
-  name: "Sneha",
+  name: "mounika",
   address: {
     city: "Hyderabad",
     pin: 500001

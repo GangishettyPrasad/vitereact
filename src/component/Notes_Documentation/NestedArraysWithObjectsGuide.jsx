@@ -24,7 +24,7 @@ const users = [
     ]
   },
   {
-    name: "Sneha",
+    name: "mounika",
     orders: [
       { id: 1, item: "Phone", price: 30000 },
       { id: 2, item: "Charger", price: 800 },

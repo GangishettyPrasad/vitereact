@@ -42,7 +42,7 @@ const filtered = fruits.filter(fruit => fruit.includes("a"));
 console.log(filtered); // ["apple", "banana", "grape", "mango"]`}</code></pre>
 
       <h3 style={{ color: '#00796b' }}>5️⃣ React Example – Filter Displayed List</h3>
-      <pre><code>{`const names = ["Prasad", "Sneha", "Ram", "Seetha"];
+      <pre><code>{`const names = ["Prasad", "mounika", "Ram", "Seetha"];
 const filteredNames = names.filter(name => name.startsWith("S"));`}</code></pre>
       <p>👉 React component లో ఇది list rendering కోసం use చేస్తాం: <code>{`{filteredNames.map(name => <li>{name}</li>)}`}</code></p>
 

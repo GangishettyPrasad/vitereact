@@ -41,9 +41,9 @@ const merged = { ...a, ...b };
 console.log(merged); // { x: 1, y: 2 }`}</code></pre>
 
       <h3 style={{ color: '#00695c' }}>6️⃣ Updating Object Properties (Immutable)</h3>
-      <pre><code>{`const user = { name: "Sneha", age: 24 };
+      <pre><code>{`const user = { name: "mounika", age: 24 };
 const updated = { ...user, age: 25 };
-console.log(updated); // { name: "Sneha", age: 25 }`}</code></pre>
+console.log(updated); // { name: "mounika", age: 25 }`}</code></pre>
       <p>👉 React state update లో విపరీతంగా ఉపయోగపడుతుంది.</p>
 
       <h3 style={{ color: '#00695c' }}>7️⃣ Spread in Function Arguments</h3>

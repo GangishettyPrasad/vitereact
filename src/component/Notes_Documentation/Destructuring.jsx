@@ -30,7 +30,7 @@ const { name, address: { street, city } } = user;`}</pre>
           <br />
           ఉదాహరణ:
           <br />
-          <code>Name: Sneha, Address: MG Road, Bangalore</code>
+          <code>Name: mounika, Address: MG Road, Bangalore</code>
         </p>
       </section>
 
@@ -65,14 +65,14 @@ const [first, second, third] = fruits;`}</pre>
       {/* Default Values */}
       <section>
         <h2>5. Default Values</h2>
-        <pre>{`const user = { name: 'Sneha', age: undefined };
+        <pre>{`const user = { name: 'mounika', age: undefined };
 const { name, age = 30 } = user;`}</pre>
         <p>
           <strong>Default Values</strong> మీరు ఒక ప్రాపర్టీ విలువ లేదు అనుకుంటే, మీరు ఒక డిఫాల్ట్ విలువ ఇవ్వవచ్చు.
           <br />
           ఉదాహరణ:
           <br />
-          <code>Name: Sneha, Age: 30</code> (ఎందుకంటే <code>age</code> ని నిర్వచించలేదు).
+          <code>Name: mounika, Age: 30</code> (ఎందుకంటే <code>age</code> ని నిర్వచించలేదు).
         </p>
       </section>
 

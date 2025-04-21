@@ -100,7 +100,7 @@ return <p>{\`Visibility is \${isVisible ? "Visible" : "Hidden"}\`}</p>;`}</pre>
       {/* 10. String Templates in Arrays */}
       <section>
         <h2>🔟 Array with Template Literals</h2>
-        <pre>{`const users = ["Prasad", "Sneha"];
+        <pre>{`const users = ["Prasad", "mounika"];
 const userList = users.map(user => \`User: \${user}\`);`}</pre>
         <p>📌 Use **map()** with template literals to format array data.</p>
       </section>
