@@ -196,7 +196,7 @@ const handleChange = ({ selectedRows }) => {
 
       />
 
-<h5> back to react <Link   to = '/myTabs'>react</Link> </h5>
+<h5> back to react <Link   to = '/dashboard/myTabs'>react</Link> </h5>
     </div>
   );
 };
