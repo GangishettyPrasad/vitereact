@@ -1,4 +1,5 @@
 import React from 'react';
+import GitFourS from './GitFourS';
 
 const GitGuide = () => {
   return (
@@ -134,6 +135,109 @@ main code
   </ul>
 </div>
 
+      </>
+      
+      <>
+      
+      <GitFourS/>
+      </>
+
+      <>
+      
+    
+      
+    <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-6">
+      <h2 className="text-2xl font-bold text-indigo-600">🔁 Clone → Run → Edit → Push Guide</h2>
+
+      {/* Step 1: Clone */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 1: Clone the Repository</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm overflow-auto">
+{`git clone https://github.com/username/repository-name.git`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">⏬ This will download the project to your local system.</p>
+      </div>
+
+      {/* Step 2: Go to Project Folder */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 2: Navigate to Project Folder</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm overflow-auto">
+{`cd repository-name`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">📁 Move into the downloaded project directory.</p>
+      </div>
+
+      {/* Step 3: Install Dependencies */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 3: Install Dependencies</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm overflow-auto">
+{`npm install`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">📦 Installs packages listed in <code>package.json</code>.</p>
+      </div>
+
+      {/* Step 4: Run the Project */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 4: Run the Project</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm overflow-auto">
+{`npm start`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">🚀 Opens the React app on <code>http://localhost:3000</code>.</p>
+      </div>
+
+      {/* Step 5: Make Changes */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 5: Make Changes</h3>
+        <p className="text-sm text-gray-600">🛠️ Open your project in VS Code or any editor and update the code.</p>
+      </div>
+
+      {/* Step 6: Push Changes to GitHub */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800">🔹 Step 6: Push Code to GitHub</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm overflow-auto">
+{`git add .
+git commit -m "Your change message"
+git push origin main`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">☁️ Push your updated code to GitHub.</p>
+      </div>
+    </div>
+
+
+
+    <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-6">
+      <h2 className="text-2xl font-bold text-green-700">🌿 Git: Create & Push New Branch</h2>
+
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800">🔸 Step 1: Create a New Branch</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm">
+{`git checkout -b feature-branch-name`}
+        </pre>
+        <p className="text-gray-600 text-sm mt-1">🛠️ You are now working on a new branch.</p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800">🔸 Step 2: Make Code Changes</h3>
+        <p className="text-gray-600 text-sm">Edit your code in your editor like VS Code.</p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800">🔸 Step 3: Add & Commit</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm">
+{`git add .
+git commit -m "Describe your changes"`}
+        </pre>
+        <p className="text-gray-600 text-sm">📦 This saves your changes in Git.</p>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold text-gray-800">🔸 Step 4: Push Branch to GitHub</h3>
+        <pre className="bg-gray-100 p-3 rounded-md text-sm">
+{`git push -u origin feature-branch-name`}
+        </pre>
+        <p className="text-gray-600 text-sm">☁️ Your branch is now on GitHub!</p>
+      </div>
+    </div>
       </>
     </div>
   );
