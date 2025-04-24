@@ -27,6 +27,7 @@ const SideNav = () => {
     { text: 'JSX', path: '/dashboard/jsx', icon: <PiFileJsxBold /> },
     { text: 'React', path: '/dashboard/mytabs', icon: <RiReactjsFill /> },
     { text: 'GIT', path: '/dashboard/git', icon: <FaGit /> },
+    { text: 'Redux', path: '/dashboard/ReduxR', icon:<RiReactjsFill /> },
   ];
 
   return (

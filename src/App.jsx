@@ -73,6 +73,8 @@ import LoginPageGuide from './component/Notes_Documentation/LoginPageGuide';
 import ProtectedRouteGuide from './component/Notes_Documentation/ProtectedRouteGuide';
 import AppJSGuide from './component/Notes_Documentation/AppJSGuide';
 import DynamicRoutesGuide from './component/Notes_Documentation/DynamicRoutesGuide';
+import Redux from './component/Redux/Redux';
+import ReduxR from './component/Redux/Redux';
 
 
 
@@ -215,7 +217,7 @@ function App() {
             <Route path="AppJSGuide" element={  <AppJSGuide />} /> 
             <Route path="DynamicRoutesGuide" element={  <DynamicRoutesGuide />} /> 
 
-            
+            <Route path="ReduxR" element={  <ReduxR />} /> 
              
               
           {/* html  */}
