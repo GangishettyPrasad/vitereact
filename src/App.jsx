@@ -75,6 +75,8 @@ import AppJSGuide from './component/Notes_Documentation/AppJSGuide';
 import DynamicRoutesGuide from './component/Notes_Documentation/DynamicRoutesGuide';
 import Redux from './component/Redux/Redux';
 import ReduxR from './component/Redux/Redux';
+import JsonConcepts from './component/Notes_Documentation/JsonConcepts';
+import JSMethods from './component/Notes_Documentation/JSMethods';
 
 
 
@@ -218,7 +220,12 @@ function App() {
             <Route path="DynamicRoutesGuide" element={  <DynamicRoutesGuide />} /> 
 
             <Route path="ReduxR" element={  <ReduxR />} /> 
+            <Route path="JsonConcepts" element={  <JsonConcepts />} /> 
+
+            <Route path="JSMethods" element={  <JSMethods />} /> 
              
+        
+
               
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}

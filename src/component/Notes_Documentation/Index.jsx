@@ -51,7 +51,10 @@ var a = {
         <li><Link   to = '/dashboard/FunctionsGuide'>FunctionsGuide</Link></li>
         <li><Link   to = '/dashboard/EventsGuide'>EventsGuide</Link></li>
 <br/>
-        
+        <li><Link   to = '/dashboard/JsonConcepts'>JsonConcepts</Link></li>
+
+        <li><Link   to = '/dashboard/JSMethods'>JSMethods</Link></li>
+<br/>    
       </ul>
 
 
