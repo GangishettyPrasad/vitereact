@@ -85,6 +85,26 @@ import ErrorHandling from './component/Notes_Documentation/ErrorHandling';
 import ClosureExample from './component/Notes_Documentation/ClosureExample';
 import HoistingExample from './component/Notes_Documentation/HoistingExample';
 import EventLoopExample from './component/Notes_Documentation/EventLoopExample';
+import MediaHandlingExample from './component/Notes_Documentation/MediaHandlingExample';
+import MediaHandlingExample1 from './component/Notes_Documentation/MediaHandlingExample1';
+import ContentTypeHandlingExample from './component/Notes_Documentation/ContentTypeHandlingExample';
+import ContentTypeHandlingExample1 from './component/Notes_Documentation/ContentTypeHandlingExample1';
+import APIExample from './component/Notes_Documentation/APIExamplee';
+import APIExamplee from './component/Notes_Documentation/APIExamplee';
+import EmployeeManagement from './component/Notes_Documentation/EmployeeManagement';
+import VoiceManager from './component/Notes_Documentation/VoiceManager';
+import VoiceManager1 from './component/Notes_Documentation/VoiceManager1';
+import SentimentAnalysis from './component/Notes_Documentation/SentimentAnalysis';
+import ImageFetchingExample from './component/Notes_Documentation/ImageFetchingExample';
+import FileUploadExample from './component/Notes_Documentation/FileUploadExample';
+import MediaPlayer from './component/Notes_Documentation/MediaPlayer';
+import TokenLogin from './component/Notes_Documentation/TokenLogin';
+import TextAnalysis from './component/Notes_Documentation/TextAnalysis';
+import ImageRecognitio from './component/Notes_Documentation/ImageRecognitio';
+import SpeechRecognition from './component/Notes_Documentation/SpeechRecognition';
+import TextToSpeech from './component/Notes_Documentation/TextToSpeech';
+import TextTranslation from './component/Notes_Documentation/TextTranslation';
+
 
 
 
@@ -240,12 +260,30 @@ function App() {
             <Route path="Closure" element={  <ClosureExample />} /> 
             <Route path="HoistingExample" element={  <HoistingExample />} /> 
             <Route path="EventLoopExample" element={  <EventLoopExample />} /> 
+            <Route path="MediaHandlingExample" element={  <MediaHandlingExample />} /> 
+            <Route path="MediaHandlingExample1" element={  <MediaHandlingExample1 />} /> 
+            <Route path="ContentTypeHandlingExample" element={  <ContentTypeHandlingExample />} /> 
 
+            <Route path="ContentTypeHandlingExample1" element={  <ContentTypeHandlingExample1 />} /> 
 
-            
-   
- 
-              
+            <Route path="APIExamplee" element={  <APIExamplee />} /> 
+            <Route path="EmployeeManagement" element={  <EmployeeManagement />} /> 
+            <Route path="VoiceManager" element={  <VoiceManager />} /> 
+            <Route path="VoiceManager1" element={  <VoiceManager1 />} /> 
+            <Route path="SentimentAnalysis" element={  <SentimentAnalysis />} /> 
+            <Route path="ImageFetchingExample" element={  <ImageFetchingExample />} /> 
+
+            <Route path="FileUploadExample" element={  <FileUploadExample />} /> 
+            <Route path="MediaPlayer" element={  <MediaPlayer />} /> 
+           
+            <Route path="TokenLogin" element={  <TokenLogin />} /> 
+            <Route path="TextAnalysis" element={  <TextAnalysis />} /> 
+            <Route path="ImageRecognitio" element={  <ImageRecognitio />} /> 
+            <Route path="SpeechRecognition" element={  <SpeechRecognition />} /> 
+    
+            <Route path="TextToSpeech" element={  <TextToSpeech />} /> 
+            <Route path="TextTranslation" element={  <TextTranslation />} /> 
+       
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
           {/* css  */} 
