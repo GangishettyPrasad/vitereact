@@ -2,17 +2,30 @@ import React from 'react';
 import StringMethodss from './StringMethodss';
 import ObjtMethods from './ObjMethods';
 import DateM from './DateM';
+import AsynchronousMethods from './AsynchronousMethods';
+import ErrorHandling from './ErrorHandling';
+import { Link } from 'react-router-dom';
 
 
 const JsMethods = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
+
+      <ol>
+
+      <li><Link   to = '/dashboard/StringMethodss'>String methods</Link></li>
+
+      <li><Link   to = '/dashboard/ObjtMethods'>obj m</Link></li>
+      <li><Link   to = '/dashboard/DateM'>date m</Link></li>
+
+      <li><Link   to = '/dashboard/AsynchronousMethods'>async m</Link></li>
+      <li><Link   to = '/dashboard/ErrorHandling'>error handling </Link></li>
+
+     
+      
+      </ol>
     
-    <> <StringMethodss/> </>
 
-    <><ObjtMethods/></>
-
-    <DateM/>
       {/* Table for JavaScript Methods */}
       <table className="min-w-full bg-white table-auto border-collapse">
         <thead>

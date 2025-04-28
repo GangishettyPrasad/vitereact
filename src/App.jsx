@@ -77,6 +77,14 @@ import Redux from './component/Redux/Redux';
 import ReduxR from './component/Redux/Redux';
 import JsonConcepts from './component/Notes_Documentation/JsonConcepts';
 import JSMethods from './component/Notes_Documentation/JSMethods';
+import StringMethodss from './component/Notes_Documentation/StringMethodss';
+import ObjtMethods from './component/Notes_Documentation/ObjMethods';
+import DateM from './component/Notes_Documentation/DateM';
+import AsynchronousMethods from './component/Notes_Documentation/AsynchronousMethods';
+import ErrorHandling from './component/Notes_Documentation/ErrorHandling';
+import ClosureExample from './component/Notes_Documentation/ClosureExample';
+import HoistingExample from './component/Notes_Documentation/HoistingExample';
+import EventLoopExample from './component/Notes_Documentation/EventLoopExample';
 
 
 
@@ -223,9 +231,20 @@ function App() {
             <Route path="JsonConcepts" element={  <JsonConcepts />} /> 
 
             <Route path="JSMethods" element={  <JSMethods />} /> 
-             
-        
 
+            <Route path="StringMethodss" element={  <StringMethodss />} /> 
+            <Route path="ObjtMethods" element={  <ObjtMethods />} /> 
+            <Route path="DateM" element={  <DateM />} /> 
+            <Route path="AsynchronousMethods" element={  <AsynchronousMethods />} /> 
+            <Route path="ErrorHandling" element={  <ErrorHandling />} /> 
+            <Route path="Closure" element={  <ClosureExample />} /> 
+            <Route path="HoistingExample" element={  <HoistingExample />} /> 
+            <Route path="EventLoopExample" element={  <EventLoopExample />} /> 
+
+
+            
+   
+ 
               
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
