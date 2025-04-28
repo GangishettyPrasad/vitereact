@@ -95,7 +95,13 @@ var a = {
         <li><Link   to = '/dashboard/PromisesAsyncGuidee'>PromisesAsyncGuidee</Link></li>
         <li><Link   to = '/dashboard/AsyncAwaitGuide'>AsyncAwaitGuide</Link></li>
         <li><Link   to = '/dashboard/PromiseChainingGuide'>PromiseChainingGuide</Link></li>
+        <li><Link   to = '/dashboard/Closure'>Closure</Link></li>
+        <li><Link   to = '/dashboard/HoistingExample'>HoistingExample</Link></li>
+        <li><Link   to = '/dashboard/EventLoopExample'>EventLoopExample</Link></li>
 
+      
+
+        
       </ul>
 
 
