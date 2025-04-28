@@ -144,7 +144,42 @@ var a = {
 
       <li><Link   to = '/dashboard/DynamicRoutesGuide'>4.DynamicRoutesGuide</Link></li>
       
+<br/><br/> 
+<br/><br/> 
+      <li><Link   to = '/dashboard/MediaHandlingExample'>MediaHandlingExample</Link></li>
+      <li><Link   to = '/dashboard/MediaHandlingExample1'>MediaHandlingExample1</Link></li>
+      <li><Link   to = '/dashboard/ContentTypeHandlingExample'>ContentTypeHandlingExample</Link></li>
+      <li><Link   to = '/dashboard/ContentTypeHandlingExample1'>ContentTypeHandlingExample1</Link></li>
+
+      <li><Link   to = '/dashboard/APIExamplee'>APIExample</Link></li>
+
+      <li><Link   to = '/dashboard/EmployeeManagement'>EmployeeManagement</Link></li>
        
+      <li><Link   to = '/dashboard/VoiceManager'>VoiceManager</Link></li>
+      <li><Link   to = '/dashboard/VoiceManager1'>VoiceManager1</Link></li>
+      
+     apis AI /ML 
+
+     <li><Link   to = '/dashboard/SentimentAnalysis'>SentimentAnalysis</Link></li>
+
+     <li><Link   to = '/dashboard/ImageFetchingExample'>ImageFetchingExample</Link></li>
+     <li><Link   to = '/dashboard/FileUploadExample'>FileUploadExample</Link></li>
+     <li><Link   to = '/dashboard/MediaPlayer'>MediaPlayer</Link></li>
+
+     <li><Link   to = '/dashboard/TokenLogin'>TokenLogin</Link></li>
+   
+      <>1. Text-based APIs (NLP - Sentiment Analysis)    </> 
+       <li><Link   to = '/dashboard/TextAnalysis'>TextAnalysis</Link></li>
+      <>2. Image Recognition APIs (Clarifai) </>
+      <li><Link   to = '/dashboard/ImageRecognitio'>ImageRecognitio</Link></li>
+      <>3. Speech Recognition APIs (Google Speech-to-Text)</>
+      <li><Link   to = '/dashboard/SpeechRecognition'>SpeechRecognition</Link></li>
+      <>4. Text-to-Speech APIs (IBM Watson) </>
+      <li><Link   to = '/dashboard/TextToSpeech'>TextToSpeech</Link></li>
+      <>5. Translation APIs (Google Cloud Translation)</>
+      <li><Link   to = '/dashboard/TextTranslation'>TextTranslation</Link></li>
+
+
       </ul>
    
       
