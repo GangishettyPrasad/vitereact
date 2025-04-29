@@ -1,6 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Layout from './component/UI/Layout';
 import Component_react from './component/react/component/Component_react';
 import Propsreact from './component/react/component/Propsreact';
@@ -104,6 +105,9 @@ import ImageRecognitio from './component/Notes_Documentation/ImageRecognitio';
 import SpeechRecognition from './component/Notes_Documentation/SpeechRecognition';
 import TextToSpeech from './component/Notes_Documentation/TextToSpeech';
 import TextTranslation from './component/Notes_Documentation/TextTranslation';
+import ThirdPartyAPI from './component/Notes_Documentation/ThirdPartyAPI';
+import Weatherr from './component/Notes_Documentation/Weatherr';
+import GoogleAuthh from './component/Notes_Documentation/GoogleAuthh';
 
 
 
@@ -283,6 +287,14 @@ function App() {
     
             <Route path="TextToSpeech" element={  <TextToSpeech />} /> 
             <Route path="TextTranslation" element={  <TextTranslation />} /> 
+            <Route path="ThirdPartyAPI" element={  <ThirdPartyAPI />} /> 
+
+            <Route path="GoogleAuthh" element={  <GoogleAuthh />} /> 
+           
+
+
+          
+
        
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
