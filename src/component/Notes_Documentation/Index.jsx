@@ -179,7 +179,9 @@ var a = {
       <>5. Translation APIs (Google Cloud Translation)</>
       <li><Link   to = '/dashboard/TextTranslation'>TextTranslation</Link></li>
 
-
+      <> third party apis integrate </>
+      <li><Link   to = '/dashboard/ThirdPartyAPI'>ThirdPartyAPI</Link></li>
+    
       </ul>
    
       
