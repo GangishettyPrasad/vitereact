@@ -3,7 +3,7 @@ import React from 'react';
 const PromisesAsyncGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#fdfdfd' }}>
-      <h2 style={{ color: '#005aa7' }}>🔥 JavaScript Promises & Async/Await – Complete Guide with Telugu Explanation</h2>
+      <h2 style={{ color: '#005aa7' }}>🔥 JavaScript Promises & Async/Await – Complete Guide with </h2>
 
       <h3 style={{ color: '#0d7c8c' }}>1️⃣ What is a Promise?</h3>
       <p>JavaScript లో Promise అనేది asynchronous operation result represent చేయడానికి వాడతారు. ఇది 3 states లో ఉంటుంది:</p>

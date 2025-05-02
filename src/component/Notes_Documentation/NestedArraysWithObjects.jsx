@@ -3,7 +3,7 @@ import React from 'react';
 const NestedArraysWithObjects = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#fefefe' }}>
-      <h2 style={{ color: '#005aa7' }}>🔗 Nested Arrays with Objects – JavaScript & React Guide (Telugu)</h2>
+      <h2 style={{ color: '#005aa7' }}>🔗 Nested Arrays with Objects – JavaScript & React Guide </h2>
       <p><strong>Nested Arrays with Objects</strong> అనేవి complex data structures manage చేయడానికి వాడతాం. ఇవి real-time applications లో చాలా common గా ఉంటాయి (Forms, Tables, API responses).</p>
 
       <h3 style={{ color: '#0d7c8c' }}>📌 Structure Example</h3>

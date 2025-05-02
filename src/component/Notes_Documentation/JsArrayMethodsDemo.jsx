@@ -3,7 +3,7 @@ import React from 'react';
 const JsArrayMethodsDemo = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#f8f9fa' }}>
-      <h2 style={{ color: '#005aa7' }}>📘 JavaScript Array Methods, Spread Operator & Destructuring – Telugu Explanation</h2>
+      <h2 style={{ color: '#005aa7' }}>📘 JavaScript Array Methods, Spread Operator & Destructuring – </h2>
 
       {/* 1️⃣ map() */}
       <h3 style={{ color: '#0d7c8c' }}>1️⃣ map() - Array Iteration</h3>

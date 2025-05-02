@@ -3,7 +3,7 @@ import React from 'react';
 const PromisesAsyncGuidee = () => {
   return (
     <div style={{ padding: '2rem', backgroundColor: '#fef9e7', fontFamily: 'Segoe UI' }}>
-      <h2 style={{ color: '#d35400' }}>⚡ Promises, Chaining & Error Handling (Telugu JSX Guide)</h2>
+      <h2 style={{ color: '#d35400' }}>⚡ Promises, Chaining & Error Handling </h2>
 
       <h3 style={{ color: '#6e2c00' }}>📌 Promise అంటే ఏంటి?</h3>
       <p>

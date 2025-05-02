@@ -86,8 +86,8 @@ const JSXDynamicRenderingFullGuide = () => {
         ))}
       </ul>
 
-      {/* 📘 Telugu Explanation */}
-      <h3 style={{ color: '#21618c' }}>📘 Telugu Explanation:</h3>
+      {/* 📘  */}
+      <h3 style={{ color: '#21618c' }}>📘 :</h3>
       <ul>
         <li>🧵 JSX లో మీరు strings, arrays, functions, objects అన్నీ render చేయవచ్చు.</li>
         <li>🔁 Arrays ని `map()` ద్వారా loop చేయడం చాలా సాధారణ practice.</li>

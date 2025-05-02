@@ -19,7 +19,7 @@ const OptionalChainingGuide = () => {
 
   return (
     <div style={{ padding: '2rem', backgroundColor: '#f5eef8', fontFamily: 'Segoe UI' }}>
-      <h2 style={{ color: '#8e44ad' }}>💡 Optional Chaining & Safe Accessing (Telugu JSX Guide)</h2>
+      <h2 style={{ color: '#8e44ad' }}>💡 Optional Chaining & Safe Accessing </h2>
 
       <h3 style={{ color: '#1f618d' }}>👉 Optional Chaining అంటే ఏమిటి?</h3>
       <p>

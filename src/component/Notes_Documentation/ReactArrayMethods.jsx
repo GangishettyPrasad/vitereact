@@ -3,7 +3,7 @@ import React from 'react';
 const ReactArrayMethods = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', backgroundColor: '#f9f9f9' }}>
-      <h2 style={{ color: '#0070f3' }}>⚛️ React లో map, filter, find, Spread Operator & Destructuring – Visual Guide (Telugu)</h2>
+      <h2 style={{ color: '#0070f3' }}>⚛️ React లో map, filter, find, Spread Operator & Destructuring – Visual Guide </h2>
 
       {/* map */}
       <h3 style={{ color: '#0c7a6f' }}>1️⃣ map()</h3>

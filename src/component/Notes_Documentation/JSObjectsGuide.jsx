@@ -3,7 +3,7 @@ import React from 'react';
 const JSObjectsGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', background: '#f4f8fb', lineHeight: '1.8' }}>
-      <h2 style={{ color: '#0d6efd' }}>🔍 JavaScript & React లో Objects – Full Guide (with Telugu Explanation)</h2>
+      <h2 style={{ color: '#0d6efd' }}>🔍 JavaScript & React లో Objects – Full Guide (with )</h2>
       <p><strong>Objects</strong> అనేవి <code>key-value pairs</code> ఆధారంగా డేటా ను store చేయడానికీ, access చేయడానికీ ఉపయోగిస్తాం. React లో state, props, APIs లో objects చాలా ముఖ్యమైనవి.</p>
 
       <h3 style={{ color: '#198754' }}>1️⃣ Basic Object Creation</h3>

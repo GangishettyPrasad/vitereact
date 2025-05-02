@@ -3,7 +3,7 @@ import React from 'react';
 const RoleBasedRoutingGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#fffefc' }}>
-      <h2 style={{ color: '#4a148c' }}>🔐 Role-Based Authentication & Routing – JSX + Telugu Explanation</h2>
+      <h2 style={{ color: '#4a148c' }}>🔐 Role-Based Authentication & Routing – JSX + </h2>
 
       <h3 style={{ color: '#00695c' }}>📄 1. Login.jsx లో ఏమి జరుగుతుంది?</h3>
       <ul>

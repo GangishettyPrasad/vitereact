@@ -3,7 +3,7 @@ import React from 'react';
 const SpreadOperatorGuidee = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#f3f9f9' }}>
-      <h2 style={{ color: '#4a148c' }}>🚀 Spread Operator (...) – JavaScript & React లో Full Guide (Telugu)</h2>
+      <h2 style={{ color: '#4a148c' }}>🚀 Spread Operator (...) – JavaScript & React లో Full Guide </h2>
       <p>
         <strong>Spread Operator (...)</strong> అనేది Arrays, Objects, & Function arguments లో values spread చేయడానికి ఉపయోగిస్తారు. ఇది Immutable updates కోసం React లో ముఖ్యమైన concept.
       </p>

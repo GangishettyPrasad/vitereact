@@ -3,7 +3,7 @@ import React from 'react';
 const AsyncAwaitGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI', backgroundColor: '#f4f6f7' }}>
-      <h2 style={{ color: '#2980b9' }}>🔄 Async / Await – JavaScript & React (Telugu JSX Guide)</h2>
+      <h2 style={{ color: '#2980b9' }}>🔄 Async / Await – JavaScript & React </h2>
 
       <h3 style={{ color: '#1abc9c' }}>👉 Async / Await అంటే ఏమిటి?</h3>
       <p>

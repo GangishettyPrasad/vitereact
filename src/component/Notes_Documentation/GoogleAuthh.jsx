@@ -49,7 +49,7 @@ const GoogleAuthh = () => {
 
     <>
 
-    <h3>Weather API Integration UI JSX with Full Telugu Explanation (React Axios REST API)</h3>
+    <h3>Weather API Integration UI JSX with Full  (React Axios REST API)</h3>
     <div style={{ fontFamily: 'Arial', lineHeight: 1.8 }}>
     <h2>🌦️ Weather API Integration</h2>
 

@@ -15,7 +15,7 @@ const JSXConditionalRenderingGuide = () => {
 
   return (
     <div style={{ padding: '2rem', background: '#fef9e7', fontFamily: 'Segoe UI' }}>
-      <h2 style={{ color: '#af601a' }}>⚛️ JSX Conditional Rendering Guide (Telugu)</h2>
+      <h2 style={{ color: '#af601a' }}>⚛️ JSX Conditional Rendering Guide </h2>
 
       <h3 style={{ color: '#884ea0' }}>1️⃣ if-else Statement</h3>
       <p>JSX లో outside condition check చేసి content return చేయవచ్చు.</p>

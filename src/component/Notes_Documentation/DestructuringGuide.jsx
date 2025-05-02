@@ -150,7 +150,7 @@ const { name, age } = person;`}
 />`}
       </pre>
 
-      <h3>💡 Summary (Telugu)</h3>
+      <h3>💡 Summary </h3>
       <ul>
         <li><strong>register()</strong> method object return చేస్తుంది</li>
         <li><strong>{`<input {...object} />`}</strong> అనేది object లోని properties అన్నిటిని JSX లో spread చేస్తుంది</li>
@@ -237,7 +237,7 @@ const { name, age } = person;`}
 {`const register = useForm().register;`}
       </pre>
 
-      <h3>🧠 Telugu Explanation Summary:</h3>
+      <h3>🧠  Summary:</h3>
       <ul>
         <li><strong>useForm()</strong> అనే hook ని form logic కోసం use చేస్తాం</li>
         <li><strong>register()</strong> → input ని React Hook Form కి connect చేస్తుంది</li>
