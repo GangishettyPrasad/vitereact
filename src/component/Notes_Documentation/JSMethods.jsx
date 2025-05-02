@@ -31,7 +31,7 @@ const JsMethods = () => {
         <thead>
           <tr className="bg-blue-200">
             <th className="py-3 px-6 text-left text-lg text-blue-800">Method Name</th>
-            <th className="py-3 px-6 text-left text-lg text-blue-800">Explanation (Telugu)</th>
+            <th className="py-3 px-6 text-left text-lg text-blue-800">Explanation </th>
             <th className="py-3 px-6 text-left text-lg text-blue-800">Real-Time Example</th>
           </tr>
         </thead>

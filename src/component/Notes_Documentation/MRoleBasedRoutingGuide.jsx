@@ -157,7 +157,7 @@ const RoleBasedRoutingGuide = () => {
   
        <>
        <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#f5f5ff', color: '#222' }}>
-      <h2 style={{ color: '#4a148c' }}>🔐 Login Authentication + Role Based Routing (Telugu Explanation)</h2>
+      <h2 style={{ color: '#4a148c' }}>🔐 Login Authentication + Role Based Routing ()</h2>
 
       <p><strong style={{ color: '#00695c' }}>Step 1: Login Page</strong> – <code style={{ backgroundColor: '#fff3e0' }}>Login.jsx</code> లో ఉన్నది.</p>
       <pre style={{ background: '#263238', color: '#fff', padding: '1rem', borderRadius: '10px' }}>

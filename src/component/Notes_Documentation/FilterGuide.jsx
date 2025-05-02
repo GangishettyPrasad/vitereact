@@ -17,7 +17,7 @@ const FilterGuide = () => {
       <pre><code>{`const numbers = [1, 2, 3, 4, 5];
 const even = numbers.filter(num => num % 2 === 0); 
 console.log(even); // [2, 4]`}</code></pre>
-      <p><strong>Telugu Explanation:</strong> <code>% 2 === 0</code> అని check చేయడంతో, even numbers మాత్రమే retain అవుతాయి.</p>
+      <p><strong>:</strong> <code>% 2 === 0</code> అని check చేయడంతో, even numbers మాత్రమే retain అవుతాయి.</p>
 
       <h3 style={{ color: '#00796b' }}>2️⃣ Example – Remove Falsy Values</h3>
       <pre><code>{`const mixed = [0, "Hello", false, null, 42, undefined, "React"];

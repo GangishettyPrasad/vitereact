@@ -3,7 +3,7 @@ import React from 'react';
 const ExecutionContextGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', backgroundColor: '#f9f9f9' }}>
-      <h2 style={{ color: '#005aa7' }}>🔥 JavaScript Execution Context & Call Stack – In-Depth Guide (Telugu)</h2>
+      <h2 style={{ color: '#005aa7' }}>🔥 JavaScript Execution Context & Call Stack – In-Depth Guide </h2>
 
       {/* 1. Execution Context */}
       <h3 style={{ color: '#0d7c8c' }}>1️⃣ Execution Context అంటే ఏంటి?</h3>

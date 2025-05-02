@@ -3,7 +3,7 @@ import React from 'react';
 const FunctionsGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#f4f8fb' }}>
-      <h2 style={{ color: '#0d47a1' }}>🔧 JavaScript & React లో Functions – Complete Guide with Telugu Explanation</h2>
+      <h2 style={{ color: '#0d47a1' }}>🔧 JavaScript & React లో Functions – Complete Guide with </h2>
 
       <p><strong>Functions</strong> అనేవి JavaScript లో reusable code blocks. React లో ఇవి components, events, rendering & API calls లో key role play చేస్తాయి.</p>
 

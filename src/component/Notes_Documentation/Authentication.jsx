@@ -4,7 +4,7 @@ import React from 'react';
 const Authentication = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', background: '#fefefe', lineHeight: '1.8' }}>
-      <h1 style={{ color: '#2e7d32' }}>🔐 React Login & Role-Based Routing Guide (Telugu)</h1>
+      <h1 style={{ color: '#2e7d32' }}>🔐 React Login & Role-Based Routing Guide </h1>
 
       {/* Step 1: Login.jsx */}
       <h2 style={{ color: '#1565c0' }}>📌 Step 1: Login Page (Login.jsx)</h2>

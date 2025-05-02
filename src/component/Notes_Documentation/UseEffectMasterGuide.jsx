@@ -96,9 +96,9 @@ const UseEffectRealTimeExamples = () => {
         <code>📊 Simulates prop change with state</code>
       </section>
 
-      {/* Telugu Explanation */}
+      {/*  */}
       <section style={{ marginTop: '2rem', border: '2px dashed #bbb', padding: '1rem', background: '#fcf3cf' }}>
-        <h3 style={{ color: '#af601a' }}>📗 Telugu Explanation</h3>
+        <h3 style={{ color: '#af601a' }}>📗 </h3>
         <ul>
           <li>📋 API Calls: Component load అవగానే fetch చేయడానికి</li>
           <li>🧾 Online/Offline: Event listener ద్వారా డిటెక్ట్ చేయడానికి</li>

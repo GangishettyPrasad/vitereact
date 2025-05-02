@@ -38,7 +38,7 @@ const UseStateCompleteGuide = () => {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI', background: '#f7f9f9' }}>
-      <h2 style={{ color: '#2e86c1' }}>🔍 React useState - Complete JSX Guide (Telugu)</h2>
+      <h2 style={{ color: '#2e86c1' }}>🔍 React useState - Complete JSX Guide </h2>
 
       <h3 style={{ color: '#117a65' }}>📌 useState working:</h3>
       <pre style={{ background: '#fef9e7', padding: '1rem' }}>
@@ -86,7 +86,7 @@ const UseStateCompleteGuide = () => {
         <li>🧩 Functional state for one-time calculations</li>
       </ul>
 
-      <h3 style={{ color: '#a93226' }}>📘 Telugu Explanation:</h3>
+      <h3 style={{ color: '#a93226' }}>📘 :</h3>
       <ul>
         <li>🧠 useState ఒక React Hook → state ని manage చేయడానికి వాడతాం</li>
         <li>🔁 ఇది UI re-render చేయడానికి Trigger అవుతుంది</li>

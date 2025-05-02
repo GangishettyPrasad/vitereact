@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use((config) => {
 export default axiosInstance;
 `}
       </pre>
-      <p><strong>🗒️ Telugu Explanation:</strong><br />
+      <p><strong>🗒️ :</strong><br />
         ✅ Axios instance తయారు చేసి, ప్రతి API కాల్ లో token attach చేయడానికి interceptor వాడాం.<br />
         ✅ దీన్ని అన్ని pages/components లో reuse చేయవచ్చు.</p>
 
@@ -76,7 +76,7 @@ const TokenLogin = () => {
 export default TokenLogin;
 `}
       </pre>
-      <p><strong>🗒️ Telugu Explanation:</strong><br />
+      <p><strong>🗒️ :</strong><br />
         🔐 యూజర్ లాగిన్ చేస్తాడు → API కి request పంపిస్తాం → టోకెన్ వస్తే localStorage లో నిల్వ చేస్తాం.<br />
         🔁 తరువాత protected pages లో టోకెన్ వాడుతాం.</p>
 
@@ -115,7 +115,7 @@ const UserProfile = () => {
 export default UserProfile;
 `}
       </pre>
-      <p><strong>🗒️ Telugu Explanation:</strong><br />
+      <p><strong>🗒️ :</strong><br />
         🔒 Login జరిగిన తరువాత మాత్రమే ఈ API పనిచేస్తుంది.<br />
         ✅ axiosInstance టోకెన్‌తో beraber request పంపుతుంది.<br />
         ✅ Server టోకెన్‌ను వెరిఫై చేసి డేటా పంపుతుంది.</p>
@@ -143,7 +143,7 @@ function App() {
 export default App;
 `}
       </pre>
-      <p><strong>🗒️ Telugu Explanation:</strong><br />
+      <p><strong>🗒️ :</strong><br />
         🚦 React Router ద్వారా pages navigate అవుతాయి.<br />
         👉 Login పేజీ root (/) లో ఉంటుంది.<br />
         👉 Profile పేజీకు access ఇచ్చే ముందు user login అయ్యాడా అనే విషయాన్ని వెరిఫై చేయాలి.</p>

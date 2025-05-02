@@ -101,7 +101,7 @@ const ArrayMethodsDeepGuide = () => {
             <tr>
               <th>Method</th>
               <th>Use Case</th>
-              <th>Telugu Explanation</th>
+              <th></th>
               <th>Return Type</th>
             </tr>
           </thead>

@@ -4,7 +4,7 @@ import GitFourS from './GitFourS';
 const GitGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#fafafa' }}>
-      <h2 style={{ color: '#005aa7' }}>🌟 Git & GitHub Full Workflow Guide with Telugu Explanation</h2>
+      <h2 style={{ color: '#005aa7' }}>🌟 Git & GitHub Full Workflow Guide with </h2>
 
       <h3 style={{ color: '#0d7c8c' }}>1️⃣ GitHub Repository Creation</h3>
       <ul>

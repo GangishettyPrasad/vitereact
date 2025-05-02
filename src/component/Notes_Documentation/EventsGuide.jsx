@@ -3,7 +3,7 @@ import React from 'react';
 const EventsGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#f9f9f9' }}>
-      <h2 style={{ color: '#005aa7' }}>🎯 Events in JavaScript & React – Real-Time Guide with Telugu Explanation</h2>
+      <h2 style={{ color: '#005aa7' }}>🎯 Events in JavaScript & React – Real-Time Guide with </h2>
 
       <p>Events అనేవి user interactions (click, input, keypress, mouseover, etc) handle చేయడానికి ఉపయోగిస్తారు. React లో state updates, validations, API calls & UI interactivity కోసం వీటి importance చాలా ఎక్కువ!</p>
 

@@ -42,7 +42,7 @@ axiosInstance.interceptors.request.use(
 export default axiosInstance;`}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **Axios Instance** ద్వారా మీరు **request interceptor** సృష్టిస్తున్నారు.
         - అన్ని API కాల్స్‌లో **token** ని **Authorization** హెడ్డర్‌గా జోడించడానికి ఉపయోగపడుతుంది.
         - **localStorage** నుండి **authToken** తీసుకొని ప్రతి API కాల్‌లో చేర్చబడుతుంది.
@@ -102,7 +102,7 @@ const TokenLogin = () => {
 export default TokenLogin;`}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - ఈ కోడ్ లో మీరు **login** API కాల్ చేస్తారు.
         - **username** మరియు **password** ని API కు పంపించి, **authToken** ను **localStorage** లో స్టోర్ చేస్తారు.
         - **localStorage** నుండి ఈ టోకెన్ ను తదుపరి **API** కాల్స్ కోసం ఉపయోగించవచ్చు.
@@ -150,7 +150,7 @@ const UserProfile = () => {
 export default UserProfile;`}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **UserProfile** ఎడమ పేజీను తీసుకోవడానికి **profile API** కాల్ చేయబడుతుంది.
         - **axiosInstance** ఉపయోగించి, **authToken** తో **API** కాల్ చేయబడుతుంది.
         - **profile** డేటా తెచ్చుకోవడం కోసం **localStorage** నుండి **token** పంపబడుతుంది.
@@ -205,7 +205,7 @@ const CheckoutForm = () => {
 export default CheckoutForm;`}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **Stripe Payment Gateway** ద్వారా **payment** తీసుకోవడాన్ని **CardElement** ద్వారా సులభంగా చేయవచ్చు.
         - **clientSecret** ను **Backend** నుండి తీసుకుని, **PaymentIntent**ను ధృవీకరిస్తుంది.
       */}
@@ -235,7 +235,7 @@ function App() {
 export default App;`}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **React Router** ఉపయోగించి **TokenLogin**, **UserProfile**, **CheckoutForm** వంటి పేజీలకు మార్పిడి చేయబడింది.
       */}
 
@@ -269,7 +269,7 @@ app.listen(3001, () => {
 `}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **Backend** ద్వారా **paymentIntent** సృష్టించి **clientSecret** ఫ్రంట్ ఎండ్ కు పంపించబడుతుంది.
         - **Stripe API**ని ఉపయోగించి **payment** ఫీచర్ యాప్‌లో ఇంస్టాల్ చేయబడుతుంది.
       */}
@@ -301,7 +301,7 @@ app.listen(3002, () => console.log('Server running on port 3002'));
 `}
       </pre>
       {/* 
-        **Explanation in Telugu:**
+        
         - **Google OAuth** ద్వారా **token** ను **verify** చేస్తుంది.
         - **Google API**తో **Google Login** పూర్తి అవుతుంది.
       */}

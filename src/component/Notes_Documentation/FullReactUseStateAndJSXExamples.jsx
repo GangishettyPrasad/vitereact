@@ -32,7 +32,7 @@ const FullReactUseStateAndJSXExamples = () => {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI', background: '#fcf3cf' }}>
-      <h2 style={{ color: '#2e86c1' }}>🔥 JSX + useState Real-time Full Examples (Telugu)</h2>
+      <h2 style={{ color: '#2e86c1' }}>🔥 JSX + useState Real-time Full Examples </h2>
 
       {/* JSX Data Rendering Examples */}
       <section>

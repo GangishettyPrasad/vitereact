@@ -3,7 +3,7 @@ import React from 'react';
 const ArraysGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', lineHeight: '1.8', background: '#fffefc' }}>
-      <h2 style={{ color: '#4a148c' }}>📘 Arrays in JavaScript & React – Real-Time Use Cases with Telugu Explanation</h2>
+      <h2 style={{ color: '#4a148c' }}>📘 Arrays in JavaScript & React – Real-Time Use Cases with </h2>
       <p>
         <strong>Arrays</strong> అనేవి multiple values ని single variable లో store చేసేందుకు ఉపయోగిస్తారు. React లో arrays చాలా ముఖ్యమైనవి – UI rendering, API data handling, & state management లో విపరీతంగా ఉపయోగపడతాయి.
       </p>

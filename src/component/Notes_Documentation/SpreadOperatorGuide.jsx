@@ -3,7 +3,7 @@ import React from 'react';
 const SpreadOperatorGuide = () => {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Segoe UI, sans-serif', backgroundColor: '#f9f9f9' }}>
-      <h2 style={{ color: '#0070f3' }}>🚀 Spread Operator (...) in JavaScript & React – Full Guide (Telugu)</h2>
+      <h2 style={{ color: '#0070f3' }}>🚀 Spread Operator (...) in JavaScript & React – Full Guide </h2>
 
       <p><strong>👉 Spread Operator అంటే:</strong> Array లేదా Object ని expand చేయడానికి, clone చేయడానికి లేదా కొత్త values కలపడానికి వాడే JavaScript feature.</p>
 

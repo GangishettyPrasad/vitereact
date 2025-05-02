@@ -48,7 +48,7 @@ const EventLoopExample = () => {
           {'}'}, 0); // Step 3: Set timeout is placed in the message queue<br/>
           console.log('End'); // Step 2: Log end immediately<br/>
         </code><br/>
-        **Telugu Explanation:**<br/>
+        **:**<br/>
         - "Start" immediately print అవుతుంది, ఎందుకంటే అది call stack లో మొదట అమలు అవుతుంది.<br/>
         - "End" print అవుతుంది, ఎందుకంటే `setTimeout` అసిన్క్రనస్ టాస్క్ కాబట్టి అది message queue కి వెళ్ళి, call stack ఖాళీ అయిన తర్వాత అమలు అవుతుంది.<br/>
         - "Inside setTimeout" చివరగా print అవుతుంది, ఎందుకంటే అది asynchronous task.
