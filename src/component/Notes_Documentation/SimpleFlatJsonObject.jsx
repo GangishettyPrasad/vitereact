@@ -44,6 +44,7 @@ const SimpleFlatJsonObject = () => {
         <li><Link   to = '/dashboard/ProductCrud'>ProductCrud</Link></li>
         <li><Link   to = '/dashboard/BankTransactionCrud'>BankTransactionCrud</Link></li>
         <li><Link   to = '/dashboard/ChatMessageCrud'>ChatMessageCrud</Link></li>
+        <li><Link   to = '/dashboard/DepartmentSubDepartmentCrud'>DepartmentSubDepartmentCrud</Link></li>
   
         
 

@@ -122,6 +122,7 @@ import AuditLogWithNestedData from './component/Notes_Documentation/AuditLogWith
 import ProductCrud from './component/Notes_Documentation/ProductCrud';
 import BankTransactionCrud from './component/Notes_Documentation/BankTransactionCrud';
 import ChatMessageCrud from './component/Notes_Documentation/ChatMessageCrud';
+import DepartmentSubDepartmentCrud from './component/Notes_Documentation/DepartmentSubDepartmentCrud';
 
 
 
@@ -324,9 +325,10 @@ function App() {
             <Route path="AuditLogWithNestedData" element={  <AuditLogWithNestedData />} /> 
             
             <Route path="ChatMessageCrud" element={  <ChatMessageCrud />} /> 
+            <Route path="DepartmentSubDepartmentCrud" element={  <DepartmentSubDepartmentCrud />} /> 
             
             
-            
+             
        
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
