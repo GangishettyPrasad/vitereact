@@ -146,21 +146,60 @@ setTimeout(()=>{
 //-----========------------- selectable rows  -------================---//
 
 const handleChange = ({ selectedRows }) => {
-    // You can set state or dispatch with something like Redux so we can use the retrieved data
-    console.log('Selected Rows: ', selectedRows);
-  };
+  // You can set state or dispatch with something like Redux so we can use the retrieved data
+  // whenver select |< >| click on this and this function call and values stored in selectedRows 
+  console.log('Selected Rows: ', selectedRows);
+};
 //-----------------------------------===================----------//
 
 
 
 //-----========------------- pagination -------================---//
+const [loading, setLoading] = useState(false);
+const [totalRows, setTotalRows] = useState(0);
+const [perPage, setPerPage] = useState(10);
+
+
+
+
+// const fetchUsers = async page => {
+//   setLoading(true);
+//   const response = await axios.get(`https://reqres.in/api/users?page=${page}&per_page=${perPage}&delay=1`);
+//   setData(response.data.data);
+//   setTotalRows(response.data.total);    // total data like all users 
+//   setLoading(false);
+// };
+
+const handlePageChange = page => {
+
+  console.log(page ,'page ')   // 1.  whenever click on < > the function call and stored values to page 
+  // fetchUsers(page);
+};
+
+
+const handlePerRowsChange = async (newPerPage, page) => {
+  console.log(newPerPage ,'newPerPage ',page,'page')  // 1.  whenever click on the no of rows then call this function and value stored in newPerPage 
+  //2. in this function call what ever page value is stored that value given in page 
+
+ 
+  // setLoading(true);
+  // const response = await axios.get(`https://reqres.in/api/users?page=${page}&per_page=${newPerPage}&delay=1`);
+  // setData(response.data.data);
+  // setPerPage(newPerPage);
+  // setLoading(false);
+};
+
+
+
 
   const paginationComponentOptions = {
-	rowsPerPageText: 'prasad all pages ',
-	rangeSeparatorText: 'from',
-	selectAllRowsItem: true,
-	selectAllRowsItemText: 'All',
+	rowsPerPageText: 'prasad all pages ',  // display text 1st side 
+	rangeSeparatorText: 'from',  // separator text like defalt 11of11
+	selectAllRowsItem: true,   //  show all rows 
+	selectAllRowsItemText: 'All',  // show all rows text 
 };
+
+
 
 
 //-----------------------------------===================----------//
@@ -184,15 +223,34 @@ const handleChange = ({ selectedRows }) => {
 
 
         selectableRows={true}
-        onSelectedRowsChange={handleChange}
+        onSelectedRowsChange={handleChange}  //whenver select |< >| click on this and this function call and values stored in selectedRows
         
         
         progressPending={pending}  // loading 
         progressComponent={<FcAutomotive style={{ fontSize: '40px', color: 'red' }} />}
 
-        //
-        pagination                // pagination 
-		paginationComponentOptions={paginationComponentOptions}
+        // pagination details 
+
+        pagination                // pagination setup shows 
+
+		    paginationComponentOptions={paginationComponentOptions}  // pagination setup text setting function 
+
+        paginationTotalRows={totalRows}   // define state for this initially set value to 0
+        paginationPerPage={perPage}  // define state for this initially set value to 30 like this 
+
+        onChangeRowsPerPage={handlePerRowsChange}   //whenever click on the no of rows then call this function
+
+        onChangePage={handlePageChange}   //whenever click on < > the function called
+
+        paginationServer
+
+      
+       
+                                                       
+        // paginationDefaultPage={currentPage}
+                                                      
+                                                      
+                                                       
 
       />
 
