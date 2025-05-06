@@ -108,6 +108,20 @@ import TextTranslation from './component/Notes_Documentation/TextTranslation';
 import ThirdPartyAPI from './component/Notes_Documentation/ThirdPartyAPI';
 import Weatherr from './component/Notes_Documentation/Weatherr';
 import GoogleAuthh from './component/Notes_Documentation/GoogleAuthh';
+import SimpleFlatJsonObject from './component/Notes_Documentation/SimpleFlatJsonObject';
+import ArrayOfJsonObjects from './component/Notes_Documentation/ArrayOfJsonObjects';
+import NestedJsonObject from './component/Notes_Documentation/NestedJsonObject';
+import ArrayOfNestedJsonObjects from './component/Notes_Documentation/ArrayOfNestedJsonObjects';
+import ComplexNestedJsonWithTable from './component/Notes_Documentation/ComplexNestedJsonWithTable';
+import JsonWithArrayInObject from './component/Notes_Documentation/JsonWithArrayInObject';
+import ArrayOfJsonObject from './component/Notes_Documentation/ArrayOfJsonObject';
+import NestedArraysAndObjects from './component/Notes_Documentation/NestedArraysAndObjects';
+import PaginatedJsonTable from './component/Notes_Documentation/PaginatedJsonTable';
+import AuditLogTable from './component/Notes_Documentation/AuditLogTable';
+import AuditLogWithNestedData from './component/Notes_Documentation/AuditLogWithNestedData';
+import ProductCrud from './component/Notes_Documentation/ProductCrud';
+import BankTransactionCrud from './component/Notes_Documentation/BankTransactionCrud';
+import ChatMessageCrud from './component/Notes_Documentation/ChatMessageCrud';
 
 
 
@@ -291,10 +305,28 @@ function App() {
 
             <Route path="GoogleAuthh" element={  <GoogleAuthh />} /> 
            
+{/* json data !!!! below */}
 
 
-          
 
+            <Route path="SimpleFlatJsonObject" element={  <SimpleFlatJsonObject />} /> 
+            <Route path="ArrayOfJsonObjects" element={  <ArrayOfJsonObjects />} /> 
+            <Route path="NestedJsonObject" element={  <NestedJsonObject />} /> 
+            <Route path="ArrayOfNestedJsonObjects" element={  <ArrayOfNestedJsonObjects />} /> 
+            <Route path="ComplexNestedJsonWithTable" element={  <ComplexNestedJsonWithTable />} /> 
+            <Route path="JsonWithArrayInObject" element={  <JsonWithArrayInObject />} /> 
+            <Route path="ArrayOfJsonObject" element={  <ArrayOfJsonObject />} /> 
+            <Route path="NestedArraysAndObjects" element={  <NestedArraysAndObjects />} /> 
+            <Route path="PaginatedJsonTable" element={  <PaginatedJsonTable />} /> 
+            <Route path="ProductCrud" element={  <ProductCrud />} /> 
+            <Route path="BankTransactionCrud" element={  <BankTransactionCrud />} /> 
+            <Route path="AuditLogTable" element={  <AuditLogTable />} /> 
+            <Route path="AuditLogWithNestedData" element={  <AuditLogWithNestedData />} /> 
+            
+            <Route path="ChatMessageCrud" element={  <ChatMessageCrud />} /> 
+            
+            
+            
        
           {/* html  */}
            {/* <Route path="html" element={<> <h3>Html Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> */}
