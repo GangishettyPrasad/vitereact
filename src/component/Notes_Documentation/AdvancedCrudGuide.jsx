@@ -108,9 +108,7 @@ const AdvancedCrudGuide = () => {
         ))}
       </ul>
 
-      <p style={{ marginTop: '2rem', color: '#6c3483', fontWeight: 'bold' }}>
-        👉 నెక్స్ట్ స్టెప్: <strong>💡 Optional Chaining & Safe Accessing</strong> visual JSX explanation కావాలా? Ready చేయమంటారా?
-      </p>
+     <p>"i dont want to any thing : texting  "</p>
     </div>
   );
 };
