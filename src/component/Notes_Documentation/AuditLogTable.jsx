@@ -67,7 +67,9 @@ const AuditLogTable = () => {
               </tbody>
             </table>
           ) : (
-            <p className="text-muted">No changes made.</p>
+           <div>
+           <p>no changes made . </p>
+           </div>
           )}
         </div>
       ))}
