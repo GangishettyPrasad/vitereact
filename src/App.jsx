@@ -123,6 +123,10 @@ import ProductCrud from './component/Notes_Documentation/ProductCrud';
 import BankTransactionCrud from './component/Notes_Documentation/BankTransactionCrud';
 import ChatMessageCrud from './component/Notes_Documentation/ChatMessageCrud';
 import DepartmentSubDepartmentCrud from './component/Notes_Documentation/DepartmentSubDepartmentCrud';
+import JSInterviewQuestions from './component/Notes_Documentation/JSInterviewQuestions';
+import JSTutorial from './component/Notes_Documentation/JSTutorial';
+import ProjectTutorial from './component/HRMS/ProjectTutorial';
+import PageWiseCodeGuide from './component/HRMS/PageWiseCodeGuide';
 
 
 
@@ -325,7 +329,11 @@ function App() {
             <Route path="AuditLogWithNestedData" element={  <AuditLogWithNestedData />} /> 
             
             <Route path="ChatMessageCrud" element={  <ChatMessageCrud />} /> 
-            <Route path="DepartmentSubDepartmentCrud" element={  <DepartmentSubDepartmentCrud />} /> 
+            <Route path="DepartmentSubDepartmentCrud" element={  <DepartmentSubDepartmentCrud />} />
+            <Route path="JSInterviewQuestions" element={  <JSInterviewQuestions />} />
+            <Route path="JSTutorial" element={  <JSTutorial />} />
+            <Route path="ProjectTutorial" element={  <ProjectTutorial />} />
+            <Route path="PageWiseCodeGuide" element={  <PageWiseCodeGuide />} />
             
             
              

@@ -16,6 +16,7 @@ import { PiFileJsxBold } from "react-icons/pi";
 import { FaSquareJs } from "react-icons/fa6";
 import { RiReactjsFill } from "react-icons/ri";
 import { FaGit } from "react-icons/fa6";
+import { MdWork } from "react-icons/md";
 
 const drawerWidth = 240;
 
@@ -28,6 +29,10 @@ const SideNav = () => {
     { text: 'React', path: '/dashboard/mytabs', icon: <RiReactjsFill /> },
     { text: 'GIT', path: '/dashboard/git', icon: <FaGit /> },
     { text: 'Redux', path: '/dashboard/ReduxR', icon:<RiReactjsFill /> },
+    { text: 'JS Interview Q&A', path: '/dashboard/JSInterviewQuestions', icon: <FaSquareJs /> },
+    { text: 'JS Tutorial', path: '/dashboard/JSTutorial', icon: <FaSquareJs /> },
+    { text: 'HRMS - Project Concepts', path: '/dashboard/ProjectTutorial', icon: <MdWork /> },
+    { text: 'HRMS - Page Wise Code', path: '/dashboard/PageWiseCodeGuide', icon: <MdWork /> },
   ];
 
   return (
