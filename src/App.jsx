@@ -127,6 +127,7 @@ import JSInterviewQuestions from './component/Notes_Documentation/JSInterviewQue
 import JSTutorial from './component/Notes_Documentation/JSTutorial';
 import ProjectTutorial from './component/HRMS/ProjectTutorial';
 import PageWiseCodeGuide from './component/HRMS/PageWiseCodeGuide';
+import GitRealTimeFlow from './component/git/GitRealTimeFlow';
 
 
 
@@ -171,7 +172,7 @@ function App() {
         {/* 📚 Common Routes (both admin & user) */}
 
 
-        <Route path="jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4></>} /> 
+        <Route path="jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4> <GitRealTimeFlow /> </>} /> 
         <Route path="Authentication" element={<Authentication />} />
 
         {/* 👤 User-only Page */}
