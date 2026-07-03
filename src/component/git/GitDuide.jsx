@@ -239,6 +239,80 @@ git commit -m "Describe your changes"`}
       </div>
     </div>
       </>
+
+      <>
+       <div className="p-6 bg-white shadow rounded-xl max-w-4xl mx-auto my-10 font-sans">
+      <h1 className="text-2xl font-bold mb-4 text-indigo-700">
+        🔀 Git Cherry-Pick Tutorial
+      </h1>
+
+      <p className="text-gray-700 mb-6">
+        Use <code className="bg-gray-100 px-1 py-0.5 rounded text-sm">git cherry-pick</code> when you want to apply specific commit(s) from one branch to another without merging the full branch.
+      </p>
+
+      <div className="space-y-6">
+
+        {/* Step 1 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">🧭 Step 1: Identify the Commit Hash</h2>
+          <p className="text-gray-600">
+            Go to your feature branch and run:
+          </p>
+          <pre className="bg-gray-100 p-4 rounded mt-2 text-sm">
+            git log --oneline
+          </pre>
+        </div>
+
+        {/* Step 2 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">🚀 Step 2: Checkout to Target Branch</h2>
+          <p className="text-gray-600">Switch to the branch where you want the changes:</p>
+          <pre className="bg-gray-100 p-4 rounded mt-2 text-sm">
+            git checkout hrmsReact_prod{"\n"}
+            git pull origin hrmsReact_prod
+          </pre>
+        </div>
+
+        {/* Step 3 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">🌿 Step 3: Create a New Branch from Production</h2>
+          <pre className="bg-gray-100 p-4 rounded text-sm">
+            git checkout -b prod_fix_branch_name
+          </pre>
+        </div>
+
+        {/* Step 4 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">🧩 Step 4: Cherry-pick the Commit(s)</h2>
+          <p className="text-gray-600">Use the commit hash(es) you got earlier:</p>
+          <pre className="bg-gray-100 p-4 rounded text-sm">
+            git cherry-pick &lt;commit-hash-1&gt; &lt;commit-hash-2&gt;
+          </pre>
+        </div>
+
+        {/* Step 5 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">⚠️ Step 5: Resolve Conflicts (if any)</h2>
+          <p className="text-gray-600">
+            If a conflict occurs (e.g. in <code>App.js</code>), manually fix it, then run:
+          </p>
+          <pre className="bg-gray-100 p-4 rounded text-sm">
+            git add .{"\n"}
+            git cherry-pick --continue
+          </pre>
+        </div>
+
+        {/* Step 6 */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">☁️ Step 6: Push and Create PR</h2>
+          <pre className="bg-gray-100 p-4 rounded text-sm">
+            git push origin prod_fix_branch_name
+          </pre>
+          <p className="text-gray-600 mt-2">Then create a PR from <strong>prod_fix_branch_name → hrmsReact_prod</strong></p>
+        </div>
+      </div>
+    </div>
+      </>
     </div>
   );
 };
