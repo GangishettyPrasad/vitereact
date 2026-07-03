@@ -1,1509 +1,873 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { 
+  Box, 
+  Typography, 
+  Paper, 
+  Tabs, 
+  Tab, 
+  Grid, 
+  Button, 
+  Divider, 
+  Chip 
+} from '@mui/material';
+import { 
+  FaBookOpen, 
+  FaTerminal, 
+  FaCopy, 
+  FaCheck, 
+  FaLock, 
+  FaSignOutAlt, 
+  FaUserShield, 
+  FaSlidersH, 
+  FaRoute, 
+  FaListUl, 
+  FaNetworkWired, 
+  FaDatabase, 
+  FaPuzzlePiece 
+} from 'react-icons/fa';
 
-const pages = [
-    {
-        id: 1,
-        title: "index.js - Application Entry Point",
-        filePath: "src/index.js",
-        category: "Core Files",
-        description: "ఇది React application యొక్క starting point. Browser లో application open చేసినప్పుడు ఈ file first execute అవుతుంది.",
-        lineByLine: [
-            {
-                code: `import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";`,
-                explanation: `React మరియు ReactDOM import చేస్తున్నారు. ReactDOM HTML page లో React components ని render చేయడానికి use చేస్తారు. App.js అనేది main component - ఇందులో entire application ఉంటుంది.`
-            },
-            {
-                code: `import axios from "axios";
-import { Provider } from 'react-redux';
-import store from './Redux/store';
-import "./storageUtils";`,
-                explanation: `axios - HTTP requests (API calls) చేయడానికి library.
-Provider - Redux store ని entire application కి available చేయడానికి wrapper component. ఇది React-Redux library నుండి వచ్చింది.
-store - Redux store object, ఇందులో application state store అవుతుంది.
-"./storageUtils" - ఈ import ద్వారా sessionStorage, localStorage, cookies encryption automatically activate అవుతుంది. ఇది just import చేస్తే చాలు, functions call చేయనవసరం లేదు - ఎందుకంటే ఆ file లో storage methods override అవుతాయి.`
-            },
-            {
-                code: `if (process.env.REACT_APP_DISABLE_LOGS === "true") {
-    console.log = () => { };
-    console.warn = () => { };
-    console.error = () => { };
-}`,
-                explanation: `Production లో console messages disable చేయడం. .env file లో REACT_APP_DISABLE_LOGS=true అయితే, console.log, console.warn, console.error అన్నీ empty functions గా replace అవుతాయి. ఇది production లో security కోసం - developer tools లో sensitive data కనిపించకుండా ఉంటుంది.`
-            },
-            {
-                code: `let host = window.location.host;
-axios.defaults.baseURL = 'https://pssqa.bharatpayroll.com/qxbox/';
-if (host.includes("bharatpayroll.com") || host.includes("indianhr.in") || ...) {
-    axios.defaults.baseURL = \`\${window.location.origin}/qxbox/\`;
-}`,
-                explanation: `Dynamic Base URL Setup:
-- window.location.host - current website address return చేస్తుంది (example: "app.bharatpayroll.com")
-- Default గా QA server URL set చేస్తుంది (development కోసం)
-- Production domains detect అయితే, current domain based URL set అవుతుంది
-- ఇది చాలా important - ఒకే codebase multiple domains లో run అవుతుంది
-- axios.defaults.baseURL set చేస్తే, తర్వాత "/api/login/" call చేస్తే, ఇది "https://domain.com/qxbox/api/login/" గా మారుతుంది`
-            },
-            {
-                code: `axios.defaults.headers.post["Content-Type"] = "application/json";
-axios.defaults.headers.post["Accept"] = "application/json";`,
-                explanation: `ప్రతి POST request కి default headers set చేయడం:
-- Content-Type: "application/json" - మనం server కి JSON format లో data పంపుతున్నాం అని చెప్తుంది
-- Accept: "application/json" - server నుండి JSON format లో response కావాలి అని చెప్తుంది
-- ఈ headers ప్రతి axios.post() call కి automatically attach అవుతాయి`
-            },
-            {
-                code: `const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
-);`,
-                explanation: `Application Rendering:
-1. document.getElementById("root") - public/index.html లో <div id="root"></div> element ని select చేస్తుంది
-2. ReactDOM.createRoot - React 18 యొక్క new rendering method (concurrent mode support)
-3. Provider store={store} - Redux store ని application లో ఎక్కడైనా access చేయగలిగేలా wrap చేస్తుంది
-4. <App /> - Main application component render అవుతుంది
-5. ఇది entire application start అయ్యే point - ఈ line execute అయ్యాక App.js component load అవుతుంది`
-            }
-        ]
+// Helper to escape HTML tags for syntax highlighting
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Custom VS-Code style Syntax Highlighter
+function highlightCode(code) {
+  if (!code) return '';
+  const placeholders = [];
+  let tokenized = code;
+
+  // 1. Comments (Green)
+  tokenized = tokenized.replace(/(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g, (match) => {
+    const id = `___COMMENT_${placeholders.length}___`;
+    placeholders.push({ id, html: `<span style="color: #6a9955; font-style: italic;">${escapeHtml(match)}</span>` });
+    return id;
+  });
+
+  // 2. Strings (Orange)
+  tokenized = tokenized.replace(/(["'`])(.*?)\1/g, (match) => {
+    const id = `___STRING_${placeholders.length}___`;
+    placeholders.push({ id, html: `<span style="color: #ce9178;">${escapeHtml(match)}</span>` });
+    return id;
+  });
+
+  // 3. Escape HTML tags
+  tokenized = escapeHtml(tokenized);
+
+  // 4. JS/React Keywords (Blue)
+  const keywords = [
+    'const', 'let', 'var', 'function', 'return', 'import', 'export', 'default', 
+    'from', 'async', 'await', 'try', 'catch', 'finally', 'if', 'else', 'switch', 
+    'case', 'break', 'new', 'throw', 'class', 'extends', 'super', 'true', 'false', 
+    'null', 'undefined', 'delete', 'in', 'of'
+  ];
+  keywords.forEach(kw => {
+    const regex = new RegExp(`\\b${kw}\\b`, 'g');
+    tokenized = tokenized.replace(regex, `<span style="color: #569cd6; font-weight: bold;">${kw}</span>`);
+  });
+
+  // 5. React Hooks & Built-in functions (Teal)
+  const builtins = [
+    'useState', 'useEffect', 'useContext', 'useRef', 'useNavigate', 'useLocation', 
+    'useSelector', 'useDispatch', 'sessionStorage', 'localStorage', 'document', 
+    'window', 'JSON', 'axios', 'CryptoJS', 'getCookie', 'reloadRoles'
+  ];
+  builtins.forEach(item => {
+    const regex = new RegExp(`\\b${item}\\b`, 'g');
+    tokenized = tokenized.replace(regex, `<span style="color: #4ec9b0;">${item}</span>`);
+  });
+
+  // 6. Function Invocations (Yellow)
+  tokenized = tokenized.replace(/\b([a-zA-Z_$][a-zA-Z0-9_$]*)(?=\()/g, '<span style="color: #dcdcaa;">$1</span>');
+
+  // 7. Numbers (Light Green)
+  tokenized = tokenized.replace(/\b(\d+)\b/g, '<span style="color: #b5cea8;">$1</span>');
+
+  // Restore placeholders
+  for (let i = placeholders.length - 1; i >= 0; i--) {
+    tokenized = tokenized.replace(placeholders[i].id, placeholders[i].html);
+  }
+
+  return tokenized;
+}
+
+// 9 Masterclass Learning Modules Data
+const PHASE2_DATABASE = [
+  {
+    id: 0,
+    title: "1. Login Module",
+    icon: <FaLock />,
+    category: "Authentication Gateways",
+    theory: {
+      what: "The Login Module is the primary authentication gateway of our enterprise dashboard portal. It validates credentials (Email or Mobile, and Password) against database records and obtains a JWT session token.",
+      why: "To verify client identity, initialize session states, and load the user's role and permission configuration matrix before allowing access to internal dashboard views.",
+      where: "Used on the root route ('/') and is the first page loaded when launching the application."
     },
-    {
-        id: 2,
-        title: "LoginForm.js - Login Page",
-        filePath: "src/Components/Login/LoginForm.js",
-        category: "Authentication Pages",
-        description: "User login చేసే page. Email/Phone మరియు Password enter చేసి application లోకి access పొందవచ్చు. OTP login option కూడా ఉంటుంది.",
-        lineByLine: [
-            {
-                code: `import { useForm } from "react-hook-form";
-import axios from "axios";
-import CryptoJS from "crypto-js";
-import { useNavigate } from "react-router-dom";
-import useMultitenantStore from "../Common/useMultitenantStore";
-import { useAuth } from "../Common/AuthContext";`,
-                explanation: `Libraries Import:
-- useForm: React Hook Form library - form handling కోసం. ఇది traditional onChange handlers కంటే better performance ఇస్తుంది
-- axios: API calls చేయడానికి
-- CryptoJS: Password & email encrypt చేయడానికి (AES encryption)
-- useNavigate: Login success తర్వాత user ని dashboard కి redirect చేయడానికి
-- useMultitenantStore: Zustand store - user info globally store చేయడానికి
-- useAuth: Auth context - password temporarily store చేయడానికి`
-            },
-            {
-                code: `const [withOTP, setWithOTP] = useState(false);
-const [errorMes, setErrorMes] = useState();
-const [loader, setLoader] = useState(true);
-const [passwordEye, setpasswordEye] = useState(false);
-const navigate = useNavigate();`,
-                explanation: `State Variables:
-- withOTP: false - Password login, true - OTP login. Toggle button click చేస్తే change అవుతుంది
-- errorMes: API error message store చేయడానికి ("Invalid credentials" etc.)
-- loader: true - button clickable, false - loading state (API call running). Double submit prevent చేయడానికి
-- passwordEye: false - password hidden (***), true - password visible. Eye icon click చేస్తే toggle
-- navigate: useNavigate() hook - programmatic గా page navigate చేయడానికి function return చేస్తుంది`
-            },
-            {
-                code: `const {
-    register, handleSubmit, formState: { errors },
-    trigger, setValue, getValues
-} = useForm({});`,
-                explanation: `React Hook Form Destructuring:
-- register: Input field ని form తో connect చేస్తుంది. {...register("email")} అని spread చేస్తే onChange, value, ref automatically handle అవుతాయి
-- handleSubmit: Form submit event handle చేస్తుంది. Validation pass అయితే callback function (onSubmit) call చేస్తుంది
-- errors: Validation fail అయిన fields errors object లో ఉంటాయి. errors.email?.message తో access చేస్తారు
-- trigger: Manual validation trigger చేయడానికి. trigger("email") - email field validate చేయడం
-- setValue: Code ద్వారా value set చేయడం. Remember me feature లో saved email set చేయడానికి
-- getValues: Current field values get చేయడానికి. getValues("email") - email value return చేస్తుంది`
-            },
-            {
-                code: `const KEY = CryptoJS.enc.Utf8.parse("A13007575abcdefg");
+    code: `// Core logic inside LoginForm.js of temp_bharatpayroll
+const KEY = CryptoJS.enc.Utf8.parse("A13007575abcdefg");
 const IV = CryptoJS.enc.Utf8.parse("Aabcdefg13007575");
 
 const encryptData = (plainText) => {
-    if (!plainText) return "";
-    let encrypted = CryptoJS.AES.encrypt(plainText, KEY, {
-        iv: IV,
-        mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7,
-    });
-    return encrypted.toString();
-};`,
-                explanation: `AES Encryption Setup:
-- KEY: 16 characters = 128-bit encryption key. Backend లో same key ఉంటుంది, so decrypt చేయగలదు
-- IV (Initialization Vector): Encryption ని more secure చేయడానికి additional random-like value
-- CryptoJS.mode.CBC: Cipher Block Chaining mode - ప్రతి block previous block result ని use చేస్తుంది
-- CryptoJS.pad.Pkcs7: Data ని block size కి pad చేయడం (16 bytes multiples)
-- ఈ function password, email ని encrypted string గా convert చేస్తుంది
-- Example: "test@email.com" -> "U2FsdGVkX1+abc123..." (unreadable format)
-- Network tab లో చూస్తే encrypted data మాత్రమే కనిపిస్తుంది, actual password కనిపించదు`
-            },
-            {
-                code: `const onSubmit = async (data) => {
-    setLoader(false);  // Loading state
-    const email = data.email.trim();
-    const password = data.password.trim();
+  if (!plainText) return "";
+  let encrypted = CryptoJS.AES.encrypt(plainText, KEY, {
+    iv: IV,
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+  });
+  return encrypted.toString();
+};
 
-    let mailRegexx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]{2,}\\.+[A-Z]{2,}$/i;
+const onSubmit = async (data) => {
+  setLoader(false); // Disables button during API delay
+  const email = data.email.trim();
+  const password = data.password.trim();
+  let req = {};
 
-    if (email.match(mailRegexx)) {
-        const encryptedEmail = encryptData(email);
-        const encryptedPassword = encryptData(password);
-        req = { email: encryptedEmail, password: encryptedPassword };
-    }`,
-                explanation: `Login Submit Function:
-- async keyword - ఈ function లో await use చేయవచ్చు (API calls కోసం)
-- data parameter - React Hook Form ద్వారా form values object receive అవుతుంది
-- setLoader(false) - Submit button disable చేసి loading spinner show చేస్తుంది
-- .trim() - Leading/trailing spaces remove చేస్తుంది
-- mailRegexx - Email format validate చేసే Regular Expression pattern
-  - ^[A-Z0-9._%+-]+ - Email start part (user)
-  - @[A-Z0-9.-]{2,} - @ తర్వాత domain name
-  - \\.[A-Z]{2,}$ - .com, .in etc.
-  - /i flag - case insensitive
-- email.match(mailRegexx) - Email pattern match అయితే true, else false
-- Encrypt చేసి request object create చేస్తుంది`
-            },
-            {
-                code: `await axios.post("/api/user/login/", req, { withCredentials: true })
-  .then((result) => {
-    var UserInfoToSesson = {
-        data: result.data.data,
-        roles: result.data.roles,
-        roleID: result.data.rolesId[0],
-        token: result.data.token,
-        subdomain: result.data.subDomain,
-        employeeImage: result.data.employeeImage,
-        firstName: result.data.firstName,
-        plan: result.data.plan,
-    };
-
-    sessionStorage.setItem("user-info", JSON.stringify(UserInfoToSesson));
-    document.cookie = \`userinfoCookie=\${JSON.stringify(UserInfoToSesson)}\`;
-    sessionStorage.setItem("RolesFromDb", JSON.stringify(result.data.existedRolesData));
-
-    if (result.data.roles[0] === "ADMIN") {
-        navigate("/my-profile");
-    }
-  })
-  .catch((err) => {
-    if (err.response.status === 401) { SessionLogIn(navigate); }
-    setErrorMes(err.response.data.errors.message);
-  });`,
-                explanation: `API Call & Response Handling:
-1. axios.post() - POST request "/api/user/login/" endpoint కి
-2. req - Encrypted email & password
-3. withCredentials: true - Cookies cross-origin requests లో send చేయడం allow
-
-Success (.then):
-4. UserInfoToSesson - API response నుండి important data extract చేసి object create చేయడం
-   - data: Company & employee info
-   - roles: ["ADMIN"] or ["EMPLOYEE"] - User role
-   - roleID: Permission check కోసం role ID
-   - token: { access: "...", refresh: "..." } - JWT tokens
-   - subdomain: Multi-tenant company identifier
-5. sessionStorage.setItem - Tab close అయ్యే వరకు data store
-6. document.cookie - Browser close చేసినా persist (session cookie)
-7. Role based navigation - ADMIN అయితే admin page, EMPLOYEE అయితే user page
-
-Error (.catch):
-8. 401 status - Invalid token, auto logout (SessionLogIn)
-9. Error message UI లో display చేయడం`
-            },
-            {
-                code: `<form onSubmit={handleSubmit(onSubmit)}>
-    <input type="text"
-        {...register("email", {
-            required: "This field is required",
-            pattern: {
-                value: /^(?:(\\+?\\d{10})|([\\w.-]+@[\\w.-]+\\.\\w{2,5}))$/,
-                message: "Please enter a valid Email ID or Phone no",
-            },
-            onChange: (event) => event.target.value = event.target.value.toLowerCase()
-        })}
-        onKeyUp={() => { trigger("email"); }}
-    />
-    {errors.email && <small className='text-danger'>{errors.email.message}</small>}
-
-    <input type={!passwordEye ? 'password' : "text"}
-        {...register("password", {
-            required: "This field is required",
-        })}
-    />
-    <i className={passwordEye ? "fa fa-eye" : "fa fa-eye-slash"}
-       onClick={() => setpasswordEye(!passwordEye)} />
-</form>`,
-                explanation: `JSX - Login Form UI:
-1. handleSubmit(onSubmit) - Form submit అయినప్పుడు first validation run, pass అయితే onSubmit call
-2. {...register("email", {...})} - Spread operator తో React Hook Form register:
-   - required: Empty submit చేస్తే error show
-   - pattern: Regex match కాకపోతే error message show
-   - onChange: Typing చేస్తుంటే lowercase convert (Email case-insensitive)
-3. onKeyUp - ప్రతి key press తర్వాత trigger("email") call - real-time validation
-4. {errors.email && ...} - Conditional rendering. Error ఉంటే red text show, లేకపోతే nothing
-5. Password Eye Toggle:
-   - passwordEye false -> type="password" (hidden *****)
-   - passwordEye true -> type="text" (visible)
-   - onClick: toggle state
-   - className: fa-eye (open) or fa-eye-slash (closed) icon`
-            }
-        ]
-    },
-    {
-        id: 3,
-        title: "TopHeader.js - Navigation Bar & Logout",
-        filePath: "src/Components/Dashboard/TopHeader.js",
-        category: "Layout Components",
-        description: "Application top navigation bar. ఇది login తర్వాత ప్రతి page లో కనిపిస్తుంది. Company logo, navigation menu, notifications, profile, logout button ఉంటాయి.",
-        lineByLine: [
-            {
-                code: `import { useDispatch, useSelector } from 'react-redux';
-import { SELECTED_COMPANY } from './../../Redux/actions';
-import { useNavigate, useLocation, Link } from "react-router-dom";
-import ApiHeaders from "../Common/ApiHeaders";
-import { VideoModalContext } from "../../Context/VideoModalContext";`,
-                explanation: `TopHeader Imports:
-- useDispatch: Redux action dispatch చేయడానికి (company switch చేసినప్పుడు)
-- useSelector: Redux store నుండి data read చేయడానికి (selected company)
-- SELECTED_COMPANY: Action creator - company select చేసినప్పుడు dispatch చేస్తారు
-- useNavigate: Page navigate చేయడానికి (Logout తర్వాత login page)
-- useLocation: Current page URL get చేయడానికి (video tutorial mapping)
-- Link: HTML <a> tag alternative - page reload లేకుండా navigate
-- ApiHeaders: Multi-tenant headers generate చేయడానికి
-- VideoModalContext: Tutorial video popup manage చేయడానికి`
-            },
-            {
-                code: `const TopHeader = ({ changesidebar }) => {
-    const multitenant = useSelector((state) => state.data);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const RolesFromDb = JSON.parse(sessionStorage.getItem('RolesFromDb'));
-    const userInfos = JSON.parse(sessionStorage.getItem('user-info'));
-    const [listofcompany, setlistofcompany] = useState([]);`,
-                explanation: `Component Setup:
-- { changesidebar } - Props destructuring. Parent (PrivateRoute) నుండి sidebar toggle function receive
-- useSelector((state) => state.data) - Redux store నుండి multitenant company data read
-- useDispatch() - Redux action dispatch function
-- useNavigate() - Navigate function
-- useLocation() - Current URL info { pathname, search, hash }
-- RolesFromDb - SessionStorage నుండి user permissions parse చేసి read
-- userInfos - SessionStorage నుండి user details (role, token, company info)
-- listofcompany - Multi-tenant companies list state (dropdown కోసం)`
-            },
-            {
-                code: `const Logout = () => {
-    sessionStorage.removeItem("user-info");
-    sessionStorage.removeItem("RolesFromDb");
-    localStorage.removeItem("RolesFromDb");
-    sessionStorage.removeItem("personalImage");
-    sessionStorage.removeItem("persnonalName");
-    document.cookie = "userinfoCookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "userinfoRoleInfo=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "personalImage=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "persnonalName=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    window.location.reload();
-    navigate("/");
-};`,
-                explanation: `Logout Function - Session Complete Clear:
-Step 1: sessionStorage items remove చేయడం
-  - "user-info": User details (role, token, company)
-  - "RolesFromDb": Permissions data
-  - "personalImage": Profile image URL
-  - "persnonalName": User name
-
-Step 2: localStorage items remove
-  - localStorage tab close చేసినా persist అవుతుంది, so manually clear చేయాలి
-
-Step 3: Cookies clear చేయడం
-  - Cookie ని delete చేయడానికి direct method లేదు
-  - Trick: expires ని past date (Jan 1, 1970) కి set చేస్తే browser automatically delete చేస్తుంది
-  - Thu, 01 Jan 1970 - Unix epoch (time calculation start point)
-
-Step 4: Page reload & redirect
-  - window.location.reload() - Page completely fresh load (all state clear)
-  - navigate("/") - Login page కి redirect`
-            },
-            {
-                code: `const getListOfCompanies = async () => {
-    const headers = ApiHeaders(multitenant);
-    var userinfo = JSON.parse(sessionStorage.getItem('user-info'));
-    if (userinfo.data.multitenantKey && userinfo.data.companyId) {
-        await axios.get(
-            \`/api/user/list-multi-tenant-companies/?mul_key=\${userinfo.data.multitenantKey}&cmp_id=\${userinfo.data.companyId}\`,
-            { headers: headers }
-        ).then((result) => {
-            setlistofcompany(result.data);
-        });
-    }
-};`,
-                explanation: `Multi-Tenant Company List Fetch:
-- ApiHeaders(multitenant) - Custom headers generate (X-CURRENT-COMPANY, X-SELECTED-COMPANY)
-- multitenantKey check - User multi-tenant enabled అయితే మాత్రమే API call
-- Template literal (\`...\`) - URL లో dynamic values insert చేయడం
-  - mul_key: Multi-tenant key (companies group identifier)
-  - cmp_id: Current company ID
-- Response లో companies list వస్తుంది - dropdown లో show చేస్తారు
-- User different company select చేస్తే dispatch(SELECTED_COMPANY(company)) call అవుతుంది`
-            }
-        ]
-    },
-    {
-        id: 4,
-        title: "Privaterote.js - Route Protection",
-        filePath: "src/Privaterote.js",
-        category: "Core Files",
-        description: "PrivateRoute component - ఇది ప్రతి protected page ని wrap చేస్తుంది. Login చేయకుండా pages access చేయకుండా protect చేస్తుంది మరియు role-based permission check చేస్తుంది.",
-        lineByLine: [
-            {
-                code: `import { Navigate, useNavigate, useLocation } from 'react-router-dom';
-import TopHeader from "./Components/Dashboard/TopHeader";
-import axios from "axios";
-import { reloadRoles } from "./sessionLogout";
-import { useSelector } from 'react-redux';
-
-const PrivateRoute = ({ children }) => {`,
-                explanation: `PrivateRoute Setup:
-- Navigate: JSX లో redirect చేయడానికి component (<Navigate to="/" />)
-- useNavigate: Function call ద్వారా redirect (navigate("/login"))
-- useLocation: Current URL path get చేయడానికి
-- TopHeader: Navigation bar component - authenticated pages లో show అవుతుంది
-- reloadRoles: API call చేసి latest permissions fetch చేసే function
-- useSelector: Redux store నుండి multitenant data read
-- { children } - Props destructuring. <PrivateRoute><Dashboard /></PrivateRoute> లో Dashboard component children గా వస్తుంది`
-            },
-            {
-                code: `function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1);
-        if (c.indexOf(name) === 0) {
-            sessionStorage.setItem("user-info", c.substring(name.length, c.length));
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}`,
-                explanation: `Cookie Parse Function:
-- document.cookie - Browser లో store చేసిన cookies string return చేస్తుంది
-  Example: "userinfoCookie=abc123; theme=dark; lang=en"
-- decodeURIComponent - URL encoded characters decode చేయడం (%20 -> space)
-- split(';') - String ని ';' తో split చేసి array గా convert
-- for loop - ప్రతి cookie check చేస్తుంది
-- charAt(0) === ' ' - Leading spaces remove చేయడం (cookies semicolon + space తో separate అవుతాయి)
-- indexOf(name) === 0 - Cookie name match అయిందా check
-- substring(name.length) - Cookie value extract (name= తర్వాత part)
-- sessionStorage.setItem - Cookie value ని sessionStorage లో కూడా copy
-- Return: Cookie value string, లేకపోతే empty string ""`
-            },
-            {
-                code: `// Token Setup
-let token;
-if (getCookie("userinfoCookie")) {
-    var tempobject = JSON.parse(getCookie("userinfoCookie"));
-    token = tempobject.token.access;
-    axios.defaults.headers.common = { 'Authorization': \`Bearer \${token}\` };
-}`,
-                explanation: `JWT Token Setup:
-1. getCookie("userinfoCookie") - Login cookie ఉందా check
-2. JSON.parse - Cookie string ని JavaScript object గా convert
-3. tempobject.token.access - JWT access token extract
-   - Token object: { access: "eyJ...", refresh: "eyJ..." }
-   - access: Short-lived token for API authentication
-4. axios.defaults.headers.common - ప్రతి API request కి automatically ఈ header attach అవుతుంది
-5. 'Bearer' prefix - OAuth 2.0 standard authentication scheme
-   - Server ఈ header check చేసి token validate చేస్తుంది
-   - Invalid token -> 401 Unauthorized -> auto logout`
-            },
-            {
-                code: `useEffect(() => {
-    if (getCookie("userinfoCookie")) {
-        reloadRoles(navigates, multitenant);
-    } else {
-        sessionStorage.removeItem("user-info");
-        sessionStorage.removeItem("RolesFromDb");
-        localStorage.removeItem("RolesFromDb");
-    }
-}, [children]);`,
-                explanation: `Roles Reload on Route Change:
-- [children] dependency - Route change అయినప్పుడు children (page component) change అవుతుంది
-- ఇది trigger అయి reloadRoles call అవుతుంది
-- reloadRoles:
-  1. API call: /api/roles/permissions/?role_id=X&company_id=Y
-  2. Latest permissions backend నుండి fetch
-  3. sessionStorage & localStorage update
-- Cookie లేకపోతే (session expired):
-  - All stored data clear
-  - User next render లో login page కి redirect అవుతాడు`
-            },
-            {
-                code: `useEffect(() => {
-    if (RolesFromDb) {
-        if (location.pathname === "/employee-management") {
-            if (RolesFromDb?.modules?.EmployeeManagement?.view === false) {
-                navigates("/notfound");
-            }
-        }
-        if (location.pathname === "/admin-dashboard") {
-            if (RolesFromDb?.modules?.Dashboard?.submodules?.AdminDashboard?.view === false) {
-                navigates("/notfound");
-            }
-        }
-        // ... 50+ more path checks
-    }
-}, []);`,
-                explanation: `Route Permission Checking:
-- Component mount అయినప్పుడు ఒకసారి execute (empty dependency [])
-- location.pathname - Current URL check (example: "/employee-management")
-- RolesFromDb?.modules?.ModuleName?.view - Optional chaining (?.) use చేసి safe access
-  - ?. operator: Object null/undefined అయితే error throw చేయకుండా undefined return చేస్తుంది
-  - Without ?.: RolesFromDb.modules.X.view - if modules is null -> ERROR
-  - With ?.: RolesFromDb?.modules?.X?.view - if modules is null -> undefined (no error)
-- view === false - Permission deny అయితే /notfound page కి redirect
-- ప్రతి URL path కి separate if condition ఉంటుంది
-- ఇది URL manually type చేసి unauthorized pages access చేయడం prevent చేస్తుంది`
-            },
-            {
-                code: `return (
-    <div id="wrapper" className={sideBar ? "toggled" : ""}>
-        {!getCookie("userinfoCookie") ? (
-            <Navigate to="/" />
-        ) : (
-            <>
-                <TopHeader changesidebar={(data) => changesidebar(data)} />
-                {children}
-            </>
-        )}
-    </div>
-);`,
-                explanation: `Conditional Rendering:
-1. Ternary operator (? :) use చేసి conditional render
-2. !getCookie("userinfoCookie") - Cookie లేకపోతే (not logged in):
-   - <Navigate to="/" /> - Login page కి redirect (React Router component)
-3. Cookie ఉంటే (logged in):
-   - <TopHeader /> - Navigation bar render
-   - {children} - Actual page component render (Dashboard, Employee page, etc.)
-4. Fragment (<> </>) - Extra div create చేయకుండా multiple elements return
-5. changesidebar prop - Sidebar toggle function TopHeader కి pass
-6. className "toggled" - Sidebar open/close CSS class toggle`
-            }
-        ]
-    },
-    {
-        id: 5,
-        title: "sessionLogout.js - Auto Logout & Role Reload",
-        filePath: "src/sessionLogout.js",
-        category: "Authentication Pages",
-        description: "ఈ file లో 2 important functions ఉన్నాయి: SessionLogIn (auto logout) మరియు reloadRoles (permissions refresh). ఇవి entire application లో reuse అవుతాయి.",
-        lineByLine: [
-            {
-                code: `import axios from "axios";
-import ApiHeaders from "./Components/Common/ApiHeaders";
-
-export function SessionLogIn(navigate) {
-    sessionStorage.removeItem("user-info");
-    sessionStorage.removeItem("RolesFromDb");
-    localStorage.removeItem("RolesFromDb");
-    sessionStorage.removeItem("personalImage");
-    sessionStorage.removeItem("persnonalName");
-    document.cookie = "userinfoCookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "userinfoRoleInfo=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "personalImage=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    document.cookie = "persnonalName=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    delete axios.defaults.headers.common["Authorization"];
-    navigate("/");
-}`,
-                explanation: `SessionLogIn - Forced Logout Function:
-- export function - ఈ function ని other files లో import చేసి use చేయవచ్చు
-- navigate parameter - useNavigate() hook value receive చేస్తుంది
-- ఈ function API call 401 Unauthorized return చేసినప్పుడు call అవుతుంది
-
-Usage Pattern (other files లో):
-  try { await axios.get("/api/data/"); }
-  catch (err) {
-      if (err.response.status === 401) { SessionLogIn(navigate); }
+  if (email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$/i)) {
+    req = { email: encryptData(email), password: encryptData(password) };
+  } else {
+    req = { phone: encryptData(email), password: encryptData(password) };
   }
 
-- delete axios.defaults.headers.common["Authorization"]
-  - Authorization header remove చేస్తుంది
-  - తర్వాత API calls token లేకుండా go అవుతాయి
-- navigate("/") - Login page కి redirect`
-            },
-            {
-                code: `export async function reloadRoles(navigate, multitenant) {
-    var userinfo = JSON.parse(sessionStorage.getItem("user-info"));
-    let headers = {
-        "X-CURRENT-COMPANY": userinfo.subdomain,
-        "X-SELECTED-COMPANY": userinfo.subdomain,
-        "x-system-ip-address": sessionStorage.getItem("SystemIpAddress") || ""
-    };
+  await axios.post("/api/user/login/", req, { withCredentials: true })
+    .then((result) => {
+      const UserInfoToSession = {
+        data: result.data.data,
+        roles: result.data.roles,
+        token: result.data.token,
+        subdomain: result.data.subDomain,
+        firstName: result.data.firstName
+      };
 
-    try {
-        const response = await axios.get(
-            \`/api/roles/permissions/?role_id=\${userinfo.roleID}&company_id=\${userinfo.data.id}\`,
-            { headers: headers }
-        );
-        if (response.data) {
-            sessionStorage.setItem("RolesFromDb", JSON.stringify(response.data));
-            localStorage.setItem("RolesFromDb", JSON.stringify(response.data));
-        }
-    } catch (error) {
-        console.log('not found');
-    }
-}`,
-                explanation: `reloadRoles - Permissions Refresh Function:
-- async function - API call await చేయడానికి
-- PrivateRoute లో ప్రతి route change తర్వాత call అవుతుంది
+      // Set cookie and sessionStorage
+      sessionStorage.setItem("user-info", JSON.stringify(UserInfoToSession));
+      document.cookie = \`userinfoCookie=\${JSON.stringify(UserInfoToSession)}\`;
+      sessionStorage.setItem("RolesFromDb", JSON.stringify(result.data.existedRolesData));
 
-Step 1: Current user info sessionStorage నుండి read
-Step 2: Custom headers prepare:
-  - X-CURRENT-COMPANY: User original company
-  - X-SELECTED-COMPANY: Currently working company (multi-tenant)
-  - x-system-ip-address: Audit trail కోసం IP address
-
-Step 3: API Call
-  - /api/roles/permissions/ endpoint
-  - role_id: User role ID (ADMIN role ID, EMPLOYEE role ID, etc.)
-  - company_id: Company ID
-  - Backend ఈ role + company combination కి permissions return చేస్తుంది
-
-Step 4: Response store
-  - sessionStorage: Current tab session
-  - localStorage: Persist (cookie recovery కోసం)
-
-Step 5: Error handling
-  - try/catch - Error అయితే catch block execute
-  - PrivateRoute cookie check ద్వారా handle అవుతుంది`
-            }
-        ]
-    },
-    {
-        id: 6,
-        title: "storageUtils.js - Encryption System",
-        filePath: "src/storageUtils.js",
-        category: "Core Files",
-        description: "ఈ file sessionStorage, localStorage, cookies ని automatically encrypt/decrypt చేస్తుంది. index.js లో import చేస్తే చాలు - అన్ని storage operations encrypted అవుతాయి.",
-        lineByLine: [
-            {
-                code: `import CryptoJS from "crypto-js";
-const SECRET_KEY = "3afb675c57a210ee0e06f84ba716d81c244ac8d7554846aa07f0686ec46b0ce0";`,
-                explanation: `AES Encryption Secret Key:
-- CryptoJS: JavaScript encryption library - AES, SHA, MD5 etc. algorithms support చేస్తుంది
-- SECRET_KEY: 64 hex characters = 256-bit key
-  - ఈ key తో encrypt చేసిన data same key తో మాత్రమే decrypt అవుతుంది
-  - Production లో ఈ key secret గా ఉంచాలి
-  - Environment variable లో store చేయడం better practice
-- AES-256: Military grade encryption - currently unbreakable`
-            },
-            {
-                code: `export const encryptData = (data) => {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-};
-
-export const decryptData = (encryptedData) => {
-    try {
-        if (!encryptedData) return null;
-        const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
-        const decryptedText = bytes.toString(CryptoJS.enc.Utf8);
-        if (!decryptedText) return null;
-        return JSON.parse(decryptedText);
-    } catch (error) {
-        return null;
-    }
-};`,
-                explanation: `Encrypt & Decrypt Functions:
-encryptData:
-  1. JSON.stringify(data) - Object/String ని JSON string గా convert
-  2. CryptoJS.AES.encrypt() - AES algorithm తో encrypt
-  3. .toString() - Encrypted data ని Base64 string గా convert
-  Example: "Hello" -> "U2FsdGVkX19abc123xyz..."
-
-decryptData:
-  1. CryptoJS.AES.decrypt() - AES decrypt, returns WordArray
-  2. .toString(CryptoJS.enc.Utf8) - WordArray ని UTF-8 string convert
-  3. JSON.parse() - JSON string ని Object గా convert
-  4. try/catch - Corrupted data or wrong key error handle
-  Example: "U2FsdGVkX19abc..." -> "Hello"`
-            },
-            {
-                code: `// Override sessionStorage.setItem
-const originalSetItem = sessionStorage.setItem;
-sessionStorage.setItem = function (key, value) {
-    const encryptedValue = encryptData(value);
-    originalSetItem.call(sessionStorage, key, encryptedValue);
-};
-
-// Override sessionStorage.getItem
-const originalGetItem = sessionStorage.getItem;
-sessionStorage.getItem = function (key) {
-    const encryptedData = originalGetItem.call(sessionStorage, key);
-    return encryptedData ? decryptData(encryptedData) : null;
-};`,
-                explanation: `Method Override Pattern (Monkey Patching):
-ఇది JavaScript యొక్క powerful feature - built-in methods ని replace చేయవచ్చు.
-
-setItem Override:
-  1. originalSetItem - Original function reference save చేయడం (backup)
-  2. sessionStorage.setItem ని new function తో replace
-  3. New function:
-     - value ని encrypt చేసి
-     - original function call చేసి encrypted value store
-  4. .call(sessionStorage, ...) - 'this' context preserve చేయడం
-
-getItem Override:
-  1. Original function reference save
-  2. New function:
-     - Original function తో encrypted data read
-     - Decrypt చేసి return
-  3. Developer tools లో encrypted data కనిపిస్తుంది, but code లో normal data return అవుతుంది
-
-Result:
-  sessionStorage.setItem("name", "Prasad")
-  // Actually stored: "U2FsdGVkX19..."
-  sessionStorage.getItem("name")
-  // Returns: "Prasad" (auto decrypted)`
-            },
-            {
-                code: `(function () {
-    const originalCookieDescriptor = Object.getOwnPropertyDescriptor(
-        Document.prototype, 'cookie'
-    );
-    Object.defineProperty(document, 'cookie', {
-        get: function () {
-            // Decrypt userinfoCookie when reading
-            const rawCookie = originalCookieDescriptor.get.call(document);
-            return cookiePairs.map(pair => {
-                if (name === 'userinfoCookie') {
-                    const bytes = CryptoJS.AES.decrypt(val, SECRET_KEY);
-                    return \`\${name}=\${bytes.toString(CryptoJS.enc.Utf8)}\`;
-                }
-                return pair;
-            }).join('; ');
-        },
-        set: function (val) {
-            // Encrypt userinfoCookie when setting
-            if (val.startsWith('userinfoCookie=')) {
-                const encrypted = CryptoJS.AES.encrypt(rawValue, SECRET_KEY).toString();
-                originalCookieDescriptor.set.call(document,
-                    \`userinfoCookie=\${encodeURIComponent(encrypted)}\`);
-            } else {
-                originalCookieDescriptor.set.call(document, val);
-            }
-        }
+      if (result.data.roles[0] === "ADMIN") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/user-dashboard");
+      }
+    })
+    .catch((err) => {
+      setLoader(true);
+      alert(err.response.data.message || "Login Failed");
     });
-})();`,
-                explanation: `Cookie Encryption - Property Override:
-- IIFE (Immediately Invoked Function Expression) - (function(){...})() - Define చేసిన వెంటనే execute
-- Object.getOwnPropertyDescriptor - document.cookie యొక్క original getter/setter reference
-- Object.defineProperty - document.cookie property ని custom getter/setter తో override
-
-Cookie Set (setter):
-  - document.cookie = "userinfoCookie=data" చేస్తే
-  - data encrypt అయి "userinfoCookie=U2FsdGVkX19..." గా actual cookie లో store
-
-Cookie Get (getter):
-  - document.cookie read చేస్తే
-  - userinfoCookie value decrypt అయి plain text return
-  - Other cookies (theme, lang etc.) unchanged గా return
-
-encodeURIComponent:
-  - Encrypted string లో special characters (+, /, =) URL safe format కి convert
-  - decodeURIComponent: Read చేసేటప్పుడు back convert`
-            }
-        ]
+};`,
+    explanation: [
+      "CryptoJS.AES.encrypt: Encrypts the user's password and email/mobile number on the client side using 128-bit key and IV values matching the backend security settings.",
+      "setLoader(false): Sets loader state to false to disable the submit button immediately upon form submission, preventing duplicate API requests.",
+      "document.cookie: Saves user details to a cookie. This cookie is parsed by the route guards (PrivateRoute.js) to check the user's session status.",
+      "sessionStorage.setItem('RolesFromDb', ...): Stores the user's roles and permission matrix locally in sessionStorage to show or hide dashboard elements dynamically."
+    ],
+    flow: "User Inputs Details → Clicks Login → client-side validation runs → CryptoJS encrypts credentials → Axios posts payload to backend → Server returns JWT tokens & permissions → SessionStorage/Cookie updates → Page redirects to Dashboard.",
+    internal: {
+      react: "React Hook Form manages input states without triggering page-wide re-renders. Component re-renders only when validation status changes.",
+      js: "Javascript executes the AES encryption block synchronously, updates the loading state, and parses the response envelope.",
+      browser: "The browser's cookie manager writes the secure session cookie to disk and redirects the URL path using the History API."
     },
-    {
-        id: 7,
-        title: "ApiHeaders.js - Custom Headers",
-        filePath: "src/Components/Common/ApiHeaders.js",
-        category: "Core Files",
-        description: "ప్రతి API call కి custom headers generate చేసే utility function. Multi-tenant support మరియు audit tracking కోసం use చేస్తారు.",
-        lineByLine: [
-            {
-                code: `import { multitenantStore } from "../Common/useMultitenantStore";
+    telugu: "Login Page code lo main settings inputs checks details. Browser logs look raw password payload capture cheyakunda standard AES keys modes matches encryption parameters configure chestham. Axios backend response token verify details session storage update route redirects coordinate configurations checks.",
+    realtime: "Enterprise applications use client-side credential encryption to protect passwords in transit and prevent middleman sniffing attacks.",
+    interview: [
+      "Q: What is the benefit of client-side encryption before posting login requests? - A: Protects passwords in transit and secures payloads against network-sniffing tools.",
+      "Q: Why use cookies and sessionStorage together for session tracking? - A: Cookies are parsed by the route guards on load, while sessionStorage maintains session data in memory across tab reloads."
+    ],
+    bestPractices: "Always trim input values before validating, disable submit buttons during pending requests to prevent duplicate submissions, and load encryption keys dynamically from environment variables instead of hardcoding them."
+  },
+  {
+    id: 1,
+    title: "2. Logout Module",
+    icon: <FaSignOutAlt />,
+    category: "Session Management",
+    theory: {
+      what: "The Logout Module clears the user's active session, flushes access tokens, deletes permission profiles, and redirects the user to the login screen.",
+      why: "To prevent unauthorized access to personal employee data and clear memory cache configurations.",
+      where: "Triggered manually when the user clicks 'Logout' or automatically when the session expires."
+    },
+    code: `// Manual Logout in TopHeader.js & sessionLogout.js
+const Logout = () => {
+  // 1. Clear session and local storage caches
+  sessionStorage.removeItem("user-info");
+  sessionStorage.removeItem("RolesFromDb");
+  localStorage.removeItem("RolesFromDb");
 
-const ApiHeaders = (multitenant) => {
-    const userinfo = JSON.parse(sessionStorage.getItem("user-info"));
-    const systemIp = sessionStorage.getItem("SystemIpAddress");
+  // 2. Clear cookies by setting their expiration date to the past
+  document.cookie = "userinfoCookie=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";
+  document.cookie = "userinfoRoleInfo=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";
 
-    let headers = {
-        "x-system-ip-address": systemIp || "",
-    };
+  // 3. Clear authorization headers
+  delete axios.defaults.headers.common["Authorization"];
 
-    const isMyProfilePath = window.location.pathname === '/my-profile';
+  // 4. Force reload and navigate
+  window.location.reload();
+  navigate("/");
+};`,
+    explanation: [
+      "sessionStorage.removeItem: Clears the cached session info, permission profiles, and user details in memory.",
+      "expires=Thu, 01 Jan 1970: Instructs the browser that the cookie is expired, prompting it to delete the cookie file immediately.",
+      "delete axios.defaults.headers: Removes the authorization token from the default headers to prevent subsequent requests from sending stale tokens.",
+      "window.location.reload(): Reloads the page to clear all React states and Redux stores in memory."
+    ],
+    flow: "User clicks Logout → clear sessionStorage → expire cookies → delete Axios authorization headers → reload page context → redirect to Login page.",
+    internal: {
+      react: "Destroys all active component instances, runs their cleanup functions, and resets global store values.",
+      js: "Deletes default object references and prompts garbage collection of session data in memory.",
+      browser: "The browser's cookie manager deletes expired cookie files from the client's hard drive."
+    },
+    telugu: "Logout clear options controls checks. Browser cookies direct script remove command ledhu, anduke past date (1970 epoch) set chestham. automatic ga browser values delete chesthundhi. Axios defaults variables authorization key drop chestham.",
+    realtime: "SaaS platforms implement strict local storage clearouts on logout to prevent subsequent users on shared machines from accessing previous session data.",
+    interview: [
+      "Q: How do you clear a cookie in Javascript? - A: Set the cookie to an empty value and set its expiration date to a past date like Thu, 01 Jan 1970.",
+      "Q: Why is window.location.reload() important during logout? - A: Wipes the Redux store and resets memory cache states, preventing unauthorized users from accessing cached data."
+    ],
+    bestPractices: "Always include the path parameter when deleting cookies to ensure they are cleared across all paths, and trigger token revocation on the backend to invalidate the token globally."
+  },
+  {
+    id: 2,
+    title: "3. Authentication",
+    icon: <FaUserShield />,
+    category: "Session Management",
+    theory: {
+      what: "Authentication is the process of verifying a user's identity. It verifies who the user is before granting access to dashboard features.",
+      why: "To secure application data and ensure that users can only access their authorized resources.",
+      where: "Implemented using JWT (JSON Web Tokens) and checked on every route transition and API call."
+    },
+    code: `// JWT access validation inside Privaterote.js
+let token;
+const cookieVal = getCookie("userinfoCookie");
 
-    if (userinfo && multitenant?.data) {
-        headers = {
-            ...headers,
-            "X-CURRENT-COMPANY": userinfo.subdomain,
-            "X-SELECTED-COMPANY": isMyProfilePath
-                ? userinfo.subdomain
-                : multitenant.data.subdomain,
-        };
-    } else {
-        headers = {
-            ...headers,
-            "X-CURRENT-COMPANY": userinfo?.subdomain,
-            "X-SELECTED-COMPANY": userinfo?.subdomain,
-        };
+if (cookieVal) {
+  // Parse session token
+  const parsedObj = JSON.parse(cookieVal);
+  token = parsedObj.token.access;
+  
+  // Inject access token into headers of all outgoing Axios requests
+  axios.defaults.headers.common['Authorization'] = \`Bearer \${token}\`;
+}`,
+    explanation: [
+      "getCookie: Checks for the active session cookie on mount.",
+      "parsedObj.token.access: Extracts the JWT access token from the parsed cookie object.",
+      "axios.defaults.headers.common['Authorization']: Automatically attaches the token to all subsequent API calls."
+    ],
+    flow: "User transitions route → Privateroute checks cookie status → injects Bearer token into Axios headers → renders page component.",
+    internal: {
+      react: "Resolves route checks before mounting page components to prevent unauthorized views from loading.",
+      js: "Parses the cookie string into a Javascript object.",
+      browser: "Attaches the cookie value to outgoing HTTP request headers."
+    },
+    telugu: "Authentication check client target token validations verify cheyadaniki use avthundhi. cookie access tokens details check check. Axios common headers structure automatically attaches values setups parameters checks.",
+    realtime: "JWT is standard for API authorization, using signed payloads (header, payload, signature) to verify request authenticity securely.",
+    interview: [
+      "Q: What is a JWT and what are its three parts? - A: A JSON Web Token contains Header (metadata), Payload (data claims), and Signature (security validation).",
+      "Q: What is the benefit of short access token lifespans? - A: Restricts the window of opportunity if a token is intercepted."
+    ],
+    bestPractices: "Store JWT access tokens in short-lived caches, configure HttpOnly flags to protect tokens from XSS attacks, and always validate tokens on both the client and server."
+  },
+  {
+    id: 3,
+    title: "4. Authorization",
+    icon: <FaSlidersH />,
+    category: "Security Models",
+    theory: {
+      what: "Authorization is the process of verifying a user's permissions, checking if an authenticated user has permission to access specific resources or actions.",
+      why: "To restrict access to sensitive features (e.g. employee details or payroll configurations) based on user roles.",
+      where: "Used in route guards (`PrivateRoute`), sidebars, page views, and API controllers."
+    },
+    code: `// Dynamic module permission gating checks
+const RolesFromDb = JSON.parse(sessionStorage.getItem('RolesFromDb'));
+
+// checks if the user has permission to view the employee list
+if (RolesFromDb) {
+  if (location.pathname === "/employee-management") {
+    if (RolesFromDb?.modules?.EmployeeManagement?.view === false) {
+      navigate("/notfound");
     }
-    return headers;
-};
-
-export default ApiHeaders;`,
-                explanation: `ApiHeaders Function - Detailed:
-
-Parameters:
-  - multitenant: Redux state object (selected company info)
-
-Headers Generated:
-  1. x-system-ip-address: User machine IP - backend audit logs కోసం
-     - || "" - IP available లేకపోతే empty string (fallback)
-
-  2. X-CURRENT-COMPANY: User login చేసిన original company subdomain
-     - ఇది always same ఉంటుంది (user belongs to this company)
-
-  3. X-SELECTED-COMPANY: Currently viewing company subdomain
-     - Multi-tenant: User వేరే company switch చేస్తే ఆ company subdomain
-     - My Profile page: Always own company (isMyProfilePath check)
-     - Single tenant: Same as X-CURRENT-COMPANY
-
-Special Logic:
-  - isMyProfilePath check: /my-profile page లో ఉన్నప్పుడు always own company data show
-    - ఎందుకంటే profile personal data - switch చేసిన company data కాదు
-  - Spread operator (...headers): Previous headers preserve చేసి new headers add
-  - Ternary (? :): isMyProfilePath true అయితే userinfo.subdomain, else multitenant subdomain
-
-Usage:
-  const headers = ApiHeaders(multitenant);
-  axios.get("/api/data/", { headers });`
-            }
-        ]
+  }
+}`,
+    explanation: [
+      "RolesFromDb: Stores the user's role permissions matrix fetched from the database.",
+      "location.pathname: Identifies the page the user is attempting to access.",
+      "view === false: Redirects the user to a page not found screen if they do not have view permissions."
+    ],
+    flow: "User requests page → checks permission matrix (RolesFromDb) → checks view permission status → renders component or redirects user.",
+    internal: {
+      react: "Evaluates permissions during the component lifecycle, updating the route tree dynamically.",
+      js: "Uses optional chaining to safely check nested properties without throwing errors.",
+      browser: "Updates the browser's location and routing paths."
     },
-    {
-        id: 8,
-        title: "Redux Store, Actions & Reducers",
-        filePath: "src/Redux/store.js, actions.js, reducers.js",
-        category: "State Management",
-        description: "Redux state management files. Company selection multi-tenant feature కోసం use చేస్తారు. localStorage persist pattern implement చేయబడింది.",
-        lineByLine: [
-            {
-                code: `// actions.js
-export const SELECTED_COMPANYS = 'SELECTED_COMPANYS';
-export const LOGOUT = 'LOGOUT';
+    telugu: "Authorization ante user role level checks permissions database tree validation run cheyadam. Employee, Admin modules options views verify matching true and false loops render block checks options controls.",
+    realtime: "RBAC (Role-Based Access Control) dynamically restricts API actions on both the client UI and backend endpoints.",
+    interview: [
+      "Q: Explain how to hide a UI button based on permissions. - A: Check the permission matrix in state (e.g., if (permissions.edit === false)) and conditionally render or disable the button.",
+      "Q: Why is backend authorization check mandatory even if frontend hides the button? - A: Users can manipulate client code in the browser; the backend must validate permissions on every request to prevent unauthorized access."
+    ],
+    bestPractices: "Always implement authorization checks on both the client and server, avoid hardcoding roles (check permissions instead), and use optional chaining to handle undefined states safely."
+  },
+  {
+    id: 4,
+    title: "5. Private Routes",
+    icon: <FaRoute />,
+    category: "Routing",
+    theory: {
+      what: "A Private Route is an authorization wrapper component that gates client route transitions in React Single Page Applications.",
+      why: "To prevent unauthenticated users from bypassing menus by typing URL paths directly in the address bar.",
+      where: "Wraps all dashboard route templates inside App.js."
+    },
+    code: `// Route protection wrapper in Privaterote.js
+const PrivateRoute = ({ children }) => {
+  const cookieVal = getCookie("userinfoCookie");
 
-export const SELECTED_COMPANY = (data) => ({
-    type: SELECTED_COMPANYS,
-    payload: data,
+  return cookieVal ? (
+    <div id="wrapper">
+      <TopHeader />
+      {children}
+    </div>
+  ) : (
+    <Navigate to="/" replace />
+  );
+};`,
+    explanation: [
+      "children: Renders the nested page component if access checks pass.",
+      "getCookie: Checks for the active session cookie on mount.",
+      "Navigate to: Redirects unauthenticated users to the login screen, replacing the current history entry."
+    ],
+    flow: "User navigates path → PrivateRoute checks cookie status → If present, renders TopHeader & page children → If missing, redirects to Login page.",
+    internal: {
+      react: "Verifies authentication before mounting components to prevent unauthorized views from loading.",
+      js: "Evaluates the cookie check expression on mount.",
+      browser: "Updates the browser's navigation history."
+    },
+    telugu: "PrivateRoute dashboard screens wrap layers settings component checks. Login verify validation details parameters match parameters. True options details render screen, else redirects login path.",
+    realtime: "Enterprise dashboards wrap routes in authorization guards to centralize authentication checks and simplify route configuration.",
+    interview: [
+      "Q: What is the purpose of the children prop in a PrivateRoute wrapper? - A: It allows the guard to wrap any component and render it dynamically if access checks pass.",
+      "Q: Why use replace in Navigate? - A: Replaces the current history entry so the user cannot navigate back to the protected page after logging out."
+    ],
+    bestPractices: "Use route guards to centralize authentication logic, keep guards lightweight to prevent navigation lag, and implement corresponding authorization checks on the backend."
+  },
+  {
+    id: 5,
+    title: "6. Sidebar Navigation",
+    icon: <FaListUl />,
+    category: "Navigation",
+    theory: {
+      what: "The Sidebar component is the primary navigation panel, rendering links dynamically based on user permissions.",
+      why: "To provide a clean navigation menu, showing only the options the user is authorized to access.",
+      where: "Rendered in the dashboard layout template."
+    },
+    code: `// Dynamic sidebar link rendering
+const SideNavigation = () => {
+  const RolesFromDb = JSON.parse(sessionStorage.getItem('RolesFromDb'));
+  const [EmployeeManagementshow, setEmployeeManagementshow] = useState(false);
+
+  useEffect(() => {
+    if (RolesFromDb?.modules?.EmployeeManagement?.view) {
+      setEmployeeManagementshow(true);
+    }
+  }, [RolesFromDb]);
+
+  return (
+    <ul className="sidebar-nav">
+      {EmployeeManagementshow && (
+        <li>
+          <NavLink to="/employee-management">
+            <i className="fa fa-users"></i> Employee Management
+          </NavLink>
+        </li>
+      )}
+    </ul>
+  );
+};`,
+    explanation: [
+      "RolesFromDb: Checks the user's role permissions matrix.",
+      "setEmployeeManagementshow: Updates local state to control the visibility of the link.",
+      "NavLink: Automatically adds an active class when the route matches the current URL."
+    ],
+    flow: "Sidebar mounts → checks permission matrix → updates visibility states → renders authorized links → NavLink highlights the active menu item.",
+    internal: {
+      react: "Updates local state to trigger a re-render and update the navigation menu.",
+      js: "Evaluates conditional rendering expressions.",
+      browser: "Highlights the active menu link when the route changes."
+    },
+    telugu: "Sidebar navigation component check chesthe modules lists permissions validation matching. False targets dynamic list hide options rules NavLink active class triggers configuration values.",
+    realtime: "Dynamic sidebars are standard in SaaS applications to customize the UI based on user permissions and subscriptions.",
+    interview: [
+      "Q: What is the difference between Link and NavLink? - A: NavLink automatically adds active styles to the link when its route matches the current URL, making it ideal for navigation menus.",
+      "Q: How do you handle company switching in multi-tenant environments? - A: Fetch authorized companies, render them in a dropdown, and update the global state when a new company is selected."
+    ],
+    bestPractices: "Keep navigation configs modular, hide links that users cannot access to prevent confusion, and use NavLink to manage active link styles automatically."
+  },
+  {
+    id: 6,
+    title: "7. Axios & API Layer",
+    icon: <FaNetworkWired />,
+    category: "API Integration",
+    theory: {
+      what: "The Axios Setup centralizes network request configuration, creating a global client instance for all API calls.",
+      why: "To avoid duplicate configurations (like baseURL and timeouts) and manage request/response interceptors in a single file.",
+      where: "Implemented in services/apiClient.js and imported by all API calling functions."
+    },
+    code: `// Centralized Axios config in apiClient.js
+const apiClient = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
 });
 
-export const logout = () => ({
-    type: LOGOUT,
-});`,
-                explanation: `Redux Actions:
-- Action = { type: string, payload: data } - State change intention describe చేసే plain object
-- Action Type Constants:
-  - SELECTED_COMPANYS: Company select action type string
-  - LOGOUT: Logout action type string
-  - Constants use చేయడం ద్వారా typo errors prevent అవుతాయి
-
-- Action Creators (Functions that return action objects):
-  - SELECTED_COMPANY(data): Company data payload తో action object return
-    - data = { subdomain: "company1", name: "Company One", ... }
-  - logout(): Payload లేకుండా logout action return
-
-Usage:
-  dispatch(SELECTED_COMPANY(companyData));  // Company switch
-  dispatch(logout());                        // Clear state`
-            },
-            {
-                code: `// reducers.js
-import { SELECTED_COMPANYS, LOGOUT } from './actions';
-
-const initialState = { data: [] };
-
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SELECTED_COMPANYS:
-            return { ...state, data: action.payload };
-        case LOGOUT:
-            return initialState;
-        default:
-            return state;
+// Interceptor to handle expired sessions globally
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Clear session data and redirect to login page
+      sessionStorage.removeItem("user-info");
+      window.location.href = '/';
     }
-};
-
-export default rootReducer;`,
-                explanation: `Redux Reducer:
-- Reducer = Pure function - current state + action input, new state output
-- Pure function: Same input -> always same output, no side effects
-- state = initialState - First time call అయినప్పుడు default state
-- switch(action.type) - Action type based different state changes
-
-Cases:
-  1. SELECTED_COMPANYS:
-     - ...state - Spread operator - existing state copy (immutability)
-     - data: action.payload - data field new value తో update
-     - Return: New state object (React detects change -> re-render)
-
-  2. LOGOUT:
-     - return initialState - State ని initial empty state కి reset
-     - Company selection clear అవుతుంది
-
-  3. default:
-     - Unknown action type -> state change చేయకుండా same state return`
-            },
-            {
-                code: `// store.js
+    return Promise.reject(error);
+  }
+);`,
+    explanation: [
+      "axios.create: Generates a new Axios instance with custom default configurations.",
+      "timeout: 10000: Cancels the request if the server takes longer than 10 seconds to respond, preventing infinite loading states.",
+      "interceptors.response: Intercepts server responses globally to catch authentication errors (like 401 status) and trigger automatic cleanups."
+    ],
+    flow: "Component triggers API service call → Axios request interceptor attaches headers → Server returns response → Response interceptor validates status → returns data or redirects on error.",
+    internal: {
+      react: "Resolves network requests in the background, updating component states when promises resolve.",
+      js: "Uses native promises to handle asynchronous operations.",
+      browser: "Executes XMLHttpRequest (XHR) operations in the background."
+    },
+    telugu: "Axios central config files logic endpoint baseURL configurations, timeouts handles checks. interceptors options catches response status errors (ex: 401 expired session) redirect forced logouts settings controls.",
+    realtime: "Enterprise applications centralize API configurations to manage headers, tokens, and error handling in a single place.",
+    interview: [
+      "Q: What is the benefit of using Axios interceptors? - A: They allow you to run custom code globally for requests and responses, making them ideal for attaching authorization tokens or handling errors.",
+      "Q: How does Axios handle timeouts? - A: You configure a timeout limit in milliseconds; if a request takes longer, Axios aborts it and throws an error."
+    ],
+    bestPractices: "Set reasonable request timeout limits, use interceptors to manage authorization headers, and always catch API errors in components to handle failures gracefully."
+  },
+  {
+    id: 7,
+    title: "8. Redux Store",
+    icon: <FaDatabase />,
+    category: "State Management",
+    theory: {
+      what: "Redux is a global state management library, providing a centralized store to share state across components.",
+      why: "To maintain a single source of truth for global state (like active company or user details) and prevent prop-drilling.",
+      where: "Configured in store.js, actions.js, and reducers.js and wrapped around the root App component."
+    },
+    code: `// Redux Store configuration with LocalStorage persistence
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 
 const loadState = () => {
-    try {
-        const serializedState = localStorage.getItem('reduxState');
-        return serializedState ? JSON.parse(serializedState) : undefined;
-    } catch (error) {
-        return undefined;
-    }
+  try {
+    const serializedState = localStorage.getItem('reduxState');
+    return serializedState ? JSON.parse(serializedState) : undefined;
+  } catch (err) {
+    return undefined;
+  }
 };
 
 const saveState = (state) => {
-    try {
-        localStorage.setItem('reduxState', JSON.stringify(state));
-    } catch (error) { }
+  try {
+    localStorage.setItem('reduxState', JSON.stringify(state));
+  } catch (err) {
+    console.error("Save state failed:", err);
+  }
 };
 
-const persistedState = loadState();
-const store = createStore(rootReducer, persistedState);
+const store = createStore(rootReducer, loadState());
 
+// Subscribe to store updates to save state automatically
 store.subscribe(() => {
-    saveState(store.getState());
+  saveState(store.getState());
 });
 
 export default store;`,
-                explanation: `Redux Store with Persistence:
-
-loadState():
-  - localStorage నుండి saved state read
-  - JSON.parse - String ని object convert
-  - undefined return అయితే reducer initialState use చేస్తుంది
-  - try/catch - Corrupted data error handle
-
-saveState(state):
-  - State ని JSON string convert చేసి localStorage లో save
-  - Page refresh అయినా data persist అవుతుంది
-
-createStore(rootReducer, persistedState):
-  - Redux store create
-  - rootReducer: State changes handle చేసే function
-  - persistedState: Initial state (localStorage నుండి)
-
-store.subscribe():
-  - State change అయినప్పుడు callback function execute
-  - ప్రతి dispatch తర్వాత saveState call అవుతుంది
-  - Real-time localStorage sync
-
-Flow:
-  1. Page load -> loadState() -> localStorage read
-  2. Store create with saved state
-  3. User company switch -> dispatch -> reducer -> new state
-  4. subscribe callback -> saveState() -> localStorage update
-  5. Page refresh -> Step 1 (state preserved)`
-            }
-        ]
+    explanation: [
+      "createStore: Initializes the Redux store with the root reducer and persisted state.",
+      "loadState: Retrieves persisted state from localStorage on application start.",
+      "store.subscribe: Runs a listener function on every state change to persist updates to localStorage."
+    ],
+    flow: "Component dispatches action → Reducer matches action type and updates state → Store notifies subscribers → Components re-render with updated state.",
+    internal: {
+      react: "The Provider wrapper updates context, prompting components using useSelector to re-render when their selected state changes.",
+      js: "Executes pure reducer functions to update the immutable state tree.",
+      browser: "Persists the updated state string in localStorage."
     },
-    {
-        id: 9,
-        title: "MoreSection.js - Services Grid Page",
-        filePath: "src/Components/Dashboard/MoreSection.js",
-        category: "Layout Components",
-        description: "More menu page - application లో available services ని cards గా display చేస్తుంది. Role-based filtering తో user కి access ఉన్న services మాత్రమే show అవుతాయి.",
-        lineByLine: [
-            {
-                code: `const services = [
-    { name: "Mobile Tracking", icon: "fa fa-street-view",
-      path: "/mobiletrack-rules", moduleKey: "MobileTracking" },
-    { name: "Calendar", icon: "fa fa-calendar-o",
-      path: "/calendar", moduleKey: "Calendar" },
-    { name: "Task Management", icon: "fa fa-pie-chart",
-      path: "/task-management-dashboard", moduleKey: "TaskManagement" },
-    // ... more services
-];`,
-                explanation: `Services Array - Static Configuration:
-- ప్రతి service ఒక object: { name, icon, path, moduleKey }
-  - name: Display name (UI లో show అవుతుంది)
-  - icon: Font Awesome icon class (fa fa-calendar-o)
-  - path: Navigate చేయాల్సిన route ("/calendar")
-  - moduleKey: RolesFromDb లో permission check చేయడానికి key ("Calendar")
-- ఈ array application available services define చేస్తుంది
-- New service add చేయాలంటే ఈ array లో object add చేస్తే చాలు`
-            },
-            {
-                code: `let allowedServices = services.filter(service => {
-    const key = service.moduleKey;
-
-    if (service.name === "CCTV Registration") {
-        return userInfos?.roles?.[0] === "ADMIN";
-    }
-
-    if (key === "Offboarding") {
-        const offModule = RolesFromDb?.modules?.Offboarding;
-        if (!offModule?.view) return false;
-        const offSub = offModule.submodules;
-        return Boolean(
-            offSub?.ExitSettings?.view ||
-            offSub?.OffboardingListing?.view ||
-            offSub?.NOCApproval?.view
-        );
-    }
-
-    return RolesFromDb?.modules?.[key]?.view === true;
-});`,
-                explanation: `Permission-Based Filtering:
-- .filter() - Array method. Condition true return చేసిన items మాత్రమే new array లో ఉంటాయి
-- callback function ప్రతి service కి execute అవుతుంది
-
-Special Cases:
-  1. CCTV Registration: Role check - ADMIN role మాత్రమే access
-     - userInfos?.roles?.[0] - First role check ("ADMIN", "EMPLOYEE", etc.)
-
-  2. Offboarding: Complex permission - module view + any submodule view
-     - offModule?.view check first
-     - Then any one of ExitSettings, OffboardingListing, NOCApproval view true
-     - Boolean() - truthy/falsy value ని true/false convert
-
-  3. General: RolesFromDb?.modules?.[key]?.view === true
-     - [key] - Dynamic property access. key = "Calendar" అయితే modules.Calendar
-     - ?.view - Safe access with optional chaining
-     - === true - Strict equality check (not just truthy)`
-            },
-            {
-                code: `allowedServices = allowedServices.map(service => {
-    if (service.name === "Performance Management") {
-        if (HRObjectivesshow) service.path = "/pm-object";
-        else if (ManagerObjectivesshow) service.path = "/objectives-list";
-        else service.path = null;
-    }
-    if (service.name === "Time Sheet") {
-        if (SendTimeSheetViewShow && userInfos.roles[0] !== "EMPLOYEE")
-            service.path = '/sendAdminTimesheetToEmp';
-        else if (EmployeeTimeSheet)
-            service.path = '/employeeTimesheetView';
-        else service.path = null;
-    }
-    return service;
-}).filter(service => service.path);`,
-                explanation: `Dynamic Path Assignment + Cleanup:
-.map() - ప్రతి service transform చేయడం (path modify)
-
-Performance Management:
-  - HR permission ఉంటే: HR objectives page (/pm-object)
-  - Manager permission ఉంటే: Manager objectives (/objectives-list)
-  - ఏమీ లేకపోతే: path = null (access deny)
-
-Time Sheet:
-  - Admin + SendTimeSheet permission: Admin timesheet page
-  - Employee permission: Employee timesheet view
-  - Role check: userInfos.roles[0] !== "EMPLOYEE" - Employee కాకపోతే admin pages
-
-.filter(service => service.path):
-  - path = null ఉన్న services remove
-  - Chaining: .map().filter() - First transform, then filter
-  - Result: Only accessible services with correct paths`
-            },
-            {
-                code: `<Row xs={1} sm={2} md={3} lg={3} xl={4} xxl={5} className="g-4">
-    {allowedServices.map(service => (
-        <Col key={service.name}>
-            <Card className="h-100 text-center shadow-sm"
-                style={{ borderRadius: "1.25rem", cursor: "pointer" }}
-                onClick={() => {
-                    service.path && navigate(service.path);
-                    setQuickAccess(service);
-                }}>
-                <Card.Body>
-                    <i className={service.icon}
-                        style={{ fontSize: "2.4rem", color: "#f58220" }} />
-                    <Card.Text className="fw-semibold mt-2">
-                        {service.name}
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        </Col>
-    ))}
-</Row>`,
-                explanation: `Responsive Grid UI:
-Row props - Responsive breakpoints:
-  - xs={1}: Mobile (0-576px) - 1 card per row
-  - sm={2}: Small (576-768px) - 2 cards per row
-  - md={3}: Medium (768-992px) - 3 cards per row
-  - xl={4}: Large (1200-1400px) - 4 cards per row
-  - xxl={5}: Extra large (1400px+) - 5 cards per row
-  - g-4: Gap/gutter between cards (Bootstrap spacing)
-
-.map() rendering:
-  - key={service.name}: React reconciliation unique key
-  - Card onClick: service.path && navigate - path ఉంటే navigate, null అయితే nothing
-  - setQuickAccess(service): Context API ద్వారా quick access track
-  - Card.Body: Card content area
-  - <i className={service.icon}> - Font Awesome icon render
-  - Card.Text: Service name display`
-            }
-        ]
+    telugu: "Redux state management central data storage coordinates updates properties. Action dispatchers reducers updates runs local storage sync rules checks.",
+    realtime: "Redux is widely used to manage complex global state, keeping data synchronized across separate layout sections (like sidebar configurations and dashboard views).",
+    interview: [
+      "Q: Why must Redux reducers be pure functions? - A: Pure functions have no side effects and return the exact same output for the same input, ensuring predictable state updates and enabling features like time-travel debugging.",
+      "Q: How do you persist Redux state across page reloads? - A: Subscribe to store changes and save the state to localStorage, then load the saved state on initialization."
+    ],
+    bestPractices: "Keep reducers pure, use Redux Toolkit to simplify store setup and reduce boilerplate code, and only store global data in Redux (keep component-specific data in local state)."
+  },
+  {
+    id: 8,
+    title: "9. Common Enterprise Concepts",
+    icon: <FaPuzzlePiece />,
+    category: "Architecture",
+    theory: {
+      what: "Common Enterprise Concepts are reusable code structures and components (like loaders, tables, modals, and date pickers) that are used across most dashboard views.",
+      why: "To enforce design consistency, reduce duplicate code, and speed up feature development.",
+      where: "Implemented as reusable components in the src/components/common directory."
     },
-    {
-        id: 10,
-        title: "Zustand Store & Context API Files",
-        filePath: "src/Components/Common/useMultitenantStore.js, AuthContext.js, ThemeContext.js, QuickAccessContext.js",
-        category: "State Management",
-        description: "Zustand store మరియు React Context files. ఇవి components మధ్య data share చేయడానికి use చేస్తారు. Redux కంటే simple alternatives.",
-        lineByLine: [
-            {
-                code: `// useMultitenantStore.js - Zustand Store
-import create from 'zustand';
+    code: `// Dynamic Data Table Component with pagination
+import React, { useState } from 'react';
 
-const useMultitenantStore = create((set) => ({
-    companyDetails: null,
-    userInfo: null,
-    setCompanyDetails: (details) => set({ companyDetails: details }),
-    setUserInfo: (userInfo) => set({ userInfo }),
-}));
+export default function DataTable({ columns, data, itemsPerPage = 10 }) {
+  const [currentPage, setCurrentPage] = useState(1);
 
-export default useMultitenantStore;
-export const multitenantStore = useMultitenantStore;`,
-                explanation: `Zustand Store:
-- create() - Zustand store create చేసే function
-- set parameter - State update చేసే function (reducer alternative)
-- Object return:
-  - companyDetails: null - Initial state
-  - userInfo: null - Initial state
-  - setCompanyDetails: State update function. set({ companyDetails: details }) call చేస్తే state update
-  - setUserInfo: Shorthand - { userInfo } = { userInfo: userInfo }
+  // Pagination calculation logic
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = data.slice(startIndex, startIndex + itemsPerPage);
 
-Zustand vs Redux:
-  - Redux: createStore + actions + reducers + Provider + useSelector + useDispatch
-  - Zustand: create() + useStore hook - Done!
-  - Zustand: Provider wrap చేయనవసరం లేదు
-  - Zustand: Boilerplate code చాలా తక్కువ
-
-Usage:
-  // Component లో
-  const { userInfo, setUserInfo } = useMultitenantStore();
-  setUserInfo(data);  // State update - auto re-render
-
-  // Outside React (ApiHeaders.js లో)
-  const userInfo = multitenantStore.getState().userInfo;`
-            },
-            {
-                code: `// AuthContext.js
-import React, { createContext, useState, useContext } from "react";
-
-const AuthContext = createContext();
-
-export const AuthProvider = ({ children }) => {
-    const [password, setPassword] = useState("");
-    return (
-        <AuthContext.Provider value={{ password, setPassword }}>
-            {children}
-        </AuthContext.Provider>
-    );
-};
-
-export const useAuth = () => useContext(AuthContext);`,
-                explanation: `Auth Context:
-- createContext() - Context object create
-- AuthProvider: Provider component - children ని wrap చేస్తుంది
-- value={{ password, setPassword }}: ఈ values wrapped components access చేయగలవు
-- useAuth: Custom hook - useContext(AuthContext) short form
-
-Usage:
-  // App.js లో wrap
-  <AuthProvider>
-    <LoginForm />
-  </AuthProvider>
-
-  // LoginForm.js లో use
-  const { setPassword } = useAuth();
-  setPassword("user_password");  // Login time store
-
-  // Other component లో read
-  const { password } = useAuth();
-
-Purpose: Login password temporary గా store - password change feature కోసం`
-            },
-            {
-                code: `// ThemeContext.js
-import { createContext, useState } from 'react';
-
-const initialState = {
-    companyName: "",
-    isFinalApprovalEnabled: false,
-};
-
-export const GlobalContext = createContext();
-
-export const GlobalProvider = ({ children }) => {
-    const [globalState, setGlobalState] = useState(initialState);
-    return (
-        <GlobalContext.Provider value={{ globalState, setGlobalState }}>
-            {children}
-        </GlobalContext.Provider>
-    );
-};`,
-                explanation: `Global Context (Theme Context):
-- initialState object: Application-wide settings
-  - companyName: Current company name display కోసం
-  - isFinalApprovalEnabled: Leave/Attendance final approval feature toggle
-- GlobalProvider: App.js లో entire application wrap చేస్తుంది
-- globalState: Object state - multiple values single state లో
-
-Usage:
-  const { globalState, setGlobalState } = useContext(GlobalContext);
-
-  // Read
-  console.log(globalState.companyName);
-
-  // Update (spread to preserve other values)
-  setGlobalState(prev => ({ ...prev, companyName: "New Company" }));`
-            },
-            {
-                code: `// QuickAccessContext.js
-import { createContext, useState, useEffect } from "react";
-
-export const QuickAccessContext = createContext();
-
-export const QuickAccessProvider = ({ children }) => {
-    const [quickAccess, setQuickAccess] = useState(null);
-
-    useEffect(() => {
-        const stored = localStorage.getItem("quickAccess");
-        if (stored) setQuickAccess(JSON.parse(stored));
-    }, []);
-
-    useEffect(() => {
-        if (quickAccess) {
-            localStorage.setItem("quickAccess", JSON.stringify(quickAccess));
-        } else {
-            localStorage.removeItem("quickAccess");
-        }
-    }, [quickAccess]);
-
-    return (
-        <QuickAccessContext.Provider value={{ quickAccess, setQuickAccess }}>
-            {children}
-        </QuickAccessContext.Provider>
-    );
-};`,
-                explanation: `Quick Access Context - localStorage Persist:
-- quickAccess: Last accessed service info store
-
-useEffect 1 (mount):
-  - Component load అయినప్పుడు localStorage నుండి saved data read
-  - JSON.parse: String ని object convert
-  - MoreSection లో last clicked service restore
-
-useEffect 2 (quickAccess change):
-  - quickAccess update అయినప్పుడు localStorage sync
-  - null అయితే localStorage నుండి remove
-  - Page refresh అయినా last access info persist
-
-MoreSection.js లో usage:
-  const { setQuickAccess } = useContext(QuickAccessContext);
-  // Card click చేసినప్పుడు
-  onClick={() => setQuickAccess(service)};`
-            }
-        ]
-    }
+  return (
+    <div>
+      <table className="table bordered">
+        <thead>
+          <tr>{columns.map(col => <th key={col.key}>{col.label}</th>)}</tr>
+        </thead>
+        <tbody>
+          {currentData.map((row, idx) => (
+            <tr key={idx}>
+              {columns.map(col => <td key={col.key}>{row[col.key]}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="pagination">
+        <button onClick={() => setCurrentPage(p => Math.max(p - 1, 1))} disabled={currentPage === 1}>Prev</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+      </div>
+    </div>
+  );
+}`,
+    explanation: [
+      "columns.map: Dynamically renders headers and cell values based on columns metadata.",
+      "data.slice: Slices the data array to display only the rows for the active page.",
+      "setCurrentPage: Updates state to handle pagination transitions."
+    ],
+    flow: "Component renders DataTable with data array → DataTable calculates pagination indices → displays slice of data → User updates page → state changes and triggers re-render.",
+    internal: {
+      react: "Tracks active page state to trigger visual re-renders on pagination change.",
+      js: "Uses array methods (like slice and map) to transform raw data into JSX elements.",
+      browser: "Updates layout elements dynamically in the DOM."
+    },
+    telugu: "Common Reusable components Table views, loaders, date pickers helpers check check. props configuration attributes modify single layout modular code components setup rules parameters checks.",
+    realtime: "Enterprise applications create a shared UI library (containing buttons, inputs, tables, and loaders) to speed up development and ensure design consistency.",
+    interview: [
+      "Q: How does client-side pagination differ from server-side pagination? - A: Client-side pagination fetches all records at once and slices them in browser memory. Server-side pagination requests only the active page's records from the server, making it much more efficient for large datasets.",
+      "Q: What is the benefit of abstracting utilities into custom hooks? - A: Separates business logic from UI rendering, making both parts easier to read, reuse, and test."
+    ],
+    bestPractices: "Build flexible components using configurable props, implement server-side pagination for large datasets to improve performance, and keep utility functions stateless."
+  }
 ];
 
-const categoryColors = {
-    "Core Files": "#e74c3c",
-    "Authentication Pages": "#3498db",
-    "Layout Components": "#2ecc71",
-    "State Management": "#9b59b6",
-};
-
 const PageWiseCodeGuide = () => {
-    const [expandedPage, setExpandedPage] = useState(null);
-    const [expandedSection, setExpandedSection] = useState({});
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("All");
-    const navigate = useNavigate();
+  const [activeModuleIdx, setActiveModuleIdx] = useState(0);
+  const [activeSubTab, setActiveSubTab] = useState('theory');
+  const [copied, setCopied] = useState(false);
 
-    const categories = ["All", ...new Set(pages.map(p => p.category))];
+  const activeModule = PHASE2_DATABASE[activeModuleIdx];
 
-    const filteredPages = pages.filter(page => {
-        const matchesCategory = selectedCategory === "All" || page.category === selectedCategory;
-        const matchesSearch = page.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            page.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            page.filePath.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchesCategory && matchesSearch;
-    });
+  const handleCopyCode = (codeText) => {
+    navigator.clipboard.writeText(codeText);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
-    const toggleSection = (pageId, sectionIndex) => {
-        const key = `${pageId}-${sectionIndex}`;
-        setExpandedSection(prev => ({ ...prev, [key]: !prev[key] }));
-    };
+  return (
+    <Box sx={{ 
+      p: { xs: 2, md: 4 }, 
+      background: 'linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%)',
+      minHeight: '100vh',
+      fontFamily: '"Outfit", system-ui, sans-serif'
+    }}>
+      
+      {/* Page Header */}
+      <Paper sx={{ 
+        p: 4, 
+        mb: 4, 
+        borderRadius: '24px', 
+        background: 'linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%)', 
+        color: '#fff',
+        boxShadow: '0 12px 36px rgba(15, 23, 42, 0.15)'
+      }}>
+        <Box display="inline-block" sx={{ px: 2, py: 0.5, borderRadius: '999px', background: 'rgba(255,255,255,0.15)', color: '#93c5fd', fontSize: '11px', fontWeight: 800, mb: 1.5, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          Phase 2: Code Walkthrough
+        </Box>
+        <Typography variant="h4" component="h1" sx={{ fontWeight: 800, mb: 1, letterSpacing: '-0.5px' }}>
+          temp_bharatpayroll Code Walkthrough (9 Tabs)
+        </Typography>
+        <Typography variant="subtitle1" sx={{ color: '#cbd5e1', maxWidth: '850px', lineHeight: 1.6, fontSize: '15px' }}>
+          Deep-dive into the actual source code of the portal page by page. Learn standard patterns for Login wrappers, session flushes, access control checks, routing gates, and Redux persistence.
+        </Typography>
+      </Paper>
 
-    const expandAll = (pageId, sections) => {
-        const newState = {};
-        sections.forEach((_, idx) => {
-            newState[`${pageId}-${idx}`] = true;
-        });
-        setExpandedSection(prev => ({ ...prev, ...newState }));
-    };
+      {/* Grid Layout containing sidebar tab buttons and detail panel */}
+      <Grid container spacing={3}>
+        
+        {/* Module Sidebar Tabs list */}
+        <Grid item xs={12} md={3.5}>
+          <Paper sx={{ 
+            p: 2, 
+            borderRadius: '20px', 
+            border: '1px solid #cbd5e1',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1
+          }}>
+            <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 800, px: 1, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Select Learning Module:
+            </Typography>
+            
+            {PHASE2_DATABASE.map((module, idx) => (
+              <Button
+                key={module.id}
+                fullWidth
+                onClick={() => { setActiveModuleIdx(idx); setActiveSubTab('theory'); }}
+                startIcon={module.icon}
+                sx={{
+                  justifyContent: 'flex-start',
+                  textTransform: 'none',
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '12px',
+                  fontWeight: activeModuleIdx === idx ? 700 : 500,
+                  bgcolor: activeModuleIdx === idx ? 'rgba(30, 58, 138, 0.08)' : 'transparent',
+                  color: activeModuleIdx === idx ? '#1e3a8a' : '#475569',
+                  border: '1px solid',
+                  borderColor: activeModuleIdx === idx ? 'rgba(30, 58, 138, 0.2)' : 'transparent',
+                  '&:hover': {
+                    bgcolor: 'rgba(30, 58, 138, 0.04)',
+                    borderColor: 'rgba(30, 58, 138, 0.1)'
+                  }
+                }}
+              >
+                {module.title}
+              </Button>
+            ))}
+          </Paper>
+        </Grid>
 
-    const collapseAll = (pageId, sections) => {
-        const newState = {};
-        sections.forEach((_, idx) => {
-            newState[`${pageId}-${idx}`] = false;
-        });
-        setExpandedSection(prev => ({ ...prev, ...newState }));
-    };
+        {/* Content detail panel */}
+        <Grid item xs={12} md={8.5}>
+          <Paper sx={{ 
+            p: 4, 
+            borderRadius: '20px', 
+            border: '1px solid #cbd5e1',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+            background: '#ffffff',
+            minHeight: '450px'
+          }}>
+            
+            {/* Title block */}
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+              <Typography variant="h5" component="h2" sx={{ fontWeight: 800, color: '#0f172a' }}>
+                {activeModule.title}
+              </Typography>
+              <Chip label={activeModule.category} color="primary" variant="outlined" size="small" sx={{ fontWeight: 'bold' }} />
+            </Box>
 
-    return (
-        <section id="content-wrapper">
-            <div className='MyMarginCls'></div>
-            <Container fluid className='rounded' style={{ background: "#edf0f5", minHeight: "81vh", overflowY: "auto", padding: "2rem" }}>
+            {/* Inner sub-tabs selector */}
+            <Tabs 
+              value={activeSubTab} 
+              onChange={(e, val) => setActiveSubTab(val)}
+              variant="scrollable"
+              scrollButtons="auto"
+              sx={{
+                borderBottom: '1px solid #e2e8f0',
+                mb: 3,
+                '& .MuiTab-root': { textTransform: 'none', fontWeight: 600, minWidth: 'auto', px: 2 }
+              }}
+            >
+              <Tab value="theory" label="1. Theory" />
+              <Tab value="code" label="2. Complete Code" />
+              <Tab value="explain" label="3. Line-by-Line" />
+              <Tab value="flow" label="4. Execution Flow" />
+              <Tab value="internal" label="5. Internal Working" />
+              <Tab value="telugu" label="6. Telugu Translation" />
+              <Tab value="realtime" label="7. Real-Time Usage" />
+              <Tab value="interview" label="8. Interview Q&A" />
+              <Tab value="bestPractices" label="9. Best Practices" />
+            </Tabs>
 
-                <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                    <h2 style={{ color: "#2c3e50", fontWeight: "bold" }}>
-                        Bharat Payroll - Page-Wise Code Guide
-                    </h2>
-                    <p style={{ color: "#7f8c8d", fontSize: "1.1rem", marginBottom: "0.5rem" }}>
-                        Project Pages - Line by Line Code Explanation (Telugu)
-                    </p>
-                    <p style={{ color: "#95a5a6", fontSize: "0.95rem" }}>
-                        Freshers & Interns - ila project code chadivi ardham cheskondi
-                    </p>
-                </div>
+            {/* Sub-tab viewport panels */}
+            
+            {/* Panel 1: Theory */}
+            {activeSubTab === 'theory' && (
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#1e3a8a', mb: 1 }}>What is it?</Typography>
+                <Typography variant="body2" sx={{ color: '#334155', mb: 3, lineHeight: 1.6 }}>{activeModule.theory.what}</Typography>
+                
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#1e3a8a', mb: 1 }}>Why do we need it?</Typography>
+                <Typography variant="body2" sx={{ color: '#334155', mb: 3, lineHeight: 1.6 }}>{activeModule.theory.why}</Typography>
+                
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#1e3a8a', mb: 1 }}>Where is it used?</Typography>
+                <Typography variant="body2" sx={{ color: '#334155', lineHeight: 1.6 }}>{activeModule.theory.where}</Typography>
+              </Box>
+            )}
 
-                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px", marginBottom: "1.5rem" }}>
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setSelectedCategory(cat)}
-                            style={{
-                                padding: "6px 16px",
-                                borderRadius: "20px",
-                                border: selectedCategory === cat ? "2px solid" : "1px solid #ddd",
-                                borderColor: selectedCategory === cat ? (categoryColors[cat] || "#3498db") : "#ddd",
-                                background: selectedCategory === cat ? (categoryColors[cat] || "#3498db") : "#fff",
-                                color: selectedCategory === cat ? "#fff" : (categoryColors[cat] || "#333"),
-                                cursor: "pointer",
-                                fontSize: "0.9rem",
-                                fontWeight: "500",
-                            }}
-                        >
-                            {cat}
-                        </button>
+            {/* Panel 2: Code */}
+            {activeSubTab === 'code' && (
+              <Box>
+                <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
+                  <Typography variant="caption" sx={{ color: '#64748b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <FaTerminal /> source_code_reference — VS Code Editor Style
+                  </Typography>
+                  <Button 
+                    size="small" 
+                    onClick={() => handleCopyCode(activeModule.code)}
+                    startIcon={copied ? <FaCheck /> : <FaCopy />}
+                    sx={{ 
+                      color: copied ? '#10b981' : '#1e3a8a', 
+                      textTransform: 'none',
+                      fontSize: '12px'
+                    }}
+                  >
+                    {copied ? 'Copied' : 'Copy Code'}
+                  </Button>
+                </Box>
+                
+                <Box sx={{ 
+                  borderRadius: '12px', 
+                  overflow: 'hidden', 
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
+                  border: '1px solid #1e293b'
+                }}>
+                  <pre 
+                    style={{ 
+                      margin: 0,
+                      background: '#1e1e1e', 
+                      color: '#d4d4d4', 
+                      padding: '20px', 
+                      overflowX: 'auto', 
+                      fontSize: '13px', 
+                      lineHeight: 1.6,
+                      fontFamily: '"Fira Code", monospace',
+                      whiteSpace: 'pre-wrap'
+                    }}
+                    dangerouslySetInnerHTML={{ __html: highlightCode(activeModule.code) }}
+                  />
+                </Box>
+              </Box>
+            )}
+
+            {/* Panel 3: Line-by-Line Explanation */}
+            {activeSubTab === 'explain' && (
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0f172a', mb: 2 }}>Line-by-Line Technical Analysis:</Typography>
+                <Box display="flex" flexDirection="column" gap={2}>
+                  {activeModule.explanation.map((item, idx) => (
+                    <Paper key={idx} sx={{ p: 2, bgcolor: '#f8fafc', borderLeft: '4px solid #3b82f6', borderRadius: '8px' }}>
+                      <Typography variant="body2" sx={{ color: '#334155', lineHeight: 1.5 }}>
+                        <strong>Point {idx + 1}:</strong> {item}
+                      </Typography>
+                    </Paper>
+                  ))}
+                </Box>
+              </Box>
+            )}
+
+            {/* Panel 4: Execution Flow */}
+            {activeSubTab === 'flow' && (
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0f172a', mb: 2 }}>User Action & Render Execution Flow:</Typography>
+                <Paper sx={{ p: 3, bgcolor: '#f8fafc', borderRadius: '12px', border: '1px dashed #cbd5e1' }}>
+                  <Typography variant="body2" sx={{ color: '#1e293b', fontFamily: 'monospace', whiteSpace: 'pre-wrap', lineHeight: 1.8 }}>
+                    {activeModule.flow.split(' → ').map((step, sIdx) => (
+                      <span key={sIdx}>
+                        {sIdx > 0 && <span style={{ color: '#ef4444', fontWeight: 'bold' }}>{'\n  ↓\n'}</span>}
+                        {step}
+                      </span>
                     ))}
-                </div>
+                  </Typography>
+                </Paper>
+              </Box>
+            )}
 
-                <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-                    <input
-                        type="search"
-                        placeholder="Search pages or file paths..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        style={{
-                            width: "100%", padding: "10px 16px", borderRadius: "8px",
-                            border: "1px solid #ddd", marginBottom: "1.5rem", fontSize: "1rem"
-                        }}
-                    />
+            {/* Panel 5: Internal Working */}
+            {activeSubTab === 'internal' && (
+              <Box display="flex" flexDirection="column" gap={3}>
+                <Paper sx={{ p: 2.5, bgcolor: '#fffbeb', borderLeft: '4px solid #f59e0b', borderRadius: '10px' }}>
+                  <Typography variant="subtitle2" sx={{ color: '#b45309', fontWeight: 800, mb: 0.5 }}>React Virtual DOM Lifecycle:</Typography>
+                  <Typography variant="body2" sx={{ color: '#78350f', lineHeight: 1.6 }}>{activeModule.internal.react}</Typography>
+                </Paper>
+                <Paper sx={{ p: 2.5, bgcolor: '#f0fdf4', borderLeft: '4px solid #22c55e', borderRadius: '10px' }}>
+                  <Typography variant="subtitle2" sx={{ color: '#15803d', fontWeight: 800, mb: 0.5 }}>JS Engine Thread Execution:</Typography>
+                  <Typography variant="body2" sx={{ color: '#166534', lineHeight: 1.6 }}>{activeModule.internal.js}</Typography>
+                </Paper>
+                <Paper sx={{ p: 2.5, bgcolor: '#eff6ff', borderLeft: '4px solid #3b82f6', borderRadius: '10px' }}>
+                  <Typography variant="subtitle2" sx={{ color: '#1d4ed8', fontWeight: 800, mb: 0.5 }}>Browser Memory & DOM Storage API:</Typography>
+                  <Typography variant="body2" sx={{ color: '#1e40af', lineHeight: 1.6 }}>{activeModule.internal.browser}</Typography>
+                </Paper>
+              </Box>
+            )}
 
-                    <p style={{ color: "#95a5a6", textAlign: "center", marginBottom: "1rem" }}>
-                        Showing {filteredPages.length} of {pages.length} pages
-                    </p>
+            {/* Panel 6: Telugu translation */}
+            {activeSubTab === 'telugu' && (
+              <Paper sx={{ p: 3, bgcolor: '#eff6ff', borderLeft: '5px solid #2563eb', borderRadius: '12px' }}>
+                <Typography variant="subtitle2" sx={{ color: '#1e40af', fontWeight: 'bold', mb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <FaBookOpen /> Telugu Masterclass Explanation (Bilingual script):
+                </Typography>
+                <Typography variant="body2" sx={{ color: '#1e3a8a', lineHeight: 1.8, fontStyle: 'italic' }}>
+                  {activeModule.telugu}
+                </Typography>
+              </Paper>
+            )}
 
-                    {filteredPages.map((page, pageIndex) => (
-                        <div key={page.id} style={{
-                            marginBottom: "16px", borderRadius: "10px",
-                            border: expandedPage === page.id ? "2px solid #2980b9" : "1px solid #e0e0e0",
-                            overflow: "hidden", background: "#fff",
-                            boxShadow: expandedPage === page.id ? "0 4px 15px rgba(41,128,185,0.2)" : "0 1px 3px rgba(0,0,0,0.08)",
-                        }}>
-                            <div
-                                onClick={() => setExpandedPage(expandedPage === page.id ? null : page.id)}
-                                style={{
-                                    padding: "18px 20px", cursor: "pointer",
-                                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                                    background: expandedPage === page.id ? "#f0f7ff" : "#fff",
-                                    borderBottom: expandedPage === page.id ? "1px solid #e0e0e0" : "none"
-                                }}
-                            >
-                                <div style={{ display: "flex", alignItems: "center", gap: "14px", flex: 1 }}>
-                                    <span style={{
-                                        background: categoryColors[page.category] || "#3498db",
-                                        color: "#fff", borderRadius: "50%",
-                                        width: "36px", height: "36px",
-                                        display: "flex", alignItems: "center", justifyContent: "center",
-                                        fontSize: "0.9rem", fontWeight: "bold", flexShrink: 0
-                                    }}>
-                                        {pageIndex + 1}
-                                    </span>
-                                    <div>
-                                        <div style={{ fontWeight: "600", fontSize: "1.05rem", color: "#2c3e50" }}>
-                                            {page.title}
-                                        </div>
-                                        <div style={{ fontSize: "0.8rem", color: "#7f8c8d", fontFamily: "monospace" }}>
-                                            {page.filePath}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                                    <span style={{
-                                        padding: "3px 12px", borderRadius: "12px", fontSize: "0.75rem",
-                                        border: `1px solid ${categoryColors[page.category] || "#3498db"}`,
-                                        color: categoryColors[page.category] || "#3498db", fontWeight: "500"
-                                    }}>
-                                        {page.category}
-                                    </span>
-                                    <span style={{ fontSize: "1.2rem", color: "#95a5a6" }}>
-                                        {expandedPage === page.id ? "\u2303" : "\u2304"}
-                                    </span>
-                                </div>
-                            </div>
+            {/* Panel 7: Real-Time Usage */}
+            {activeSubTab === 'realtime' && (
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#1e3a8a', mb: 1 }}>Corporate Code Architecture Standards:</Typography>
+                <Typography variant="body2" sx={{ color: '#334155', lineHeight: 1.6 }}>{activeModule.realtime}</Typography>
+              </Box>
+            )}
 
-                            {expandedPage === page.id && (
-                                <div style={{ padding: "20px" }}>
-                                    <div style={{
-                                        background: "#eaf6ff", borderRadius: "8px",
-                                        padding: "16px", marginBottom: "16px"
-                                    }}>
-                                        <p style={{ color: "#2980b9", fontWeight: "bold", marginBottom: "8px", fontSize: "1rem" }}>
-                                            Page Overview:
-                                        </p>
-                                        <p style={{ color: "#333", lineHeight: "1.7", margin: 0 }}>
-                                            {page.description}
-                                        </p>
-                                    </div>
+            {/* Panel 8: Interview Questions */}
+            {activeSubTab === 'interview' && (
+              <Box display="flex" flexDirection="column" gap={2}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0f172a', mb: 1 }}>Interview Q&A Checkpoints:</Typography>
+                {activeModule.interview.map((item, idx) => (
+                  <Paper key={idx} sx={{ p: 2, bgcolor: '#fafafa', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                    <Typography variant="body2" sx={{ color: '#334155', lineHeight: 1.6 }}>
+                      {item.split(' - ').map((part, pIdx) => (
+                        <span key={pIdx}>
+                          {pIdx === 0 ? <strong>{part}</strong> : <><br />{part}</>}
+                        </span>
+                      ))}
+                    </Typography>
+                  </Paper>
+                ))}
+              </Box>
+            )}
 
-                                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-                                        <p style={{ color: "#2c3e50", fontWeight: "bold", margin: 0 }}>
-                                            Code Sections ({page.lineByLine.length})
-                                        </p>
-                                        <div style={{ display: "flex", gap: "8px" }}>
-                                            <button
-                                                onClick={() => expandAll(page.id, page.lineByLine)}
-                                                style={{
-                                                    padding: "4px 12px", borderRadius: "4px",
-                                                    border: "1px solid #3498db", background: "#fff",
-                                                    color: "#3498db", cursor: "pointer", fontSize: "0.8rem"
-                                                }}>
-                                                Expand All
-                                            </button>
-                                            <button
-                                                onClick={() => collapseAll(page.id, page.lineByLine)}
-                                                style={{
-                                                    padding: "4px 12px", borderRadius: "4px",
-                                                    border: "1px solid #95a5a6", background: "#fff",
-                                                    color: "#95a5a6", cursor: "pointer", fontSize: "0.8rem"
-                                                }}>
-                                                Collapse All
-                                            </button>
-                                        </div>
-                                    </div>
+            {/* Panel 9: Best Practices */}
+            {activeSubTab === 'bestPractices' && (
+              <Box>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#1e3a8a', mb: 1 }}>Architectural Best Practices & Avoidances:</Typography>
+                <Typography variant="body2" sx={{ color: '#334155', lineHeight: 1.6 }}>{activeModule.bestPractices}</Typography>
+              </Box>
+            )}
 
-                                    {page.lineByLine.map((section, sectionIdx) => {
-                                        const isExpanded = expandedSection[`${page.id}-${sectionIdx}`];
-                                        return (
-                                            <div key={sectionIdx} style={{
-                                                marginBottom: "10px", borderRadius: "8px",
-                                                border: "1px solid #e8e8e8", overflow: "hidden"
-                                            }}>
-                                                <div
-                                                    onClick={() => toggleSection(page.id, sectionIdx)}
-                                                    style={{
-                                                        padding: "10px 16px", cursor: "pointer",
-                                                        background: isExpanded ? "#f8f9fa" : "#fff",
-                                                        display: "flex", alignItems: "center", gap: "10px",
-                                                        borderBottom: isExpanded ? "1px solid #e8e8e8" : "none"
-                                                    }}
-                                                >
-                                                    <span style={{
-                                                        background: "#27ae60", color: "#fff",
-                                                        borderRadius: "50%", width: "24px", height: "24px",
-                                                        display: "flex", alignItems: "center", justifyContent: "center",
-                                                        fontSize: "0.7rem", fontWeight: "bold", flexShrink: 0
-                                                    }}>
-                                                        {sectionIdx + 1}
-                                                    </span>
-                                                    <pre style={{
-                                                        margin: 0, fontSize: "0.82rem", color: "#555",
-                                                        fontFamily: "'Fira Code', 'Consolas', monospace",
-                                                        whiteSpace: "nowrap", overflow: "hidden",
-                                                        textOverflow: "ellipsis", flex: 1
-                                                    }}>
-                                                        {section.code.split('\n')[0].trim()}
-                                                    </pre>
-                                                    <span style={{ fontSize: "1rem", color: "#95a5a6", flexShrink: 0 }}>
-                                                        {isExpanded ? "\u2303" : "\u2304"}
-                                                    </span>
-                                                </div>
-
-                                                {isExpanded && (
-                                                    <div>
-                                                        <div style={{
-                                                            background: "#1e1e1e", padding: "16px",
-                                                            overflow: "auto"
-                                                        }}>
-                                                            <pre style={{
-                                                                color: "#d4d4d4", margin: 0, fontSize: "0.82rem",
-                                                                lineHeight: "1.6",
-                                                                fontFamily: "'Fira Code', 'Consolas', monospace",
-                                                                whiteSpace: "pre-wrap", wordBreak: "break-word"
-                                                            }}>
-                                                                {section.code}
-                                                            </pre>
-                                                        </div>
-                                                        <div style={{
-                                                            background: "#fffbea", padding: "16px",
-                                                            borderTop: "2px solid #f39c12"
-                                                        }}>
-                                                            <p style={{ color: "#e67e22", fontWeight: "bold", marginBottom: "8px", fontSize: "0.9rem" }}>
-                                                                Telugu Explanation:
-                                                            </p>
-                                                            <div style={{
-                                                                color: "#333", lineHeight: "1.9",
-                                                                whiteSpace: "pre-line", fontSize: "0.9rem"
-                                                            }}>
-                                                                {section.explanation}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
-
-                <div style={{ textAlign: "center", marginTop: "2rem" }}>
-                    <button
-                        onClick={() => navigate("/project-tutorial")}
-                        style={{
-                            padding: "10px 24px", borderRadius: "8px",
-                            border: "2px solid #3498db", background: "#fff",
-                            color: "#3498db", cursor: "pointer", fontSize: "1rem",
-                            fontWeight: "500"
-                        }}
-                    >
-                        View Concept-Wise Topics
-                    </button>
-                </div>
-            </Container>
-        </section>
-    );
+          </Paper>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 };
 
 export default PageWiseCodeGuide;

@@ -7,6 +7,8 @@ import Component_react from "./react/component/Component_react";
 import Propsreact from "./react/component/Propsreact";
 import ReactDataTable from "./reactdatatable/ReactDataTable";
 import ReactHookForm from "./UseForm/ReactHookForm";
+import CmdGuide from "./Notes_Documentation/CmdGuide";
+import ChatbotIntegrationTeluguGuide from "./Notes_Documentation/ChatbotIntegrationTeluguGuide";
 
 // import Index from './pages/JS/Index';
 // import GitGuide from './pages/GitGuide';
@@ -17,6 +19,16 @@ import ReactHookForm from "./UseForm/ReactHookForm";
 // import ReactHookForm from './pages/React/ReactHookForm';
 
 const dashboardRoutes = [
+  {
+    path: 'chatbot-guide',
+    element: <ChatbotIntegrationTeluguGuide />,
+    roles: ['admin', 'user'],
+  },
+  {
+    path: 'cmd',
+    element: <CmdGuide />,
+    roles: ['admin', 'user'],
+  },
   {
     path: 'jsindex',
     element: <Index />,

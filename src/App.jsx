@@ -127,6 +127,8 @@ import JSInterviewQuestions from './component/Notes_Documentation/JSInterviewQue
 import JSTutorial from './component/Notes_Documentation/JSTutorial';
 import ProjectTutorial from './component/HRMS/ProjectTutorial';
 import PageWiseCodeGuide from './component/HRMS/PageWiseCodeGuide';
+import Phase3CodeGuide from './component/HRMS/Phase3CodeGuide';
+import Phase4CodeGuide from './component/HRMS/Phase4CodeGuide';
 import GitRealTimeFlow from './component/git/GitRealTimeFlow';
 
 
@@ -335,6 +337,8 @@ function App() {
             <Route path="JSTutorial" element={  <JSTutorial />} />
             <Route path="ProjectTutorial" element={  <ProjectTutorial />} />
             <Route path="PageWiseCodeGuide" element={  <PageWiseCodeGuide />} />
+            <Route path="Phase3CodeGuide" element={  <Phase3CodeGuide />} />
+            <Route path="Phase4CodeGuide" element={  <Phase4CodeGuide />} />
             
             
              
