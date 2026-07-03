@@ -16,13 +16,13 @@ import { PiFileJsxBold } from "react-icons/pi";
 import { FaSquareJs, FaGit, FaTerminal } from "react-icons/fa6";
 import { RiReactjsFill } from "react-icons/ri";
 import { MdWork } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
 
 const drawerWidth = 240;
 
 const SideNav = () => {
   const menuItems = [
-    { text: 'HTML', path: '/dashboard/html', icon: <FaSquareJs /> },
-    { text: 'CSS', path: '/dashboard/css', icon: <FaSquareJs /> },
+    { text: 'Frontend UI Masterclass', path: '/dashboard/frontend-masterclass', icon: <FaLaptopCode /> },
     { text: 'JavaScript', path: '/dashboard/jsindex', icon: <FaSquareJs /> },
     { text: 'JSX', path: '/dashboard/jsx', icon: <PiFileJsxBold /> },
     { text: 'React', path: '/dashboard/mytabs', icon: <RiReactjsFill /> },

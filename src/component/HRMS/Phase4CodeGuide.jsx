@@ -175,7 +175,7 @@ const AddEmployee = () => {
       js: "Javascript executes async API calls to fetch location and designation details dynamically.",
       browser: "The browser's File API reads uploaded document blobs and attaches them to the FormData object."
     },
-    telugu: "Employee Onboarding page lo personal details, documents uploads handle cheyadaniki multi-step form stepper system configure chestham. Pincode type cheyagaane City/State details automatic ga fetch chesi display cheyadaniki postzipcode API setup apply chestham. Text input variables normal ga string values capture chesthunte, files dynamic ga attach cheyadaniki native FormData API parameters append chestham.",
+    telugu: "Employee onboarding multi-step form stepper system wizard inputs hooks registers checks validations. Zipcode city state lookup automatic populate, department designations options dynamic dropdown filters fetch API triggers. File attachments FormData binary blobs append multipart uploads parameters headers setups. If omit: users upload files, backend receives blank fields, validation triggers crash, form resets on step switches, destroying inputs.",
     realtime: "Enterprise applications use multi-step forms to organize complex workflows, and use FormData to send file attachments alongside text fields.",
     interview: [
       "Q: How do you handle file uploads alongside text fields in a single API call? - A: Use the browser's native FormData object and append both text fields and file blobs, then send the request with 'Content-Type': 'multipart/form-data'.",
@@ -307,7 +307,7 @@ export default function Attendance() {
       js: "Executes client-side array filtering dynamically based on search terms.",
       browser: "Renders the list dynamically, handling pagination and sorting in memory."
     },
-    telugu: "Attendance dashboard data rendering. DataTable component use chesi active check-in details display chestham. Client-side search optimization look: search input data key press key. advanced searches local filters values API post triggers checks.",
+    telugu: "Attendance logs lists grid rendering dynamic columns selectors. Client search inputs keywords inline filtering optimizations setups logic parameters. Server advanced dates filters POST api requests dynamic queries coordinates updates checks. Paginated tables loader states checks variables rules. If omit: rendering large log lists slows browser memory, and advanced filters require reload loops, causing laggy user dashboard views.",
     realtime: "Enterprise grids load search queries and filters to handle millions of attendance records efficiently.",
     interview: [
       "Q: What is the benefit of filtering lists on the client side versus requesting data from the server? - A: Client-side filtering provides instant results and reduces server load, but is only suitable for small datasets. Large datasets should be filtered on the server using pagination.",
@@ -449,7 +449,7 @@ export default function UserApplyLeave() {
       js: "Uses Moment.js to calculate date differences and parse date objects.",
       browser: "Parses uploaded files using the File API, validating size and type before sending."
     },
-    telugu: "User apply leave modules configurations check. User backdated dates select chesthunnapudu date checker system warning alerts triggers setup coordinate. File size 2MB limits parameters verification checks values clear checks.",
+    telugu: "Leave application form parameters. Backdated date checkers system indicators validations warning messages setups moment comparisons. Attachment file size validation parameters (2MB limit checks) local checks clear inputs. Submission form API bindings multitenant headers configuration rules. If omit: employees apply leaves for last month without managers flags, and upload 100MB files, crashing storage limits.",
     realtime: "Leave systems check leaves limits and calculate salary deductions dynamically before submitting requests.",
     interview: [
       "Q: How do you check if a date is in the past in React? - A: Use Moment.js (moment(date).isBefore(moment(), 'day')) or native JavaScript (new Date(date) < new Date().setHours(0,0,0,0)).",
@@ -614,7 +614,7 @@ export default function EmployeeKRA() {
       js: "Performs array checks (`every()`) and compares date strings in the ISO format.",
       browser: "Manages state variables in memory and renders warning logs if validation checks fail."
     },
-    telugu: "Monthly KRA appraisals evaluation forms setup. Questionnaires list load chesthunnapudu deadline dates check triggers check coordinates. Current date check: deadline cross aiethe textareas automatically disabled state switches blocks coordinate setups.",
+    telugu: "KPI/KRA monthly evaluations setups questionnaires questions answers state binding variables mappings. Deadline checks isDisabled logic toggle locks configurations textareas disabled status checks today vs deadline. Draft save status vs final submitted evaluations locks parameters validations maps. If omit: users edit evaluations after deadline date passes, and submit forms with blank answers, causing audit issues.",
     realtime: "Corporate reviews use strict evaluation windows, requiring automated deadline locks to prevent retrospective updates.",
     interview: [
       "Q: What is the difference between saving a draft and final submission in databases? - A: Drafts are stored with edit permissions enabled, allowing users to make updates. Final submissions write values with lock flags set to true, making fields read-only and notifying managers.",
@@ -748,7 +748,7 @@ export default function RegimeForm() {
       js: "Loops through calculations to separate data for Old and New regimes.",
       browser: "Renders confirmation modals and handles page transitions."
     },
-    telugu: "Tax saving declaration select regime form setups. Old vs New regime values dynamic calculations columns render indicators checks. switch trigger check: Old Regime post inputs trigger check new regime declarations cleanups trigger sets.",
+    telugu: "Tax regime selection OLD vs NEW variables calculations tables. HR enableRegimeSelection toggle configurations checks views. Switch regime submissions opposes configs cleanups API posts delete maps triggers options. Warnings modals confirmation triggers indicators. If omit: system mixes Old and New regime declarations in calculations, leading to tax computation conflicts.",
     realtime: "Regime switchers perform complex salary calculations and tax projections to help employees select the optimal tax regime.",
     interview: [
       "Q: Why clean up opposing regime data when switching tax regimes? - A: Cleaning up opposing regime data prevents calculation conflicts and ensures that the payroll engine calculates TDS deductions using the correct tax rules.",
@@ -904,7 +904,7 @@ export default function DesignationMaster() {
       js: "Handles server-side pagination offsets: idx + 1 + (page - 1) * size.",
       browser: "Applies CSS animations to render skeleton loading effects."
     },
-    telugu: "Company profile settings. designations records details CRUD setups. delete block check: active employees count greater than 0 aiethe delete button disable chestham. loading display targets look custom Shimmer table skeleton animations sets.",
+    telugu: "Designation configuration CRUD registers dynamic paginated listings. Row delete validator conditions disabled delete buttons checks: designations count > 0 employee blocks. Shimmer skeleton table loader state indicators layouts controls css gradients. If omit: HR deletes designation while active employees are assigned to it, creating orphan records in db and system crashes.",
     realtime: "Enterprise applications use skeleton loaders and strict database integrity rules to manage organizational settings securely.",
     interview: [
       "Q: Why use skeleton loaders instead of simple loading spinners? - A: Skeleton loaders show the layout structure of the page, improving perceived performance and user experience compared to blank screens with spinning icons.",
@@ -1029,7 +1029,7 @@ export default function Systemtrack() {
       js: "Handles binary data objects and processes data conversions.",
       browser: "Creates temporary download URLs and downloads the generated file."
     },
-    telugu: "Reports and tracking dashboards. System activity logs DataTable expandableRows component display targets. Excel download process logic: Axios responseType key block 'blob' values coordinate sets, browser URL download links trigger chestharu.",
+    telugu: "Activity logs tracking lists tables expandableRow nested detail grids. Excel reports export configurations responseType: 'blob' binary data stream setups. URL.createObjectURL temporary DOM anchor click actions auto downloads. Multiselect dropdown selections array parameters checks. If omit: binary Excel files corrupt during downloads, and user cannot expand rows to inspect details.",
     realtime: "Payroll portals generate salary registers, attendance history reports, and activity logs using excel export configurations.",
     interview: [
       "Q: How do you download files from API responses in JavaScript? - A: Configure Axios with 'responseType: blob', convert the response to a Blob object, generate a download URL using window.URL.createObjectURL(), and trigger a download click using a temporary anchor link.",

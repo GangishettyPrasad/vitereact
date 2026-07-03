@@ -170,7 +170,7 @@ const onSubmit = async (data) => {
       js: "Javascript executes the AES encryption block synchronously, updates the loading state, and parses the response envelope.",
       browser: "The browser's cookie manager writes the secure session cookie to disk and redirects the URL path using the History API."
     },
-    telugu: "Login Page code lo main settings inputs checks details. Browser logs look raw password payload capture cheyakunda standard AES keys modes matches encryption parameters configure chestham. Axios backend response token verify details session storage update route redirects coordinate configurations checks.",
+    telugu: "User credentials browser environment lo text values display cheyakunda secure standard AES-128 algorithms keys modes indicators mapping use chesi encrypt chestham. Client requests payloads tamper cheyakunda payload lock state parameters. Verification validation complete ayyaka dynamic JWT tokens generate chestham, store settings keys variables user-info and roles cookies storage registers maps update routing dashboard navigation coordinate details updates checks. Omission triggers: raw passwords network tab logs security leak configurations access hacks.",
     realtime: "Enterprise applications use client-side credential encryption to protect passwords in transit and prevent middleman sniffing attacks.",
     interview: [
       "Q: What is the benefit of client-side encryption before posting login requests? - A: Protects passwords in transit and secures payloads against network-sniffing tools.",
@@ -218,7 +218,7 @@ const Logout = () => {
       js: "Deletes default object references and prompts garbage collection of session data in memory.",
       browser: "The browser's cookie manager deletes expired cookie files from the client's hard drive."
     },
-    telugu: "Logout clear options controls checks. Browser cookies direct script remove command ledhu, anduke past date (1970 epoch) set chestham. automatic ga browser values delete chesthundhi. Axios defaults variables authorization key drop chestham.",
+    telugu: "User active login tokens data parameters complete structures clear updates checks. Cookies values direct script drops check triggers check targets settings. Security verification dates expired configurations parameters (1970 epoch date settings) set chesi browser cookie dynamic cleanups triggers properties. Axios network headers default configs drop reset page context locations refresh updates layout. If omitted, session information continues to exist in storage, letting other users on the shared machine access private account profiles.",
     realtime: "SaaS platforms implement strict local storage clearouts on logout to prevent subsequent users on shared machines from accessing previous session data.",
     interview: [
       "Q: How do you clear a cookie in Javascript? - A: Set the cookie to an empty value and set its expiration date to a past date like Thu, 01 Jan 1970.",
@@ -259,7 +259,7 @@ if (cookieVal) {
       js: "Parses the cookie string into a Javascript object.",
       browser: "Attaches the cookie value to outgoing HTTP request headers."
     },
-    telugu: "Authentication check client target token validations verify cheyadaniki use avthundhi. cookie access tokens details check check. Axios common headers structure automatically attaches values setups parameters checks.",
+    telugu: "JWT authentication parameters checks routes guards mechanisms. User cookie check parse JSON access keys indicators extraction templates. Axios common headers structure automatically dynamic Bearer token authorization setups variables inject details. Outgoing api requests verification credentials checks mapping setup rules. Idi drop check triggers, client requests access details completely reject servers security checks error checks layouts dynamic.",
     realtime: "JWT is standard for API authorization, using signed payloads (header, payload, signature) to verify request authenticity securely.",
     interview: [
       "Q: What is a JWT and what are its three parts? - A: A JSON Web Token contains Header (metadata), Payload (data claims), and Signature (security validation).",
@@ -299,7 +299,7 @@ if (RolesFromDb) {
       js: "Uses optional chaining to safely check nested properties without throwing errors.",
       browser: "Updates the browser's location and routing paths."
     },
-    telugu: "Authorization ante user role level checks permissions database tree validation run cheyadam. Employee, Admin modules options views verify matching true and false loops render block checks options controls.",
+    telugu: "User role levels controls permissions database config verification setups rules indicators. Page navigation routes switches check list roles maps true false checks. Dashboard buttons widgets render options check parameters properties config mapping redirect Notfound paths triggers. If omitted, normal employees can directly open configuration views or payroll panels by manually editing code references in browser console inputs.",
     realtime: "RBAC (Role-Based Access Control) dynamically restricts API actions on both the client UI and backend endpoints.",
     interview: [
       "Q: Explain how to hide a UI button based on permissions. - A: Check the permission matrix in state (e.g., if (permissions.edit === false)) and conditionally render or disable the button.",
@@ -341,7 +341,7 @@ const PrivateRoute = ({ children }) => {
       js: "Evaluates the cookie check expression on mount.",
       browser: "Updates the browser's navigation history."
     },
-    telugu: "PrivateRoute dashboard screens wrap layers settings component checks. Login verify validation details parameters match parameters. True options details render screen, else redirects login path.",
+    telugu: "Private router wrapper gates layouts security guards configuration options checks. Active auth cookies properties check indicators. Access verification match: logins valid aiethe layout panels structures render chesthundi, else Login path redirects replaces entries blocks templates. Idi missing triggers, any user can type the dashboard path directly in the URL address bar, bypass the login screens, and view protected dashboard layouts.",
     realtime: "Enterprise dashboards wrap routes in authorization guards to centralize authentication checks and simplify route configuration.",
     interview: [
       "Q: What is the purpose of the children prop in a PrivateRoute wrapper? - A: It allows the guard to wrap any component and render it dynamically if access checks pass.",
@@ -393,7 +393,7 @@ const SideNavigation = () => {
       js: "Evaluates conditional rendering expressions.",
       browser: "Highlights the active menu link when the route changes."
     },
-    telugu: "Sidebar navigation component check chesthe modules lists permissions validation matching. False targets dynamic list hide options rules NavLink active class triggers configuration values.",
+    telugu: "Sidebar menus routes paths permissions checks dynamic visibility selectors templates rules. Database permissions list views mappings matching options hooks structures. Unauthorized page links dynamic hide loops coordinate configuration mappings. NavLink active class highlighting styling coordination settings parameters. If omit: menu buttons show up, user clicks them, route guard rejects, causing broken layouts and poor navigation workflows.",
     realtime: "Dynamic sidebars are standard in SaaS applications to customize the UI based on user permissions and subscriptions.",
     interview: [
       "Q: What is the difference between Link and NavLink? - A: NavLink automatically adds active styles to the link when its route matches the current URL, making it ideal for navigation menus.",
@@ -444,7 +444,7 @@ apiClient.interceptors.response.use(
       js: "Uses native promises to handle asynchronous operations.",
       browser: "Executes XMLHttpRequest (XHR) operations in the background."
     },
-    telugu: "Axios central config files logic endpoint baseURL configurations, timeouts handles checks. interceptors options catches response status errors (ex: 401 expired session) redirect forced logouts settings controls.",
+    telugu: "Central axios clients setup baseline parameters config timeout details. Response interceptors error capture models dynamic redirections logs controls. Server 401 unauth session expiry triggers session storage clear rules cookies expirations force logout loops redirection setups parameters. If omitted, network request timeout defaults fail, system infinite spinner freezes and session token expiry throws raw API errors on components.",
     realtime: "Enterprise applications centralize API configurations to manage headers, tokens, and error handling in a single place.",
     interview: [
       "Q: What is the benefit of using Axios interceptors? - A: They allow you to run custom code globally for requests and responses, making them ideal for attaching authorization tokens or handling errors.",
@@ -502,7 +502,7 @@ export default store;`,
       js: "Executes pure reducer functions to update the immutable state tree.",
       browser: "Persists the updated state string in localStorage."
     },
-    telugu: "Redux state management central data storage coordinates updates properties. Action dispatchers reducers updates runs local storage sync rules checks.",
+    telugu: "Redux states managers store state changes variables dispatches reducers setups. Global active tenant information configurations cache coordinates loops. State subscriptions local storage synchronize rules JSON parse setups checks variables. Component prop-drilling bypass structures properties monitors. If omitted: sibling UI modules cannot share state updates, displaying mismatched active company profiles and requiring page refreshes to sync data.",
     realtime: "Redux is widely used to manage complex global state, keeping data synchronized across separate layout sections (like sidebar configurations and dashboard views).",
     interview: [
       "Q: Why must Redux reducers be pure functions? - A: Pure functions have no side effects and return the exact same output for the same input, ensuring predictable state updates and enabling features like time-travel debugging.",
@@ -564,7 +564,7 @@ export default function DataTable({ columns, data, itemsPerPage = 10 }) {
       js: "Uses array methods (like slice and map) to transform raw data into JSX elements.",
       browser: "Updates layout elements dynamically in the DOM."
     },
-    telugu: "Common Reusable components Table views, loaders, date pickers helpers check check. props configuration attributes modify single layout modular code components setup rules parameters checks.",
+    telugu: "Common reusable presentational components tables alerts badges loader indicators layout structures parameters templates. Design guidelines consistency mappings props values settings configurations setup coordinates. Single source of design changes filters guidelines. If omit, modifying button borders or color themes requires editing hundreds of files, leading to inconsistent app interface layouts.",
     realtime: "Enterprise applications create a shared UI library (containing buttons, inputs, tables, and loaders) to speed up development and ensure design consistency.",
     interview: [
       "Q: How does client-side pagination differ from server-side pagination? - A: Client-side pagination fetches all records at once and slices them in browser memory. Server-side pagination requests only the active page's records from the server, making it much more efficient for large datasets.",

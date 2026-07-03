@@ -68,6 +68,7 @@ import Rlogin from './component/login/Rlogin';
 import RProtectedRoute from './component/login/RProtectedRoute';
 import dashboardRoutes from './component/dashboardRoutes';
 import Authentication from './component/Notes_Documentation/Authentication';
+import FrontendMasterclassPortal from './component/Notes_Documentation/FrontendMasterclassPortal';
 import RoleBasedRoutingGuide from './component/Notes_Documentation/RoleBasedRoutingGuide';
 import MRoleBasedRoutingGuide from './component/Notes_Documentation/MRoleBasedRoutingGuide';
 import LoginPageGuide from './component/Notes_Documentation/LoginPageGuide';
@@ -178,22 +179,9 @@ function App() {
         <Route path="jsx" element={<> <h3>JSX Page Still Not Started </h3> <h4>Please Waitt .....</h4> <GitRealTimeFlow /> </>} /> 
         <Route path="Authentication" element={<Authentication />} />
 
-        {/* 👤 User-only Page */}
-
-
-        <Route path="html"  element={
-                                      <RProtectedRoute allowedRoles={['user']}>
-                                      <> <h3>HTML USER Page Still Not Started </h3> <h4>Please Waitt .....</h4></>
-                                      </RProtectedRoute>
-                                    } />
-
-          {/* 👑 Admin-only Pages */}
-
-          <Route  path="css"  element={
-                                        <RProtectedRoute allowedRoles={['admin']}>
-                                        <> <h3>CSS ADMIN Page Still Not Started </h3> <h4>Please Waitt .....</h4></>
-                                        </RProtectedRoute>
-                                        }  />   
+        <Route path="html"  element={<FrontendMasterclassPortal />} />
+        <Route path="css"  element={<FrontendMasterclassPortal />} />   
+        <Route path="frontend-masterclass" element={<FrontendMasterclassPortal />} />
                  
 
           {/* Auto load routes from config */}

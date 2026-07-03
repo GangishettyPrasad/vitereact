@@ -105,7 +105,7 @@ const CONCEPTS_DATABASE = [
     dependency: "None. Start the masterclass here.",
     title: "React Project Creation (Vite)",
     desc: "Initializing a new React project using Vite instead of legacy Webpack. Vite leverages Native ES Modules (ESM) to load files on demand and compiles modules instantly using esbuild.",
-    telugu: "Vite template use chesi fresh React application ni set up cheyadam. Webpack laaga entire codebase bundle chesi server run cheyakunda, modern browser dynamic ES Modules support use chesi browser loaded components locally load chesthundi.",
+    telugu: "Vite template use chesi fresh React application ni set up cheyadam. Webpack tho పోలిస్తే Vite Native ES Modules (ESM) use chesthundi, anduke dynamic modules instant loading avthundi like dynamic delivery trucks. Webpack entire building check chesthe, Vite direct component dynamically server nundi pull chesthundi, local hot reload updates sub-second runtime complete chesthundi. Idi use cheyakapothe large code base code changes reflects and hot reload loop cycles chala latency templates generate chesthayi.",
     whyItMatters: "Speeds up local hot reload loops from 10 seconds in Webpack to sub-second in Vite for large enterprise portals.",
     example1: `// EXAMPLE 1: Vite config setting up local Chatbot dev server
 import { defineConfig } from 'vite';
@@ -144,7 +144,7 @@ export default defineConfig({
     dependency: "Vite Project Creation",
     title: "Scalable Folder Structure",
     desc: "Structuring directories modularly separating dumb UI components (Common), route views (pages), API triggers (services), global states (store), and helpers (utils).",
-    telugu: "Application directories structure set up cheyadam. UI templates components files, URL pages, networks axios settings, global Redux states folders distinct ga partition chestharu.",
+    telugu: "Scale-ready structure parameters registers setup targets. Sibling file dependencies conflicts and merge overlaps clean layouts update checks. components, pages, context, and utils folder levels clean structure dividers set chestharu like sorting office mail drawers. Core logic components standalone pages modules layers configurations keep. Idi miss aiethe file naming conflicts, code replication issues develop and components tracing standard routing maintenance impossible transitions templates.",
     whyItMatters: "Prevents source conflicts. Ensures developers find code in seconds when fixing bugs in large teams.",
     example1: `// EXAMPLE 1: Chatbot modules structure blueprints
 // src/
@@ -168,7 +168,7 @@ export default defineConfig({
     dependency: "Scalable Folder Structure",
     title: "Environment Variables (.env)",
     desc: "Separating configuration setups from coding logic. Allows development staging builds to automatically change target API endpoints without editing files.",
-    telugu: "Staging, development, production profiles setups look variations. Endpoints URLs hardcode cheyakunda external files variables configurations parameters settings checks.",
+    telugu: "Staging, development, production environment values dynamic checking models configs. VITE_ API endpoints, secrets configurations files load parameters, environment configuration switches automatic run handles. Secrets files values raw code variables secure dynamic logs checks bypass key security guard. If omit, security parameters leak in open repository, and target environment switches database details manual code modifications checks dynamic build errors compile systems.",
     whyItMatters: "Prevents leaking credentials and access keys into public Github source repositories.",
     example1: `# EXAMPLE 1: .env.production (Chatbot widget credentials)
 REACT_APP_BOT_API_URL=https://chat-core.production.com/v1
@@ -185,7 +185,7 @@ REACT_APP_ENABLE_TESTING_USERS=true`
     dependency: "Environment Variables",
     title: "Global Axios Instance Setup",
     desc: "Creating a common Axios instance with defined baseURL, timeouts, and standard headers to centralize network calls.",
-    telugu: "Centralized api client instance configure cheyadam. Custom settings, client request timings controls setup parameters, page individual configuration cleanups.",
+    telugu: "Axios client configurations setups central locations options. Outgoing API request configurations setups standard headers timeout limits (ex: 8000ms) parameters rules triggers check. Network latency requests automatically drops warnings logs checks coordinates rules controls. If omitted, duplicate headers inside every axios calling file happen, request timeouts checks cannot run globally and system freeze conditions browser tab hangs occur.",
     whyItMatters: "Eliminates duplicate header configurations across hundreds of API request files.",
     example1: `// EXAMPLE 1: Chat API client configuration
 import axios from 'axios';
@@ -216,7 +216,7 @@ export const hrmsClient = axios.create({
     dependency: "Global Axios Instance Setup",
     title: "Modular API Services Layer",
     desc: "Abstracting API requests into dedicated service files. Keeps components clean of direct Axios import statements.",
-    telugu: "API network fetch requests folders check. Pages direct ga Axios import dependencies maintain cheyakunda, pure API services helpers class functions expose chesthundi.",
+    telugu: "API network routes direct components Axios calls dynamic bypass rules layout. API services layers separation parameters keep files clean. Mock response objects configuration methods dynamic test coordinates systems targets mappings. Standard endpoints parameters methods call settings wrappers. If omit, direct Axios instances load templates in page components, test mocks complex and UI components become tightly coupled to server data structures.",
     whyItMatters: "Improves testability. You can mock api responses easily without triggering real server hits.",
     example1: `// EXAMPLE 1: Chatbot Queries API Service
 import { chatApiClient } from './apiClient';
@@ -253,7 +253,7 @@ export const leaveService = {
     dependency: "Modular API Services Layer",
     title: "React Router Configuration",
     desc: "Setting up browser router tree structures to resolve paths dynamically to specific page views.",
-    telugu: "Application URLs pathways matching screens definitions tree logic. Dynamic URLs load elements, single page routing coordinates setup.",
+    telugu: "React routing configuration setups browser dynamic page coordinates mapping rules. Routing path templates loading screens dynamic outlet coordinates tree structures. Deep link bookmark dynamic screens navigation path trace controls setups. If omitted, standard browser navigation history updates fail, bookmarks direct load routes not found error messages render options page breaks happen.",
     whyItMatters: "Maintains page navigation history and allows direct deep-linking bookmarks to dashboard features.",
     example1: `// EXAMPLE 1: Routing configuration for Chatbot console
 import React from 'react';
@@ -295,7 +295,7 @@ export function HRMSAppRouter() {
     dependency: "React Router Configuration",
     title: "Private Route Guard Walls",
     desc: "Protecting dashboard pages by checking authentication tokens. Redirects unauthenticated users to Login page.",
-    telugu: "Private routes authentication filters system. Token missing unauth users check login screens gates controller redirects.",
+    telugu: "Auth route guards verification guards check checkpoints layouts indicators. User session check, JSON parsing tokens default header credentials setup checks. Redirect unauthenticated users path login settings controllers replace structures. If omitted, authorization completely drops client side screens parameters, dynamic dashboard URL endpoints guess updates parameters users easily bypass validation pages.",
     whyItMatters: "Blocks unauthorized users from bypassing client menus by typing dashboard paths directly in the URL bar.",
     example1: `// EXAMPLE 1: Guard for AI Assistant admin setting
 import React from 'react';
@@ -331,7 +331,7 @@ export function PayrollGuard() {
     dependency: "Private Route Guard Walls",
     title: "Shared Layout Structures",
     desc: "Designing shared layouts with static Headers/Sidebars. Outlet dynamically renders nested path components.",
-    telugu: "Shared header sidebar common panels layouts. Switch elements load changing items inner layouts rendering dynamic components.",
+    telugu: "Static frame components sidebar top header static layouts templates nested viewport updates checks. Outlet dynamic render loops mapping coordinate dynamic components loaders rules. Sidebar static transitions render limits prevent layouts. If omitted, route switches destroy sidebar components completely, resulting in frame flicker, memory reload latency, page transition scroll state loses.",
     whyItMatters: "Prevents sidebar flicker and re-mount latency during route transitions.",
     example1: `// EXAMPLE 1: Chat console layout shell
 import React from 'react';
@@ -373,7 +373,7 @@ export default function PortalFrame() {
     dependency: "Shared Layout Structures",
     title: "JWT Session Authentication",
     desc: "Handling JWT access tokens. Reading, parsing, and storing session states in cookies and session storage.",
-    telugu: "JWT access token authentication parameters. Server dynamic authorization details storage updates mapping setups.",
+    telugu: "User session validation JWT tokens extraction decryption details cookie parsed keys checks. session storage registers parameters active values user-info storage configs  controllers parameters. Authorization headers security verification credentials parameters mapping setup indicators. If omit, active user details and authentication logs are not checked, API requests fail and users gets logged out unexpectedly on page refresh.",
     whyItMatters: "Validates request authenticity on both client router rendering and server API persistence levels.",
     example1: `// EXAMPLE 1: Session parsing for AI bot widget
 export function loadBotToken() {
@@ -406,7 +406,7 @@ export function getHRMSAccessToken() {
     dependency: "JWT Session Authentication",
     title: "Role-Based Authorization",
     desc: "Gating views and actions based on user privilege levels (e.g. CEO, Admin, Employee).",
-    telugu: "Roles parameters gating checks. Admin, client users check dashboards redirections dynamic permissions checks.",
+    telugu: "Roles authentication gating authorization security levels verification controllers checks. User roles (Admin, HR, Employee) match routing permissions screens restrict controllers config coordinates. Unauthorized role routes redirects blocks warning indicators. If omit, general system users view executive settings dashboards, changing configurations or reading salary structures parameters directly.",
     whyItMatters: "Prevents employees from viewing administrative configurations or executive payroll databases.",
     example1: `// EXAMPLE 1: Admin logs page gating check
 import React from 'react';
@@ -440,7 +440,7 @@ export function SalaryEditor({ activeUser }) {
     dependency: "Role-Based Authorization",
     title: "Granular Permissions Tree (RBAC)",
     desc: "Mapping dynamic modules permission trees returned from database to control read/write/edit levels on components.",
-    telugu: "Modules list details permissions verification logic. View edit buttons show/hide controls settings parameters.",
+    telugu: "RBAC systems dynamic permission maps checking parameters coordinates logic validation templates. View, Add, Edit, Delete permission flags verify indicators mapping rules. UI buttons show/hide rendering checks conditional controls. If omitted, user can see write/delete buttons on screen, click triggers API errors on server side, presenting poor UI experience templates.",
     whyItMatters: "Enables dynamic feature flagging. Allows users with custom roles to use specific dashboard tools without full admin rights.",
     example1: `// EXAMPLE 1: Gating chatbot settings by permission object
 export function canManageBots(rolesData) {
@@ -459,7 +459,7 @@ export function canApproveAttendance(rolesFromDb) {
     dependency: "Granular Permissions Tree (RBAC)",
     title: "Permission-Based Sidebar Layout",
     desc: "Dynamically rendering sidebar links based on loaded permission maps. Hides unauthorized paths from menus.",
-    telugu: "Sidebar navigation checks permissions config. Access false paths links automatic ga menus list nundi dynamic remove option controls.",
+    telugu: "Sidebar routes navigation paths permissions configs filters dynamic links visibility rules checks. Unauthorized menus automatically hidden, UI presentation layout profiles cleanup monitors indicators configs. Navigation links coordinates structures templates. If omitted, sidebar displays invalid access options buttons, user clicks them, route guard redirects to notfound, causing user interface confusion.",
     whyItMatters: "Keeps navigation clean by hiding links that would otherwise redirect to unauthorized pages.",
     example1: `// EXAMPLE 1: Dynamic sidebar links for Chat Console
 import React from 'react';
@@ -496,7 +496,7 @@ export function HRMSSidebar({ rolesFromDb }) {
     dependency: "Permission-Based Sidebar Layout",
     title: "Redux Toolkit Slices & Store",
     desc: "Setting up standard global state stores with slices, reducers, selectors, and state selectors dispatchers.",
-    telugu: "Redux Toolkit global state store variables config. Actions payloads dispatches, selectors through components logic check setups.",
+    telugu: "Redux Toolkit state manager global slices definitions dispatches mappings. Components sync rules state indicators hooks selectors props drilling bypass structures indicators mapping rules. Central source of truth update monitors. If omit: sibling UI views hold mismatched state caches, requiring manual reloads to sync sidebar settings across modules.",
     whyItMatters: "Centralizes application state, preventing data synchronization issues between sibling components.",
     example1: `// EXAMPLE 1: Redux Slice tracking bot active sessions
 import { createSlice } from '@reduxjs/toolkit';
@@ -531,7 +531,7 @@ export default companySlice.reducer;`
     dependency: "Redux Toolkit Slices & Store",
     title: "React Context API (useContext)",
     desc: "Providing lightweight state trees (like Themes or Auth) without prop-drilling or large Redux store payloads.",
-    telugu: "Context providers values injection wrappers. Intermediate components variables bypass tools hooks config.",
+    telugu: "Lightweight context providers values hook setups. Authentication status active configs themes dark mode variables shared selectors rules checks. Sub-components prop drilling bypass mechanisms settings controls checks. Context wrappers variables controls. If omitted, theme settings or simple user session profiles require prop drilling down 10 levels, making intermediate code files extremely messy.",
     whyItMatters: "Reduces code complexity when sharing theme, configuration, or authentication state across deep component levels.",
     example1: `// EXAMPLE 1: Custom configuration context for Bot UI
 import React, { createContext, useContext, useState } from 'react';
@@ -569,7 +569,7 @@ export const useQuickAccess = () => useContext(QuickAccessContext);`
     dependency: "React Context API (useContext)",
     title: "React Core Hooks (State & Effects)",
     desc: "Utilizing React lifecycle hooks (useState, useEffect, useMemo, useCallback) to manage reactivity and render optimization.",
-    telugu: "Component react-states, side effects triggers logic options checks. Memoization and callbacks use cases performance optimization triggers.",
+    telugu: "Component reactive states parameters triggers hooks layouts monitors checks. useState variables local updates, useEffect side effects tracking listeners cleanup setups templates. useMemo memoization functions selectors performance optimization triggers caching. If omitted, component memory leaks build up, triggers infinite API loops browser console freezes locks operations.",
     whyItMatters: "Prevents redundant re-computations and memory leaks on high-frequency UI updates.",
     example1: `// EXAMPLE 1: Scroll lock tracker using useEffect on chat
 import React, { useState, useEffect, useRef } from 'react';
@@ -603,7 +603,7 @@ export function PayrollSummaries({ employees }) {
     dependency: "React Core Hooks (State & Effects)",
     title: "React Hook Form Validation",
     desc: "Orchestrating forms inputs, error notifications, validation regex patterns without triggering page reload.",
-    telugu: "React Hook Form packages form inputs validation validation triggers. Real-time patterns parsing errors handling options setup checks.",
+    telugu: "Form inputs registers validations validation rules regex patterns checks triggers validations. Real-time inputs validation indicators message inline text indicators controls. Keyboard re-renders loops bypass mechanisms setups configurations indicators. If omitted, page wide components re-render on every single keystroke, lag performance, and server receives dirty inputs.",
     whyItMatters: "Reduces re-renders. Component inputs values are stored internally rather than firing state updates on every keystroke.",
     example1: `// EXAMPLE 1: Chatbot parameters customization form
 import React from 'react';
@@ -646,7 +646,7 @@ export function NewEmployeeForm() {
     dependency: "React Hook Form Validation",
     title: "Form Submission & API Binding",
     desc: "Interpreting forms events and posting payloads to API endpoints. Handling loaders states during server latency.",
-    telugu: "Form data variables backend payloads binding process. Loaders toggle options, try catch blocks error responses checks.",
+    telugu: "Form data payloads Axios post submissions services api binds triggers logic checks. Submitting loaders controls disable button double submission prevention parameters monitors checks. Try catch validation error alerts setups systems triggers coordinates. If omit, users double click submit buttons, posting duplicate API payloads creating database entity conflicts.",
     whyItMatters: "Disabling buttons during pending requests prevents duplicate server entries.",
     example1: `// EXAMPLE 1: Sending chat form data
 import React, { useState } from 'react';
@@ -692,7 +692,7 @@ export function LeaveApplyAction({ leaveForm, leaveService }) {
     dependency: "Form Submission & API Binding",
     title: "Creating Reusable Custom UI Components",
     desc: "Building highly reusable presentational components (tables, loaders, badges) configured entirely via props.",
-    telugu: "Reusable presentational cards structure. Logic completely parameters configuration settings controls templates rules.",
+    telugu: "Common reusable presentational components tables alerts badges loader indicators layout structures parameters templates. Design guidelines consistency mappings props values settings configurations setup coordinates. Single source of design changes filters guidelines. If omit, modifying button borders or color themes requires editing hundreds of files, leading to inconsistent app interface layouts.",
     whyItMatters: "Centralizes theme design changes. Changing the color theme in one component updates it app-wide.",
     example1: `// EXAMPLE 1: Chat status badge widget
 import React from 'react';
@@ -728,7 +728,7 @@ export default function RecordRow({ employee }) {
     dependency: "Creating Reusable Custom UI Components",
     title: "Writing Reusable Custom Hooks",
     desc: "Extracting repetitive state lifecycle logic into standalone custom hooks (e.g. useSpeechToText, useLocalStorage).",
-    telugu: "Multiple components common functions logic hook folder extraction helper values return hooks configuration.",
+    telugu: "Reusable custom hooks layout state log extraction configs hooks folders. Scroll locks tracking hooks, localstorage syncing variables hooks helper functions indicators logic rules setups. Logic separations presentational views cleanups coordinate mapping. If omitted, repetitive states loops (e.g. scroll listeners) are duplicated inside every file, bloating source directories.",
     whyItMatters: "Separates UI layout code from state logic, making both parts easier to read and test.",
     example1: `// EXAMPLE 1: useChatScroll hook
 import { useEffect, useRef } from 'react';
@@ -759,7 +759,7 @@ export function useSessionTimer(logoutAction, limitMs = 60000) {
     dependency: "Writing Reusable Custom Hooks",
     title: "Pure Utility Functions",
     desc: "Writing pure JS functions (date parsers, currency converters) isolated from React render lifecycle for unit testing.",
-    telugu: "Pure JS format functions date conversions calculations, tests inputs formats converters helpers.",
+    telugu: "Stateless helper functions date parsing currency converters values mappings indicators helpers pure scripts. React logic components separation deterministic functions inputs outputs validations setups. Easy unit testing hooks checks. If omit, formatters are hardcoded inside UI components, preventing code reuse and making unit testing helpers impossible in isolation.",
     whyItMatters: "Ensures calculations are 100% deterministic and easy to unit test using Jest or Vitest.",
     example1: `// EXAMPLE 1: Chat raw text sanitize utility
 export function cleanRawPrompt(text) {
@@ -786,7 +786,7 @@ export function getDurationDays(startDate, endDate) {
     dependency: "Pure Utility Functions",
     title: "React Performance Tuning",
     desc: "Optimizing render speeds using code splitting, memoization (React.memo, useMemo, useCallback) and windowing virtual lists.",
-    telugu: "Renders optimize operations variables maps caching. Components re-renders loops prevent controls.",
+    telugu: "React optimization frames rendering speed check memoization techniques virtual scrolling systems configurations checks. Caching calculations useMemo, callbacks useCallback controls. Large data tables dynamic loads virtual rows setups. If omit, page lags scrolling through thousands of lines payroll log records, frames drop browser responsiveness freeze.",
     whyItMatters: "Prevents lagging user interface frames on pages displaying large payroll sheets or high-frequency chat streams.",
     example1: `// EXAMPLE 1: Memoized chat bubbles list container
 import React, { memo } from 'react';
@@ -815,7 +815,7 @@ export function VirtualizedRow({ item, index, style }) {
     dependency: "React Performance Tuning",
     title: "Application Client Security",
     desc: "Hardening client security against XSS/CSRF. Using AES encryption libraries to protect cached tokens from inspection.",
-    telugu: "Client data security safeguards. Token caching checks AES encryption storage formats overrides controls.",
+    telugu: "Client data security shields cached tokens configurations controls logic verification targets settings. CryptoJS AES encryption algorithms storage wrapper overrides parameters setups indicators keys configs. Inspect tools local storage values hide safeguards rules. If omitted, rogue browser extensions read plaintext JWT session variables in localStorage, hijacking user accounts.",
     whyItMatters: "Shields user tokens and employee records from access via malicious scripts injected into the browser.",
     example1: `// EXAMPLE 1: Bot session token AES encrypt cache
 import CryptoJS from 'crypto-js';
@@ -846,7 +846,7 @@ sessionStorage.setItem = function(key, value) {
     dependency: "Application Client Security",
     title: "Global Error Boundaries & UI Alerts",
     desc: "Catching runtime Javascript exceptions using Error Boundaries and formatting API crashes into user-friendly error banners.",
-    telugu: "Component crash handling boundaries alerts system. Render fails warnings options fallbacks layout.",
+    telugu: "Component exceptions runtime catches Error Boundaries alerts fallback layout rendering setups. Render failure fallback views triggers resets logic structures checks monitors variables. Safe user error banners configurations alerts. If omit: single unhandled JS error in a subcomponent crashes the entire page workspace, displaying a completely blank white screen.",
     whyItMatters: "Ensures the entire app dashboard doesn't go blank when a sub-component triggers an unexpected runtime error.",
     example1: `// EXAMPLE 1: Chat server downtime fallback screen
 import React from 'react';
@@ -882,7 +882,7 @@ export class HRMSBoundary extends Component {
     dependency: "Global Error Boundaries & UI Alerts",
     title: "Frontend Client Logging Services",
     desc: "Capturing client errors, browser environments details, and shipping log payloads to centralized monitoring endpoints.",
-    telugu: "Client crashes errors telemetry collection. Remote logging service payload dispatch setup.",
+    telugu: "Client crashes errors environments parameters telemetry logging service configs coordinates. Central server logging endpoints reports payloads formats. Developers diagnostic monitors bug alerts indicators telemetry. If omit, production runtime errors go unrecorded, forcing developer to rely on vague user support tickets rather than trace logs metadata.",
     whyItMatters: "Provides developers with real-time insight into production bugs without relying on user bug reports.",
     example1: `// EXAMPLE 1: Chat engine query timeout logger
 export async function logBotErrorTelemetry(errDetails) {
@@ -918,7 +918,7 @@ export function captureHRMSLog(actionCode, targetId, employeeId) {
     dependency: "Frontend Client Logging Services",
     title: "Production Deployment Configs",
     desc: "Optimizing production builds, setting asset caches, configure Nginx routes for Single Page Application index redirects.",
-    telugu: "Vite build outputs configurations check. Static asset caches, Nginx SPA redirects setup rules.",
+    telugu: "Vite production builds build bundle setups static assets caching. Nginx routing configs single page app redirects rewrite rules configs index.html fallbacks templates maps. Docker configurations. If omit: browser refreshes on sub-route URL folders like /dashboard/payroll result in server HTTP 404 error pages, breaking navigation paths.",
     whyItMatters: "Prevents 404 errors when users refresh deep route paths (e.g. /dashboard/payroll) on live servers.",
     example1: `// EXAMPLE 1: Nginx router redirects config file
 # File: nginx.conf (SPA Fallback Redirect Configuration)
@@ -951,7 +951,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf`
     dependency: "Production Deployment Configs",
     title: "Git Workflow & Release Pipeline",
     desc: "Structuring branch models (feature, hotfix, release, main) and configuring pre-commit hooks to enforce coding standards.",
-    telugu: "Enterprise code repository branch lifecycle guidelines. Pre commit linter checks git hooks rules setup.",
+    telugu: "Git version branch models rules feature branch release pipeline structures guidelines. Precommit lint rules Husky configuration automatic checkups merges blocks validations. Branch styling parameters indicators guidelines. If omit: developers commit unformatted code files with syntax errors directly to production repository branches, corrupting deployment pipelines.",
     whyItMatters: "Blocks formatting issues and compilation errors from merging into production branches.",
     example1: `// EXAMPLE 1: git features branch creation sequence
 # 1. Pull latest changes from main branch
@@ -982,7 +982,7 @@ git push origin feature/integrate-chatbot-widget`,
     dependency: "Git Workflow & Release Pipeline",
     title: "Continuous Integration Pipelines",
     desc: "Configuring GitHub Actions/GitLab CI scripts to run tests, lint scripts, and build bundles automatically on code pull requests.",
-    telugu: "Continuous integration scripts definitions files. Pull requests test runs builds automations pipelines.",
+    telugu: "CI workflow automation pipelines scripts pull request build verifications tests code analysis checkups templates maps. GitHub Actions runner environment settings packages test checks setups trackers logs. If omit: manual checks are required on code, allowing broken dependencies or compilation errors to slip directly into production servers.",
     whyItMatters: "Automates pull-request audits, ensuring no broken code gets merged into staging environments.",
     example1: `// EXAMPLE 1: GitHub Actions main deploy workflow configuration
 # File: .github/workflows/deploy.yml
@@ -1021,7 +1021,7 @@ jobs:
     dependency: "Continuous Integration Pipelines",
     title: "End-to-End Enterprise Architecture",
     desc: "Reviewing the overall execution architecture: User actions -> Event handlers -> Services API -> Security checks -> Server persistence.",
-    telugu: "Complete application data loop summary. Client side triggers services gates persistent logs layout mapping.",
+    telugu: "Client action state flow network API services interceptors gates DB logs persistence architectures. Telemetry diagnostics mapping updates checkups variables rules coordinates frameworks templates monitors logs. If omit, developer debugs individual UI inputs or DB schemas separately without understanding end-to-end data pipelines flows, causing bugs.",
     whyItMatters: "Provides a full system understanding, empowering you to trace features from the UI to database records.",
     example1: `// EXAMPLE 1: AI chatbot flow architecture description
 # 1. User types prompt -> ChatInput trigger event
