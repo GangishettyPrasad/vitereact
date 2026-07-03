@@ -36,6 +36,7 @@ const SideNav = () => {
     { text: 'Phase 2: Code Walkthrough (HRMS)', path: '/dashboard/PageWiseCodeGuide', icon: <MdWork /> },
     { text: 'Phase 3: Coding Boilerplate', path: '/dashboard/Phase3CodeGuide', icon: <MdWork /> },
     { text: 'Phase 4: Core HRMS Modules', path: '/dashboard/Phase4CodeGuide', icon: <MdWork /> },
+    { text: 'Phase 5: External Libraries', path: '/dashboard/ExternalLibrariesGuide', icon: <MdWork /> },
   ];
 
   return (

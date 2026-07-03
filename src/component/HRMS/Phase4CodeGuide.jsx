@@ -19,7 +19,9 @@ import {
   FaClock, 
   FaCalendarAlt, 
   FaBriefcase, 
-  FaMoneyBillWave 
+  FaMoneyBillWave,
+  FaSlidersH,
+  FaFileAlt
 } from 'react-icons/fa';
 
 // Helper to escape HTML tags for syntax highlighting
@@ -69,7 +71,7 @@ function highlightCode(code) {
   const builtins = [
     'useState', 'useEffect', 'useContext', 'useRef', 'useNavigate', 'useLocation', 
     'useSelector', 'useDispatch', 'sessionStorage', 'localStorage', 'document', 
-    'window', 'JSON', 'axios', 'CryptoJS', 'getCookie', 'reloadRoles', 'createSlice', 'configureStore', 'FormData'
+    'window', 'JSON', 'axios', 'CryptoJS', 'getCookie', 'reloadRoles', 'createSlice', 'configureStore', 'FormData', 'Blob', 'FileReader'
   ];
   builtins.forEach(item => {
     const regex = new RegExp(`\\b${item}\\b`, 'g');
@@ -94,7 +96,7 @@ function highlightCode(code) {
 const PHASE4_DATABASE = [
   {
     id: 0,
-    title: "1. Employee Onboarding & Directory",
+    title: "1. Employee Onboarding",
     icon: <FaUsers />,
     category: "Core HRMS",
     theory: "Employee Onboarding uses a multi-step form wizard (stepper) to collect personal, job, and document details, while the Employee Directory displays a paginated list of active employees with search and filter capabilities.",
@@ -186,155 +188,854 @@ const AddEmployee = () => {
     title: "2. Attendance Tracking",
     icon: <FaClock />,
     category: "Core HRMS",
-    theory: "Attendance Tracking handles employee clock-ins and check-outs, calculating daily work hours, shift schedules, and overtime hours.",
-    code: `// Core logic mockup for CheckInOut.js
-const CheckInOut = () => {
-  const [loading, setLoading] = useState(false);
+    theory: "Attendance Tracking handles employee clock-ins and check-outs, calculating daily work hours, shift schedules, and overtime hours. It displays a paginated list of active logs with search and advanced multi-filtering.",
+    code: `// File: src/components/Attendance/Attendance.jsx
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import axios from "axios";
+import { AiOutlineReload, AiOutlineSearch } from "react-icons/ai";
 
-  const handleCheckIn = async () => {
-    setLoading(true);
-    const headers = ApiHeaders(multitenant);
-    await axios.post("/api/attendance/check-in/", {}, { headers })
-      .then(res => alert("Checked in successfully!"))
-      .catch(err => console.log(err))
-      .finally(() => setLoading(false));
+export default function Attendance() {
+  const [attendanceList, setAttendanceList] = useState([]);
+  const [filterattendanceList, setFilterAttendanceList] = useState([]);
+  const [departmentsList, setDepartmentsList] = useState([]);
+  const [listEmployes, setListEmployes] = useState([]);
+  
+  const [department, setDepartment] = useState("");
+  const [employee, setEmployee] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [search, setSearch] = useState("");
+  const [loader, setLoader] = useState(false);
+
+  // 1️⃣ DataTables Column Definitions
+  const columns = [
+    { name: "S.No", selector: (row) => row.Num, sortable: true },
+    { name: "Emp Code", selector: (row) => row.emp_code, sortable: true },
+    { name: "Employee", selector: (row) => row.employee, sortable: true },
+    { name: "Check In Time", selector: (row) => row.log_in_time, sortable: true },
+    { name: "Check Out Time", selector: (row) => row.log_out_time, sortable: true },
+    { name: "Total Hours", selector: (row) => row.total_hr_spent, sortable: true },
+    { name: "Status", cell: (row) => <button className="btn btn-sm">{row.status}</button> }
+  ];
+
+  // 2️⃣ Fetch Attendance list from backend API
+  const getAttendanceList = async () => {
+    setLoader(false);
+    try {
+      const response = await axios.get("/api/user/attendance_get/");
+      const mapped = response.data.map((item, idx) => ({ ...item, Num: idx + 1 }));
+      setAttendanceList(mapped);
+      setFilterAttendanceList(mapped);
+      setLoader(true);
+    } catch (error) {
+      console.error("Failed to load attendance", error);
+      setLoader(true);
+    }
   };
 
-  return <button onClick={handleCheckIn} disabled={loading}>Check In</button>;
-};`,
+  // 3️⃣ Client-side instant keyword filter search
+  useEffect(() => {
+    const result = filterattendanceList.filter((att) => {
+      return (
+        att.emp_code.toLowerCase().includes(search.toLowerCase()) ||
+        att.employee.toLowerCase().includes(search.toLowerCase()) ||
+        att.department.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+    setAttendanceList(result);
+  }, [search]);
+
+  // 4️⃣ Server-side advanced multi-filtering searches
+  const searchwithfilters = async () => {
+    let req = {
+      af_department: department,
+      af_emp_code: employee,
+      af_from_date: fromDate,
+      af_to_date: toDate
+    };
+    await axios.post("/api/user/attendance_advancedfilter/", req)
+      .then(res => {
+        const mapped = res.data.map((item, idx) => ({ ...item, Num: idx + 1 }));
+        setAttendanceList(mapped);
+      })
+      .catch(err => console.error(err));
+  };
+
+  useEffect(() => {
+    getAttendanceList();
+  }, []);
+
+  return (
+    <div className="attendance-container">
+      {/* Filters Area */}
+      <div className="filters-grid" style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
+        <input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} />
+        <input type="date" value={toDate} onChange={e => setToDate(e.target.value)} />
+        <button onClick={searchwithfilters}><AiOutlineSearch /> Search</button>
+      </div>
+
+      {/* Paginated DataTable */}
+      {loader ? (
+        <DataTable
+          columns={columns}
+          data={attendanceList}
+          pagination
+          highlightOnHover
+          subHeader
+          subHeaderComponent={
+            <input 
+              type="text" 
+              placeholder="Search..." 
+              value={search} 
+              onChange={e => setSearch(e.target.value)} 
+            />
+          }
+        />
+      ) : <p>Loading Attendance Logs...</p>}
+    </div>
+  );
+}`,
     explanation: [
-      "handleCheckIn: Sends a clock-in request to the backend with authentication headers.",
-      "setLoading: Toggles loading state to prevent double-clicks during request latency."
+      "columns array: Defines headers and selector accessors for the DataTable component.",
+      "useEffect on search: Triggers client-side filtering instantly whenever the search input changes, avoiding API roundtrips.",
+      "searchwithfilters: Sends a POST request with selected filters to fetch matching attendance records from the server."
     ],
-    flow: "User clicks Check In → handleCheckIn triggers API request → Axios sends Bearer token in headers → Server records clock-in time in database → UI updates with status.",
+    flow: "Page mounts → getAttendanceList fetches all logs → DataTable renders active list → User enters dates and clicks Search → searchwithfilters posts payload to server → server returns filtered records → state updates and DataTable re-renders.",
     internal: {
-      react: "Tracks active loading states to disable buttons during requests.",
-      js: "Handles async API requests using JavaScript promises.",
-      browser: "Sends HTTP requests and updates localStorage with clock-in status."
+      react: "Manages state variable changes to trigger component updates when filters or search terms change.",
+      js: "Executes client-side array filtering dynamically based on search terms.",
+      browser: "Renders the list dynamically, handling pagination and sorting in memory."
     },
-    telugu: "Attendance check-in check-out operations handle cheyadaniki clock controls. API request send chesthe database timestamp logs coordinate details write chesthundhi.",
-    realtime: "HRMS dashboards require secure check-in modules, often capturing IP addresses or locations to prevent punch-in tampering.",
+    telugu: "Attendance dashboard data rendering. DataTable component use chesi active check-in details display chestham. Client-side search optimization look: search input data key press key. advanced searches local filters values API post triggers checks.",
+    realtime: "Enterprise grids load search queries and filters to handle millions of attendance records efficiently.",
     interview: [
-      "Q: How do you prevent double-clicks on API triggers? - A: Disable the button immediately by setting a local loading state to true, and reset it only after the promise resolves."
+      "Q: What is the benefit of filtering lists on the client side versus requesting data from the server? - A: Client-side filtering provides instant results and reduces server load, but is only suitable for small datasets. Large datasets should be filtered on the server using pagination.",
+      "Q: How do you handle table columns sorting in React Data Table? - A: Add a 'sortable: true' attribute to the column definition and define a custom sort function if sorting complex objects."
     ],
-    bestPractices: "Validate client IP addresses or locations before recording attendance, and implement background check-in sync to recover from connection drops."
+    bestPractices: "Use server-side pagination for large datasets to keep pages fast, and implement auto-refresh rules to load new clock-ins in real-time."
   },
   {
     id: 2,
     title: "3. Leave Management",
     icon: <FaCalendarAlt />,
     category: "Core HRMS",
-    theory: "Leave Management allows employees to apply for leaves and check leave balances, while managers can review, approve, or reject applications dynamically.",
-    code: `// Leave apply logic in ApplyLeave.js
-const ApplyLeave = () => {
-  const { register, handleSubmit } = useForm();
+    theory: "Leave Management allows employees to apply for leaves, check balances, and track application history, automatically checking for backdated leaves and validation rules.",
+    code: `// File: src/components/LeaveManagement/UserApplyLeave.jsx
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import moment from "moment";
 
+export default function UserApplyLeave() {
+  const [employeeDataRules, setEmployeeDataRules] = useState([]);
+  const [userLeaveData, setUserLeaveData] = useState([]);
+  const [SelectDayType, setSelectDayType] = useState("Full_Day");
+  const [isBackdatedLeave, setisBackdatedLeave] = useState(false);
+  const [dateisBack, setdateisBack] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  const { register, handleSubmit, setValue, getValues, formState: { errors }, clearErrors } = useForm();
+  
+  // Read session user details
+  const userinfo = JSON.parse(sessionStorage.getItem("user-info") || "{}");
+  const employeeNumber = userinfo?.data?.employee?.workDetails_EmployeeNumber;
+
+  // 1️⃣ Dynamic Date math check for backdated leaves
+  const checkthisdateisBackdated = (date) => {
+    setdateisBack(false);
+    const parsedDate = moment(date);
+    const currentDate = moment();
+    
+    // Check if the selected date is before today
+    if (parsedDate.isBefore(currentDate, "day")) {
+      setdateisBack(true);
+    }
+  };
+
+  // 2️⃣ Handle file attachment size limit validation
+  const onFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size > 2 * 1024 * 1024) { // 2MB Limit
+      alert("Please upload a file smaller than 2MB");
+      setValue("LeaveAttachment", "");
+    }
+  };
+
+  // 3️⃣ Submit Leave Form Data
   const onSubmit = async (data) => {
-    const headers = ApiHeaders(multitenant);
-    await axios.post("/api/leaves/apply/", data, { headers })
-      .then(res => alert("Leave applied successfully!"))
-      .catch(err => console.log(err));
+    setDisable(true);
+    const formData = new FormData();
+    formData.append("employee", employeeNumber);
+    formData.append("leaveRule", data.leaveType);
+    formData.append("startDate", moment(data.startDate).format("DD/MM/YYYY"));
+    formData.append("endDate", moment(data.endDate).format("DD/MM/YYYY"));
+    formData.append("reason", data.eventDescription);
+    
+    if (data.LeaveAttachment && data.LeaveAttachment[0]) {
+      formData.append("attachment", data.LeaveAttachment[0]);
+    }
+
+    if (dateisBack && !isBackdatedLeave) {
+      formData.append("isBackdated", true);
+    }
+
+    try {
+      const response = await axios.post("/api/leave/apply/", formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+      alert("Leave applied successfully!");
+      setDisable(false);
+    } catch (err) {
+      alert("Error: " + (err.response?.data?.error || "Submission failed"));
+      setDisable(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <select {...register("leaveType")}><option value="Sick">Sick</option></select>
-      <input type="date" {...register("startDate")} />
-      <button type="submit">Apply</button>
+      <div>
+        <label>Leave Type</label>
+        <select {...register("leaveType", { required: "Please select leave type" })}>
+          <option value="">Select Type</option>
+          {employeeDataRules.map(item => (
+            <option key={item.leaveRule} value={item.leaveRule}>{item.leaveRuleDetails.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label>Start Date</label>
+        <input 
+          type="date" 
+          {...register("startDate", { 
+            required: "Start date is required",
+            onChange: (e) => {
+              checkthisdateisBackdated(e.target.value);
+              clearErrors("startDate");
+            }
+          })} 
+        />
+      </div>
+
+      {dateisBack && (
+        <div style={{ color: 'red', fontSize: '12px' }}>
+          Warning: You are applying for a backdated leave. Managers must approve backdated leaves.
+        </div>
+      )}
+
+      <div>
+        <label>Reason</label>
+        <textarea {...register("eventDescription", { required: "Please enter a reason" })} />
+      </div>
+
+      <div>
+        <label>Attachment (Max 2MB)</label>
+        <input type="file" {...register("LeaveAttachment")} onChange={onFileChange} />
+      </div>
+
+      <button type="submit" disabled={disable}>Apply Leave</button>
     </form>
   );
-};`,
+}`,
     explanation: [
-      "onSubmit: Sends the leave application data (dates, type, reason) to the backend API.",
-      "ApiHeaders: Attaches the user's token and company details to authorize the request."
+      "checkthisdateisBackdated: Compares the selected start date with the current date to flag backdated leaves dynamically.",
+      "onFileChange: Validates files locally to ensure uploads do not exceed size limits (2MB).",
+      "FormData configuration: Formats the request to upload file attachments alongside text fields."
     ],
-    flow: "User enters dates and leave type → clicks Apply → form validation runs → Axios posts request to backend → Server calculates balances and records leave request.",
+    flow: "User selects leave type → User picks start date → Date check runs: sets dateisBack flag on backdated dates → User uploads file → File validator checks size → User submits form → Axios uploads FormData payload to the server.",
     internal: {
-      react: "Manages form state and validation rules dynamically.",
-      js: "Submits JSON payload asynchronous using promises.",
-      browser: "Sends network request and displays feedback banners."
+      react: "Tracks date validation states and dynamically renders warnings if backdated leaves are selected.",
+      js: "Uses Moment.js to calculate date differences and parse date objects.",
+      browser: "Parses uploaded files using the File API, validating size and type before sending."
     },
-    telugu: "Leaves configurations setups. user details inputs check leaves status apply trigger options checks.",
-    realtime: "Leave tracking requires calendar integrations and automated notification alerts to inform managers of new applications.",
+    telugu: "User apply leave modules configurations check. User backdated dates select chesthunnapudu date checker system warning alerts triggers setup coordinate. File size 2MB limits parameters verification checks values clear checks.",
+    realtime: "Leave systems check leaves limits and calculate salary deductions dynamically before submitting requests.",
     interview: [
-      "Q: How do you calculate leave duration between dates on the client side? - A: Parse both dates into Date objects, calculate the time difference in milliseconds, and convert it to days (duration = diffTime / (1000 * 60 * 60 * 24) + 1)."
+      "Q: How do you check if a date is in the past in React? - A: Use Moment.js (moment(date).isBefore(moment(), 'day')) or native JavaScript (new Date(date) < new Date().setHours(0,0,0,0)).",
+      "Q: Why use FormData instead of standard JSON payloads? - A: JSON payloads do not support binary data (like files or images). FormData formats requests as multipart payloads, allowing files to be sent alongside text fields."
     ],
-    bestPractices: "Check leave balances on the client side to prevent invalid submissions, and implement automated fallback approval rules for expired requests."
+    bestPractices: "Validate file size and formats on the client side, implement clear backdated leave policies in code, and display leave balances clearly on the application form."
   },
   {
     id: 3,
-    title: "4. Performance Review",
+    title: "4. Performance Review (KRA)",
     icon: <FaBriefcase />,
     category: "Core HRMS",
-    theory: "Performance Review (MonthlyKRA) manages KPI/KRA checklists, allowing managers to assign questionnaires and track employee performance ratings.",
-    code: `// KRA Questionnaire loader
-const KRADashboard = () => {
-  const [questions, setQuestions] = useState([]);
+    theory: "Performance Review (MonthlyKRA) manages KPI/KRA checklists, allowing employees to submit self-evaluations and managers to record scores, enforcing deadlines dynamically.",
+    code: `// File: src/components/MonthlyKRA/EmployeeKRA.jsx
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import axios from "axios";
+import moment from "moment";
+import { Modal, Form } from "react-bootstrap";
 
-  useEffect(() => {
-    const fetchQuestions = async () => {
-      const headers = ApiHeaders(multitenant);
-      await axios.get("/get_questionnaire/", { headers })
-        .then(res => setQuestions(res.data))
-        .catch(err => console.log(err));
+export default function EmployeeKRA() {
+  const [employeeKRAList, setEmployeeKRAList] = useState([]);
+  const [questionsList, setQuestionsList] = useState([]);
+  const [setNameForQuestion, setSetNameForQuestion] = useState("");
+  const [deadLineDate, setdeadLineDate] = useState(null);
+  
+  const [show, setShow] = useState(false);
+  const [submited, setSubmited] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  // 1️⃣ Compare current date with form deadline to toggle read-only state
+  const today = new Date().toISOString().split("T")[0];
+  const deadlineStr = deadLineDate ? new Date(deadLineDate).toISOString().split("T")[0] : "";
+  const isDisabled = today > deadlineStr; // True if deadline is in the past
+
+  // 2️⃣ Fetch questions list assigned to active form set
+  const getListOfdata = async (empId, setNum) => {
+    await axios.get(\`/api/performance_management/v2/retrive/questions/\${empId}/?set_number=\${setNum}\`)
+      .then(res => {
+        if (res.data.statusCode === 200) {
+          const results = res.data.result.results;
+          setSetNameForQuestion(results[0]?.setName || "");
+          const mapped = results.map(item => ({
+            question: item.question,
+            questionId: item.questionId,
+            answers: item.answer || ""
+          }));
+          setQuestionsList(mapped);
+        }
+      });
+  };
+
+  // 3️⃣ Save draft self-evaluation answers (candidateStatus: "Save")
+  const onsaveEmployeeAnswers = async () => {
+    const userinfo = JSON.parse(sessionStorage.getItem("user-info") || "{}");
+    const qAnswersPayload = questionsList.map(item => ({
+      question: item.questionId,
+      answer: item.answers
+    }));
+
+    const req = {
+      employee: userinfo?.data?.employee?.id,
+      set_name: setNameForQuestion,
+      candidateStatus: "Save",
+      ques_ans: qAnswersPayload
     };
-    fetchQuestions();
-  }, []);
 
-  return <div>Loaded {questions.length} KPI targets</div>;
-};`,
+    await axios.post("/api/performance_management/employee/kra/create/", req)
+      .then(() => alert("Draft saved successfully!"))
+      .catch(err => console.error(err));
+  };
+
+  // 4️⃣ Submit final evaluation answers (candidateStatus: "SUBMITTED")
+  const onSubmitFinal = async () => {
+    setDisable(true);
+    const userinfo = JSON.parse(sessionStorage.getItem("user-info") || "{}");
+    const qAnswersPayload = questionsList.map(item => ({
+      question: item.questionId,
+      answer: item.answers
+    }));
+
+    // Verify all questions are answered before submitting
+    const allAnswered = qAnswersPayload.every(item => item.answer !== "");
+    if (!allAnswered) {
+      alert("All questions are mandatory before final submission!");
+      setDisable(false);
+      return;
+    }
+
+    const req = {
+      employee: userinfo?.data?.employee?.id,
+      set_name: setNameForQuestion,
+      candidateStatus: "SUBMITTED",
+      ques_ans: qAnswersPayload
+    };
+
+    await axios.post("/api/performance_management/employee/kra/create/", req)
+      .then(() => {
+        alert("Performance evaluation submitted successfully!");
+        setShow(false);
+        setDisable(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setDisable(false);
+      });
+  };
+
+  const handleTextareaChange = (val, idx) => {
+    const updated = [...questionsList];
+    updated[idx].answers = val;
+    setQuestionsList(updated);
+  };
+
+  return (
+    <div>
+      {/* Questionnaire modal */}
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Self Evaluation Questionnaire</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h5>Form Set: {setNameForQuestion}</h5>
+          
+          {questionsList.map((q, idx) => (
+            <div key={q.questionId} style={{ marginBottom: '15px' }}>
+              <label>Q{idx+1}: {q.question}</label>
+              <textarea 
+                className="form-control" 
+                value={q.answers} 
+                disabled={submited || isDisabled}
+                onChange={e => handleTextareaChange(e.target.value, idx)}
+              />
+            </div>
+          ))}
+
+          {isDisabled && (
+            <p style={{ color: 'red' }}>
+              Warning: Submission deadline has passed. Please contact your manager to extend the deadline.
+            </p>
+          )}
+
+          {!submited && (
+            <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
+              <button disabled={isDisabled} onClick={onsaveEmployeeAnswers}>Save Draft</button>
+              <button disabled={isDisabled || disable} onClick={onSubmitFinal}>Submit Evaluation</button>
+            </div>
+          )}
+        </Modal.Body>
+      </Modal>
+    </div>
+  );
+}`,
     explanation: [
-      "fetchQuestions: Fetches the assigned KPI questionnaires from the server.",
-      "setQuestions: Stores questions in local state to render checklist inputs dynamically."
+      "isDisabled: Compares the current date string (YYYY-MM-DD) with the form deadline date string to lock inputs dynamically.",
+      "candidateStatus 'Save' vs 'SUBMITTED': 'Save' writes a draft in the database, allowing users to return and edit. 'SUBMITTED' locks the form and marks it ready for manager review.",
+      "allAnswered validation: Checks every element in the array to block submissions with empty answer fields."
     ],
-    flow: "Dashboard mounts → fetchQuestions queries backend → server returns KPI lists → state updates → UI renders questionnaires list.",
+    flow: "Component mounts → fetch KRA forms list → User clicks evaluation action → getListOfdata loads questions → Modal opens → date check compares today vs deadline → User types answers → clicks Save Draft (saves values without locking) or clicks Submit (validates all fields are filled, posts final payload, locks form).",
     internal: {
-      react: "useEffect hook triggers API call on mount to load data before rendering details.",
-      js: "Retrieves list arrays and maps elements into checklist inputs dynamically.",
-      browser: "Renders dynamically generated questionnaire forms."
+      react: "Dynamically updates local textarea value matrices on keystroke events without reloading page states.",
+      js: "Performs array checks (`every()`) and compares date strings in the ISO format.",
+      browser: "Manages state variables in memory and renders warning logs if validation checks fail."
     },
-    telugu: "Monthly KRA performance checks evaluations setups questions list load options controls.",
-    realtime: "KPI dashboards use interactive checklist grids, autosaving responses to prevent loss of progress during reviews.",
+    telugu: "Monthly KRA appraisals evaluation forms setup. Questionnaires list load chesthunnapudu deadline dates check triggers check coordinates. Current date check: deadline cross aiethe textareas automatically disabled state switches blocks coordinate setups.",
+    realtime: "Corporate reviews use strict evaluation windows, requiring automated deadline locks to prevent retrospective updates.",
     interview: [
-      "Q: Why call APIs inside useEffect instead of directly in the component body? - A: Calling APIs directly in the component body triggers a request on every single re-render, leading to infinite API call loops. useEffect restricts calls to mount or specific dependency updates."
+      "Q: What is the difference between saving a draft and final submission in databases? - A: Drafts are stored with edit permissions enabled, allowing users to make updates. Final submissions write values with lock flags set to true, making fields read-only and notifying managers.",
+      "Q: How do you verify that every element in an array meets a condition in JavaScript? - A: Use the native 'Array.prototype.every()' method, which returns true only if all elements in the array pass the validation check."
     ],
-    bestPractices: "Implement autosave features to preserve input progress, and use visual rating charts to summarize KPI scores."
+    bestPractices: "Display deadline dates clearly in UI headers, implement autosave features to preserve input progress, and wrap date comparisons in try/catch blocks."
   },
   {
     id: 4,
     title: "5. Savings & Taxes",
     icon: <FaMoneyBillWave />,
     category: "Core HRMS",
-    theory: "Savings & Taxes handles investment declarations, tax calculations, and expense reimbursement claims.",
-    code: `// Savings Declaration submission logic
-const TaxDeclaration = () => {
-  const [declarations, setDeclarations] = useState([]);
+    theory: "Savings & Taxes manages tax regime selections (Old vs New Regime) and investment declarations, dynamically clearing contrasting data configurations on regime changes.",
+    code: `// File: src/components/savingDeclaration/RegimeForm.jsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
-  const handlePost = async () => {
-    const headers = ApiHeaders(multitenant);
-    await axios.post("/api/tax/declare/", { declarations }, { headers })
-      .then(res => alert("Tax declaration saved!"))
-      .catch(err => console.log(err));
+export default function RegimeForm() {
+  const navigate = useNavigate();
+  const [employeeDetails, setEmployeeDetails] = useState({});
+  const [oldRegime, setOldRegime] = useState({});
+  const [newRegime, setNewRegime] = useState({});
+  
+  const [oldRegimePopUp, setOldRegimePopUp] = useState(false);
+  const [newRegimePopUp, setNewRegimePopUp] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
+
+  // 1️⃣ Fetch active regimes details and CTC from backend
+  const getEmployeeBankDetails = async () => {
+    try {
+      const response = await axios.get("/api/investment_declaration/regime-select");
+      const list = response.data;
+      const lastElement = list[list.length - 1];
+
+      // Check if regime changes are enabled by HR
+      if (lastElement.enableRegimeSelection === false) {
+        setShowDetails(false);
+      } else {
+        // Extract calculations for both regimes
+        list.forEach(element => {
+          if (element.regimeType === "old_regime") {
+            setOldRegime(element);
+          } else if (element.regimeType === "new_regime") {
+            setNewRegime(element);
+          }
+        });
+        setEmployeeDetails(list[2]);
+        setShowDetails(true);
+      }
+    } catch (e) {
+      console.error(e);
+      setShowDetails(false);
+    }
   };
 
-  return <button onClick={handlePost}>Submit Tax Info</button>;
-};`,
+  // 2️⃣ Handle switching regimes and delete contrasting data
+  const switchRegimeSubmit = (targetRegimeIdToDelete) => {
+    const apiUrl = '/api/investment_declaration/regime-select';
+    
+    // Post selected target to delete opposing configuration values
+    axios.post(apiUrl, { investmentId: targetRegimeIdToDelete })
+      .then(res => {
+        alert("Tax regime switched successfully!");
+        navigate('/saving-declaration-form');
+      })
+      .catch(err => console.error(err));
+
+    setOldRegimePopUp(false);
+    setNewRegimePopUp(false);
+  };
+
+  useEffect(() => {
+    getEmployeeBankDetails();
+  }, []);
+
+  return (
+    <div className="regime-form-container">
+      {showDetails ? (
+        <div>
+          <h3>Select Tax Regime</h3>
+          <p>Total CTC: {employeeDetails.employeeCtc}</p>
+          <p>Gross Per Year: {employeeDetails.empGrossYear}</p>
+
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Old Regime Brackets</th>
+                <th>New Regime Brackets</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0 to 2.5 Lakhs (0%)</td>
+                <td>0 to 3 Lakhs (0%)</td>
+              </tr>
+              {/* Render dynamic calculations */}
+              <tr>
+                <td>Total Old Tax: {oldRegime.totalTax}</td>
+                <td>Total New Tax: {newRegime.totalTax}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <button onClick={() => setOldRegimePopUp(true)}>Select Old Regime</button>
+          <button onClick={() => setNewRegimePopUp(true)}>Select New Regime</button>
+        </div>
+      ) : <p>Regime selection is currently disabled by HR.</p>}
+
+      {/* Warning Modals */}
+      <Modal show={oldRegimePopUp} onHide={() => setOldRegimePopUp(false)}>
+        <Modal.Header closeButton><h3>Confirm Old Regime</h3></Modal.Header>
+        <Modal.Body>
+          <p>Warning: Selecting the Old Regime will delete your New Regime declarations. Continue?</p>
+          <button onClick={() => switchRegimeSubmit(newRegime.investmentId)}>Yes, Switch</button>
+          <button onClick={() => setOldRegimePopUp(false)}>Cancel</button>
+        </Modal.Body>
+      </Modal>
+    </div>
+  );
+}`,
     explanation: [
-      "handlePost: Sends the tax declaration payload to the backend.",
-      "setDeclarations: Tracks investment values across categories (e.g. 80C, 80D)."
+      "enableRegimeSelection: HR-controlled variable that enables or disables regime selections on the client side.",
+      "switchRegimeSubmit: Sends a POST request to delete the declarations of the opposing tax regime and activate the selected one.",
+      "totalTax and healthCessCuttings: Renders dynamic calculations for both regimes to help employees make informed decisions."
     ],
-    flow: "User enters investment values → clicks Submit → handlePost triggers API call → server recalculates tax projections and updates records.",
+    flow: "Page mounts → getEmployeeBankDetails fetches calculations → Regime comparison table renders → User clicks Select Old Regime → warning modal opens → User confirms selection → switchRegimeSubmit posts investment ID of the opposing regime → database updates → page redirects.",
     internal: {
-      react: "Tracks investment inputs and computes real-time tax projection updates.",
-      js: "Processes numeric calculations and validates inputs.",
-      browser: "Sends JSON payload and displays success messages."
+      react: "Toggles visibility based on active states and HR configurations.",
+      js: "Loops through calculations to separate data for Old and New regimes.",
+      browser: "Renders confirmation modals and handles page transitions."
     },
-    telugu: "Saving declaration forms setups. investments categories values tax configurations controls.",
-    realtime: "Payroll portals validate investments against tax bracket rules dynamically to calculate monthly TDS deductions.",
+    telugu: "Tax saving declaration select regime form setups. Old vs New regime values dynamic calculations columns render indicators checks. switch trigger check: Old Regime post inputs trigger check new regime declarations cleanups trigger sets.",
+    realtime: "Regime switchers perform complex salary calculations and tax projections to help employees select the optimal tax regime.",
     interview: [
-      "Q: How do you handle numeric inputs safely in forms? - A: Parse input values to numbers using Number() or parseFloat() before processing, and validate ranges to prevent calculations with invalid inputs."
+      "Q: Why clean up opposing regime data when switching tax regimes? - A: Cleaning up opposing regime data prevents calculation conflicts and ensures that the payroll engine calculates TDS deductions using the correct tax rules.",
+      "Q: Explain how to render modal screens in React. - A: Create a modal component, bind its visibility to a state variable (e.g. showModal), and toggle the state to show or hide the modal dynamically."
     ],
-    bestPractices: "Provide clear tooltips explaining tax eligibility rules, and implement document upload requirements to verify declaration claims."
+    bestPractices: "Display total tax projections for both regimes side-by-side, implement clear warning confirmations, and disable selection windows after payroll runs."
+  },
+  {
+    id: 5,
+    title: "6. Company Profile & Master Setups",
+    icon: <FaSlidersH />,
+    category: "Core HRMS",
+    theory: "Company Profile & Master Setups (DesignationMaster) manages organization departments, shifts, and designation rules, incorporating validations to prevent deleting designations with active employees.",
+    code: `// File: src/components/EimAdmin/Designation/DesignationMaster.jsx
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+
+// 1️⃣ Skeleton Shimmer Loader Component
+const ShimmerTable = () => {
+  const rows = Array(5).fill(null);
+  return (
+    <div style={{ width: "100%", padding: "10px" }}>
+      {rows.map((_, i) => (
+        <div key={i} style={{ display: "flex", gap: "15px", marginBottom: "15px", height: "40px", background: "#e0e0e0", borderRadius: "6px" }} />
+      ))}
+    </div>
+  );
+};
+
+export default function DesignationMaster() {
+  const { register, handleSubmit, reset, setValue, getValues } = useForm();
+  
+  const [countries, setCountries] = useState([]);
+  const [totalRows, setTotalRows] = useState(0);
+  const [perPage, setPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loader, setLoader] = useState(false);
+  const [show, setShow] = useState(false);
+  const [isEdited, setisEdited] = useState(false);
+  const [editId, setEditId] = useState(null);
+
+  const userinfo = JSON.parse(sessionStorage.getItem("user-info") || "{}");
+
+  // 2️⃣ Fetch Designations List from Server
+  const getCountries = async (page, size = perPage) => {
+    setLoader(false);
+    const url = \`/api/company/v2/designation/details/\${userinfo.data.id}/?page=\${page}&page_size=\${size}\`;
+    try {
+      const res = await axios.get(url);
+      if (res.data.statusCode === 200) {
+        const results = res.data.result.results.map((item, idx) => ({
+          ...item,
+          Num: idx + 1 + (page - 1) * size
+        }));
+        setCountries(results);
+        setTotalRows(res.data.result.count);
+      }
+      setLoader(true);
+    } catch (e) {
+      console.error(e);
+      setLoader(true);
+    }
+  };
+
+  // 3️⃣ Create or Edit Designation
+  const onSubmit = async (data) => {
+    const req = {
+      company: userinfo.data.id,
+      name: data.designationName
+    };
+
+    try {
+      if (!isEdited) {
+        // Create new designation
+        await axios.post("/api/company/designation/", req);
+      } else {
+        // Update existing designation
+        await axios.patch(\`/api/company/update/designation/\${editId}/\`, req);
+      }
+      setShow(false);
+      getCountries(1);
+    } catch (err) {
+      alert("Error saving designation: " + (err.response?.data?.message || "Failed"));
+    }
+  };
+
+  // 4️⃣ Delete Designation
+  const deleteDesignation = async (id) => {
+    try {
+      await axios.delete(\`/api/company/update/designation/\${id}/\`);
+      getCountries(1);
+    } catch (e) {
+      alert("Delete failed: " + (e.response?.data?.message || "Failed"));
+    }
+  };
+
+  const columns = [
+    { name: "S.No", selector: (row) => row.Num, sortable: true },
+    { name: "Designation Name", selector: (row) => row.name, sortable: true },
+    { name: "Employee Count", selector: (row) => row.noOfEmployees, sortable: true },
+    {
+      name: "Action",
+      cell: (row) => {
+        // Enforce Validation: Block deleting designations with active employees
+        const cannotDelete = row.noOfEmployees > 0;
+        
+        return (
+          <div>
+            <button onClick={() => {
+              setisEdited(true);
+              setEditId(row.id);
+              setValue("designationName", row.name);
+              setShow(true);
+            }}><AiOutlineEdit /></button>
+            
+            <button 
+              disabled={cannotDelete}
+              style={{ color: cannotDelete ? '#ccc' : 'red' }}
+              onClick={() => deleteDesignation(row.id)}
+            >
+              <AiOutlineDelete />
+            </button>
+          </div>
+        );
+      }
+    }
+  ];
+
+  useEffect(() => {
+    getCountries(1);
+  }, []);
+
+  return (
+    <div>
+      <button onClick={() => { setisEdited(false); reset(); setShow(true); }}>Add Designation</button>
+      {loader ? (
+        <DataTable columns={columns} data={countries} pagination paginationServer paginationTotalRows={totalRows} onChangePage={getCountries} />
+      ) : <ShimmerTable />}
+    </div>
+  );
+}`,
+    explanation: [
+      "cannotDelete validation: Blocks deleting designations if the active employee count is greater than zero, protecting data integrity.",
+      "ShimmerTable: Displays a skeleton loader using CSS gradients to show a loading state during API calls.",
+      "paginationServer: Configures the DataTable to request data dynamically from the server on page transitions."
+    ],
+    flow: "Page mounts → getCountries fetches designations → DataTable renders list → User clicks Delete → check noOfEmployees: if > 0 button is disabled → if 0 deleteDesignation posts API request → server deletes designation → table refreshes.",
+    internal: {
+      react: "Uses conditional rendering to toggle between the Shimmer Table and the actual DataTable.",
+      js: "Handles server-side pagination offsets: idx + 1 + (page - 1) * size.",
+      browser: "Applies CSS animations to render skeleton loading effects."
+    },
+    telugu: "Company profile settings. designations records details CRUD setups. delete block check: active employees count greater than 0 aiethe delete button disable chestham. loading display targets look custom Shimmer table skeleton animations sets.",
+    realtime: "Enterprise applications use skeleton loaders and strict database integrity rules to manage organizational settings securely.",
+    interview: [
+      "Q: Why use skeleton loaders instead of simple loading spinners? - A: Skeleton loaders show the layout structure of the page, improving perceived performance and user experience compared to blank screens with spinning icons.",
+      "Q: Explain how server-side pagination works. - A: The client requests a specific page and size (e.g. page=2, limit=10), and the server queries the database using offset limits (offset = (page-1)*limit) and returns only those records along with the total count."
+    ],
+    bestPractices: "Prevent deleting organization settings that are referenced by active records, use path aliases, and implement clear skeleton loaders."
+  },
+  {
+    id: 6,
+    title: "7. Reports & Logs",
+    icon: <FaFileAlt />,
+    category: "Core HRMS",
+    theory: "Reports & Logs manages system tracking logs, utilizing nested expandable rows to display detailed records and exporting log data to Excel files dynamically.",
+    code: `// File: src/components/SystemTrack/Systemtrack.jsx
+import React, { useEffect, useState } from "react";
+import DataTable from "react-data-table-component";
+import axios from "axios";
+import moment from "moment";
+import Multiselect from "multiselect-react-dropdown";
+
+export default function Systemtrack() {
+  const [directoryList, setDirectoryList] = useState([]);
+  const [sortedOptions, setSortedOptions] = useState([]);
+  const [selectedEmployeesIDs, setSelectedEmployeesIDs] = useState([]);
+  const [todate, settodate] = useState(moment().format("YYYY-MM-DD"));
+  const [todate1, settodate1] = useState(moment().format("YYYY-MM-DD"));
+  const [loader, setLoader] = useState(false);
+
+  // 1️⃣ Nested Expandable rows component
+  const ExpandedComponent = ({ data }) => (
+    <div style={{ padding: '15px', background: '#f8fafc' }}>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>System Name</th>
+            <th>On Time</th>
+            <th>Off Time</th>
+            <th>Break Duration</th>
+            <th>System IP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{data.systemName.join(', ')}</td>
+            <td>{data.systemOnChar.map(t => moment(t).format("DD-MM hh:mm")).join(', ')}</td>
+            <td>{data.systemOffChar.map(t => moment(t).format("DD-MM hh:mm")).join(', ')}</td>
+            <td>{data.instanceDuration.join(' mins, ')}</td>
+            <td>{data.systemIp.join(', ')}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+
+  // 2️⃣ Fetch logs list from server
+  const getUsersList = async (page = 1) => {
+    const url = \`/api/attendance/keylogger/logs/v2?page=\${page}&start_date=\${todate}&end_date=\${todate1}\`;
+    await axios.get(url)
+      .then(res => {
+        if (res.data.statusCode === 200) {
+          setDirectoryList(res.data.result.paginatedData.results);
+        }
+      });
+  };
+
+  // 3️⃣ Export data and download Excel file dynamically
+  const onExportExcel = async () => {
+    const url = \`/api/attendance/keylogger/logs/v2?download=true&start_date=\${todate}&end_date=\${todate1}\`;
+    try {
+      const response = await axios.get(url, {
+        responseType: 'blob', // Receive response as binary blob
+      });
+
+      // Convert response data to Excel Blob object
+      const excelBlob = new Blob([response.data], { type: 'text/ms-excel' });
+      const downloadURL = window.URL.createObjectURL(excelBlob);
+      
+      // Create temporary DOM anchor link and trigger download click
+      const link = document.createElement("a");
+      link.download = \`SystemTrack_Report_\${moment().format("DD-MM-YYYY")}.xlsx\`;
+      link.href = downloadURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (e) {
+      console.error("Export failed", e);
+    }
+  };
+
+  const columns = [
+    { name: "Emp ID", selector: (row) => row.empId, sortable: true },
+    { name: "Name", selector: (row) => row.employeeName_, sortable: true },
+    { name: "Department", selector: (row) => row.employeeDepartment, sortable: true }
+  ];
+
+  return (
+    <div>
+      <Multiselect 
+        options={sortedOptions} 
+        displayValue="employeeName" 
+        onSelect={(list) => setSelectedEmployeesIDs(list.map(i => i.id))} 
+      />
+      <button onClick={onExportExcel}>Export Excel</button>
+      
+      <DataTable 
+        columns={columns} 
+        data={directoryList} 
+        expandableRows 
+        expandableRowsComponent={ExpandedComponent} 
+      />
+    </div>
+  );
+}`,
+    explanation: [
+      "expandableRows: DataTable property that allows rows to expand and display nested detail panels.",
+      "responseType 'blob': Configures Axios to receive binary data streams rather than parsing responses as JSON.",
+      "URL.createObjectURL: Generates a temporary URL representing the binary Blob object in browser memory, enabling direct file downloads."
+    ],
+    flow: "Page mounts → fetches list → User clicks row → Row expands and displays sub-table → User clicks Export → Axios requests binary data stream → converts response to Blob object → creates DOM anchor link → triggers file download.",
+    internal: {
+      react: "Renders nested components dynamically when rows are expanded.",
+      js: "Handles binary data objects and processes data conversions.",
+      browser: "Creates temporary download URLs and downloads the generated file."
+    },
+    telugu: "Reports and tracking dashboards. System activity logs DataTable expandableRows component display targets. Excel download process logic: Axios responseType key block 'blob' values coordinate sets, browser URL download links trigger chestharu.",
+    realtime: "Payroll portals generate salary registers, attendance history reports, and activity logs using excel export configurations.",
+    interview: [
+      "Q: How do you download files from API responses in JavaScript? - A: Configure Axios with 'responseType: blob', convert the response to a Blob object, generate a download URL using window.URL.createObjectURL(), and trigger a download click using a temporary anchor link.",
+      "Q: What is the purpose of responseType: 'blob' in Axios? - A: Instructs Axios to receive raw binary data streams (like Excel sheets or PDF files) rather than parsing them as JSON."
+    ],
+    bestPractices: "Export data asynchronously for large reports to prevent page freezing, display loading indicators during download processing, and clean up generated Blob URLs after downloads finish."
   }
 ];
 
