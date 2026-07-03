@@ -124,7 +124,7 @@ rm src/index.css`,
       "rm src/App.css: Removes default styling configurations to provide a clean baseline for custom styles."
     ],
     integration: "Run these commands in your terminal. Ensure Node.js (version 18+) is installed on your local machine.",
-    telugu: "Vite template use chesi fresh React application ni initialize cheyadam. CLI terminal cmd blocks code dependencies correct install options support coordinate set up.",
+    telugu: "Vite environment templates react application setting baseline commands setups rules. Modern dynamic packaging tools libraries dependencies installs checks mapping coordinate templates. Baseline CSS cleaner folders structures initial template overrides configs logs. System execution templates ready clean configs coordinates. Idi check omit parameters: installation package conflicts happen, Webpack legacy configurations slow dev hot reload processes.",
     bestPractices: "Use standard LTS versions of Node.js, and lock package versions to prevent breaking changes."
   },
   {
@@ -164,7 +164,7 @@ new-payroll-app/
       "src/utils: Contains pure, state-free helper functions that are easy to unit test."
     ],
     integration: "Create these folders under the src/ directory of your fresh Vite project immediately after initialization.",
-    telugu: "Scale-ready project directory folders set up cheyadam. Components, layouts, network settings distinct ga divide chestharu to prevent merge conflicts.",
+    telugu: "Scale-ready project directory folders set up cheyadam. Components, layouts, network settings distinct ga divide chestharu to prevent merge conflicts. Pages matched routes separate directories triggers helpers hooks functions folders structures parameters. Omission triggers: developers place all code files in one directory, causing file conflicts, code overrides, and difficulties debugging system features.",
     bestPractices: "Follow a consistent file naming convention (like PascalCase for components and camelCase for utilities) and keep related folders close together."
   },
   {
@@ -201,7 +201,7 @@ VITE_CRYPTO_IV=`,
       "import.meta.env: The syntax used to access environment variables in Vite instead of Node's process.env."
     ],
     integration: "Save these files as .env.development and .env.production in the root directory of your project (the same folder that contains package.json).",
-    telugu: "Base URL paths hardcode cheyakunda, development staging environments switches details. VITE_ prefix use chesi secure config profiles set up cheyadam.",
+    telugu: "Development, staging, production API endpoints key profiles configurations setups. VITE_ prefix indicators client env imports setup parameters settings. Key storage security bypass settings maps controls. Environment changes code files modification cleanups prevent structures. If omit: developer must manually edit API URLs in source files before every build, causing production release errors and security leaks.",
     bestPractices: "Always add your .env files to .gitignore to prevent leaking keys, and commit an .env.example file containing empty definitions instead."
   },
   {
@@ -325,7 +325,7 @@ localStorage.getItem = function (key) {
         "Object.defineProperty(document, 'cookie', ...): Overrides the cookie getter and setter to encrypt and decrypt the userinfoCookie automatically."
     ],
     integration: "Save as src/utils/storageUtils.js. Import this file at the top of your src/main.jsx entry point to activate overrides globally on launch.",
-    telugu: "Browser sessionStorage, localStorage tokens database inputs automatically AES-256 encrypt cheyadanki monkey patching. hackers storage details raw text visual look check block parameters.",
+    telugu: "Browser storage sessionStorage, localStorage monkey patching parameters encryption controls. CryptoJS AES encryption methods wrappers writeups overrides checks variables. Document cookies getter setter dynamic properties descriptors overrides secure encryption models configurations check. If omit: browser localStorage values are stored in plaintext, allowing extensions or XSS scripts to steal token payloads.",
     bestPractices: "Wrap all decryption steps in try/catch blocks to handle data corruption gracefully without crashing the application."
   },
   {
@@ -398,7 +398,7 @@ export default apiClient;`,
       "apiClient.interceptors.response: Catches 401 errors globally to clear expired sessions and redirect the user automatically."
     ],
     integration: "Save as src/services/apiClient.js. Import this pre-configured instance in all your API service folders to manage API requests globally.",
-    telugu: "Centralized axios config instance setups. Request interceptor automatically bearer headers update chesthundhi, response interceptor 401 catches automatic forced logout setups logs.",
+    telugu: "Central axios client instance request headers token injections response verification filters setups. Auth token sessionStorage pull configurations checks request interceptors common headers setup dynamic. Response interceptor expired session 401 catches automatic redirects clear sessionStorage controls rules. If omitted, developers must manually add auth token headers inside every axios call file, making headers updates tedious.",
     bestPractices: "Set reasonable request timeouts (e.g. 10000ms) to prevent infinite loading states when the server is down or the user's connection drops."
   },
   {
@@ -457,7 +457,7 @@ export const useAuth = () => {
       "!loading && children: Prevents child components from rendering before the session check finishes, avoiding UI flickers."
     ],
     integration: "Save as src/context/AuthContext.jsx. Wrap your routing tree in main.jsx inside <AuthProvider> to make auth state accessible globally.",
-    telugu: "Authentication global context hooks. Session restore loading gate setup component mount. Konsi context values share variables settings coordinate providers.",
+    telugu: "React Context API wrapper global auth status check indicators provider coordinates. Component mount user-info parsing session restoration triggers. Loading screen states blocking UI components mounting variables check templates. Auth context custom consumers validation rules. If omitted: children mount before session token parses, causing sidebar flickers and redirecting users back to login screen.",
     bestPractices: "Keep context files focused on single domains to avoid bloated configurations, and use custom consumer hooks to make context consumption clean and easy."
   },
   {
@@ -538,7 +538,7 @@ export default store;`,
       "configureStore: Initializes the Redux store with the specified slice reducers and default middleware."
     ],
     integration: "Save the slice as src/store/slices/companySlice.js and the store configuration as src/store/index.js. Wrap your application in <Provider store={store}> in main.jsx.",
-    telugu: "Redux Toolkit global state store configuration slices, actions dispatches details. Component details props bypass values caches setups.",
+    telugu: "Redux store configuration slices state reducers global persistence localstorage setups checks variables. Dispatches selectors hooks mappings state select triggers parameters. Active company profiles caching properties. If omitted: component-specific state variables are isolated, forcing developer to write extensive event emitter prop chains to sync sidebar selections.",
     bestPractices: "Only store global data in Redux (keep component-specific data in local state), and normalize complex state structures to simplify state updates."
   },
   {
@@ -620,7 +620,7 @@ export default function PrivateRoute({ children, requiredPermission = null }) {
       "rolesInfo.modules[module].view: Checks the permission object to restrict access to sensitive pages."
     ],
     integration: "Save as src/routes/PrivateRoute.jsx. Wrap protected routes inside App.jsx: <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>} />.",
-    telugu: "Access validations check check guard gate component. Cookie missing logins path automatic redirect replaces options checks.",
+    telugu: "Route guards wrappers checking cookies access roles verification redirect locks setups. Route location path validations authentication flag triggers. View permissions matrix matching checks Notfound redirects logic options config. If omitted: users access private pages directly by guessing the path in address bars, exposing databases data endpoints to unauthenticated users.",
     bestPractices: "Use route guards to centralize authentication logic, and remember that client-side route guards must be paired with backend validation for security."
   },
   {
@@ -679,7 +679,7 @@ export default function Layout() {
       "showPayroll: Evaluates permissions to hide restricted links dynamically."
     ],
     integration: "Save as src/components/layout/Sidebar.jsx. Render it inside your dashboard wrapper alongside the page children viewport.",
-    telugu: "Sidebar navigation component check check dynamic menu items show options values permissions. False paths lists auto-hide styles check.",
+    telugu: "Shared frame panel components layouts nested rendering dynamic child views setups maps. Sidebars navigation link visibility permissions filters check parameters selectors. NavLink active route tracking indicator classes styling coordinate monitors. If omit: layout components are unmounted on every navigation check, causing page flickers, rebuild latency, and sidebar scroll state loss.",
     bestPractices: "Group links logically, hide rather than disable restricted options to keep the UI clean, and use NavLink to manage active link styles automatically."
   }
 ];

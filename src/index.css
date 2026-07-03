@@ -66,3 +66,40 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Global VS-Code Style Format for pre and code blocks */
+pre {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  padding: 18px !important;
+  border-radius: 10px !important;
+  overflow-x: auto !important;
+  font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  border: 1px solid #2d3748 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  margin: 20px 0 !important;
+  text-align: left !important;
+  white-space: pre !important;
+}
+
+code {
+  font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+  font-size: 13.5px !important;
+  background: rgba(0, 0, 0, 0.06);
+  color: #d53f8c;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  white-space: inherit !important;
+}
