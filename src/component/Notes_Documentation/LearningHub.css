@@ -1,0 +1,570 @@
+.LearningHubPage {
+  background: #f4f6f8;
+  min-height: 100vh;
+  color: #1f2933;
+  padding: 24px;
+}
+
+.LearningHubHeader {
+  align-items: flex-end;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding: 24px;
+}
+
+.LearningHubHeader h1,
+.LearningHubPanel h2 {
+  color: #102a43;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+}
+
+.LearningHubHeader p,
+.LearningHubPanel p {
+  color: #486581;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.LearningHubEyebrow {
+  color: #0f766e !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 6px !important;
+  text-transform: uppercase;
+}
+
+.LearningHubPath {
+  background: #eef8f7;
+  border: 1px solid #b6e3df;
+  border-radius: 6px;
+  color: #0f766e;
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 12px;
+}
+
+.LearningHubHeaderActions {
+  align-items: flex-end;
+  display: grid;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-items: end;
+}
+
+.LearningHubLanguage {
+  align-items: center;
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+.LearningHubLanguage span {
+  color: #486581;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+.LearningHubLanguage button {
+  background: #ffffff;
+  border: 1px solid #bcccdc;
+  border-radius: 6px;
+  color: #334e68;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  min-height: 32px;
+  padding: 5px 10px;
+}
+
+.LearningHubLanguage button.active {
+  background: #0f766e;
+  border-color: #0f766e;
+  color: #ffffff;
+}
+
+.LearningHubLayout {
+  align-items: flex-start;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+
+.LearningHubSteps {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+  padding: 12px;
+  position: sticky;
+  top: 16px;
+}
+
+.LearningHubSteps button,
+.LearningHubNavColumn button {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+  color: #334e68;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 10px;
+  min-height: 42px;
+  padding: 9px 10px;
+  text-align: left;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+  width: 100%;
+}
+
+.LearningHubSteps button:hover,
+.LearningHubNavColumn button:hover {
+  background: #f0f7ff;
+  border-color: #8bb8e8;
+  color: #0b5cab;
+}
+
+.LearningHubSteps button.active,
+.LearningHubNavColumn button.active {
+  background: #e6f4ff;
+  border-color: #2f80c5;
+  color: #0b5cab;
+}
+
+.LearningHubSteps span {
+  align-items: center;
+  background: #f7c948;
+  border-radius: 50%;
+  color: #102a43;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+  height: 24px;
+  justify-content: center;
+  width: 24px;
+}
+
+.LearningHubContent {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.LearningHubPanel {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 22px;
+}
+
+.LearningHubPanelHeader {
+  align-items: flex-start;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.LearningHubFiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  max-width: 50%;
+}
+
+.LearningHubFiles span {
+  background: #f0f4f8;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+  color: #334e68;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 8px;
+}
+
+.LearningHubGridTwo {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+}
+
+.LearningHubPanel h3,
+.LearningHubNavColumn h3,
+.LearningHubModuleList h3 {
+  color: #102a43;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 18px 0 8px;
+}
+
+.LearningHubPanel h3:first-child,
+.LearningHubNavColumn h3:first-child,
+.LearningHubModuleList h3:first-child {
+  margin-top: 0;
+}
+
+.LearningHubPanel ul {
+  color: #334e68;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+
+.LearningHubPanel li {
+  margin-bottom: 7px;
+}
+
+.LearningHubCode {
+  background: #102a43;
+  border: 1px solid #243b53;
+  border-radius: 8px;
+  color: #f0f4f8;
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 0;
+  max-height: 520px;
+  overflow: auto;
+  padding: 16px;
+  white-space: pre;
+}
+
+.LearningHubTableWrap {
+  overflow: auto;
+}
+
+.LearningHubTable {
+  border-collapse: collapse;
+  min-width: 900px;
+  width: 100%;
+}
+
+.LearningHubTable th,
+.LearningHubTable td {
+  border-bottom: 1px solid #d9e2ec;
+  color: #334e68;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.LearningHubTable th {
+  background: #f0f4f8;
+  color: #102a43;
+  font-weight: 800;
+}
+
+.LearningHubModuleColumns {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.LearningHubModuleList > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.LearningHubModuleList span {
+  align-items: center;
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+  color: #334e68;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 8px;
+  padding: 7px 9px;
+}
+
+.LearningHubModuleList strong {
+  background: #f7c948;
+  border-radius: 10px;
+  color: #102a43;
+  font-size: 11px;
+  min-width: 22px;
+  padding: 1px 6px;
+  text-align: center;
+}
+
+.LearningHubApiList {
+  display: grid;
+  gap: 10px;
+}
+
+.LearningHubApiRow {
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: 180px minmax(0, 1fr) minmax(220px, 0.75fr);
+  padding: 12px;
+}
+
+.LearningHubApiRow strong {
+  color: #102a43;
+  font-size: 13px;
+}
+
+.LearningHubApiRow span,
+.LearningHubApiRow em {
+  color: #486581;
+  font-size: 13px;
+  font-style: normal;
+}
+
+.LearningHubNavigator {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 0.8fr 1fr 1.2fr;
+  margin-bottom: 20px;
+}
+
+.LearningHubNavColumn {
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.LearningHubNavColumn button {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.LearningHubNavColumn small {
+  color: #627d98;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.LearningHubSelected {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+}
+
+.LearningHubSelected .LearningHubCode {
+  grid-row: span 2;
+}
+
+.LearningHubExplanation {
+  background: #fffdf0;
+  border: 1px solid #f0d776;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.LearningHubBestGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.LearningHubBestCard {
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  padding: 16px;
+}
+
+.LearningHubBestCard h3 {
+  margin-top: 0;
+}
+
+.LearningHubBestCard p {
+  margin-bottom: 10px;
+}
+
+.LearningHubTeluguNote {
+  background: #fffdf0;
+  border: 1px solid #f0d776;
+  border-radius: 6px;
+  grid-column: 1 / -1;
+  padding: 10px;
+}
+
+.LearningHubConceptList {
+  display: grid;
+  gap: 16px;
+}
+
+.LearningHubConceptCard {
+  background: #f7fafc;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  padding: 16px;
+}
+
+.LearningHubConceptText h3 {
+  margin-top: 0;
+}
+
+.LearningHubConceptText h4 {
+  color: #102a43;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 14px 0 6px;
+}
+
+.LearningHubCoreList {
+  display: grid;
+  gap: 18px;
+}
+
+.LearningHubCoreCard {
+  background: #ffffff;
+  border: 1px solid #bcccdc;
+  border-radius: 8px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  padding: 18px;
+}
+
+.LearningHubCoreText h3 {
+  color: #102a43;
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+
+.LearningHubCoreText h4 {
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 16px 0 6px;
+}
+
+.LearningHubFilesInline {
+  justify-content: flex-start;
+  margin: 0 0 12px;
+  max-width: none;
+}
+
+.LearningHubFlowStrip {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.LearningHubFlowStrip span {
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 8px;
+  color: #0c4a6e;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (max-width: 1180px) {
+  .LearningHubLayout,
+  .LearningHubGridTwo,
+  .LearningHubModuleColumns,
+  .LearningHubSelected,
+  .LearningHubBestCard,
+  .LearningHubConceptCard,
+  .LearningHubCoreCard {
+    grid-template-columns: 1fr;
+  }
+
+  .LearningHubSteps {
+    max-height: none;
+    position: static;
+  }
+
+  .LearningHubFiles {
+    justify-content: flex-start;
+    max-width: none;
+  }
+
+  .LearningHubSelected .LearningHubCode {
+    grid-row: auto;
+  }
+
+  .LearningHubFlowStrip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .LearningHubPage {
+    padding: 12px;
+  }
+
+  .LearningHubHeader,
+  .LearningHubPanelHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .LearningHubHeader h1,
+  .LearningHubPanel h2 {
+    font-size: 24px;
+  }
+
+  .LearningHubPath {
+    width: 100%;
+  }
+
+  .LearningHubHeaderActions,
+  .LearningHubLanguage {
+    align-items: stretch;
+    justify-items: stretch;
+    width: 100%;
+  }
+
+  .LearningHubLanguage {
+    flex-wrap: wrap;
+  }
+
+  .LearningHubNavigator {
+    grid-template-columns: 1fr;
+  }
+
+  .LearningHubPanel {
+    padding: 16px;
+  }
+}

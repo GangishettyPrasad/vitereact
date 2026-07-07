@@ -1,0 +1,476 @@
+.BoilerplatePage {
+  background: #f4f6f8;
+  min-height: 100vh;
+  color: #1f2933;
+  padding: 24px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Light Theme Header */
+.BoilerplateHeader {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.BoilerplateHeaderTitle h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #102a43;
+  margin: 0 0 6px;
+}
+
+.BoilerplateHeaderTitle p {
+  color: #486581;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.BoilerplateHeaderActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.BoilerplateBadge {
+  background: #eef8f7;
+  border: 1px solid #b6e3df;
+  color: #0f766e;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.LanguageSelector {
+  display: flex;
+  background: #f0f4f8;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.LanguageSelector button {
+  background: transparent;
+  border: none;
+  color: #486581;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.LanguageSelector button.active {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+/* Sidebar Styling */
+.BoilerplateLayout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.BoilerplateSidebar {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.SidebarTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #627d98;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  padding-left: 6px;
+}
+
+.SidebarButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.SidebarBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  color: #334e68;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.SidebarBtn:hover {
+  background: #f0f7ff;
+  border-color: #8bb8e8;
+  color: #0b5cab;
+}
+
+.SidebarBtn.active {
+  background: #e6f4ff;
+  border-color: #2f80c5;
+  color: #0b5cab;
+}
+
+.SidebarBtnNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #f0f4f8;
+  color: #486581;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.SidebarBtn.active .SidebarBtnNumber {
+  background: #2f80c5;
+  color: #ffffff;
+}
+
+/* Content Area */
+.BoilerplateContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ContentCard {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 22px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.CardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.CardHeaderTitle h2 {
+  font-size: 22px;
+  color: #102a43;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.CardHeaderTitle p {
+  color: #486581;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.CardFiles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 40%;
+}
+
+.FileBadge {
+  background: #f0f4f8;
+  border: 1px solid #d9e2ec;
+  color: #334e68;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Grid Layout */
+.GridTwo {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 20px;
+}
+
+.PointsSection h3,
+.ExplanationSection h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #102a43;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.PointsList {
+  margin: 0 0 18px;
+  padding-left: 20px;
+  color: #334e68;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.PointsList li {
+  margin-bottom: 8px;
+}
+
+/* Light Theme Telugu Box */
+.TeluguExplanation {
+  background: #fffdf0;
+  border: 1px solid #f0d776;
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 14px;
+}
+
+.TeluguExplanation h4 {
+  color: #856404;
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.TeluguExplanation p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #856404;
+}
+
+/* VS Code Dark Editor Style (Themed accurately) */
+.CodeContainer {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.CodeHeader {
+  background: #1e1e1e;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d3748;
+}
+
+.CodeFilename {
+  color: #858585;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+}
+
+.CopyBtn {
+  background: transparent;
+  border: none;
+  color: #858585;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.CopyBtn:hover {
+  color: #38bdf8;
+}
+
+/* VS Code editor workspace background color is exactly #1e1e1e */
+.CodeBox {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 16px;
+  margin: 0;
+  overflow: auto;
+  max-height: 480px;
+}
+
+.TreeStructure {
+  background: #1e1e1e;
+  color: #9cdcfe;
+  border-radius: 6px;
+  padding: 14px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12.5px;
+  line-height: 1.65;
+  overflow-x: auto;
+  border: 1px solid #334155;
+}
+
+/* High Contrast Architecture Image Box */
+.ArchImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 14px;
+  border: 1px solid #d9e2ec;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.ArchImageWrapper {
+  position: relative;
+  cursor: zoom-in;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.ArchImageWrapper:hover {
+  transform: scale(1.01);
+}
+
+.ArchImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.ArchZoomBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(16, 42, 67, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.ArchCaption {
+  color: #627d98;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Image Zoom Lightbox Modal */
+.LightboxModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.LightboxContent {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+}
+
+.LightboxImage {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.LightboxCloseBtn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.LightboxCloseBtn:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+  .BoilerplateLayout {
+    grid-template-columns: 1fr;
+  }
+  .BoilerplateSidebar {
+    position: static;
+  }
+  .GridTwo {
+    grid-template-columns: 1fr;
+  }
+  .CardFiles {
+    max-width: none;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .BoilerplatePage {
+    padding: 16px;
+  }
+  .BoilerplateHeader {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+  .BoilerplateHeaderActions {
+    align-items: flex-start;
+  }
+}

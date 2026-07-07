@@ -9,6 +9,8 @@ import ReactDataTable from "./reactdatatable/ReactDataTable";
 import ReactHookForm from "./UseForm/ReactHookForm";
 import CmdGuide from "./Notes_Documentation/CmdGuide";
 import ChatbotIntegrationTeluguGuide from "./Notes_Documentation/ChatbotIntegrationTeluguGuide";
+import LearningHub from "./Notes_Documentation/LearningHub";
+import ProjectBoilerplate from "./Notes_Documentation/ProjectBoilerplate";
 
 // import Index from './pages/JS/Index';
 // import GitGuide from './pages/GitGuide';
@@ -19,6 +21,16 @@ import ChatbotIntegrationTeluguGuide from "./Notes_Documentation/ChatbotIntegrat
 // import ReactHookForm from './pages/React/ReactHookForm';
 
 const dashboardRoutes = [
+  {
+    path: 'project-boilerplate',
+    element: <ProjectBoilerplate />,
+    roles: ['admin', 'user'],
+  },
+  {
+    path: 'learning-hub',
+    element: <LearningHub />,
+    roles: ['admin', 'user'],
+  },
   {
     path: 'chatbot-guide',
     element: <ChatbotIntegrationTeluguGuide />,
