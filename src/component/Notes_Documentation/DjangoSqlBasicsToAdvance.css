@@ -1,0 +1,403 @@
+.DjangoSqlPage {
+  background: #f4f6f8;
+  min-height: 100vh;
+  color: #1e293b;
+  padding: 24px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Header section styling */
+.DjangoSqlHeader {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.DjangoSqlTitle h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0c4a6e;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.DjangoSqlTitle p {
+  color: #486581;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.DjangoSqlBadge {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Layout setup */
+.DjangoSqlLayout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* Sidebar and Chapter Navigation */
+.DjangoSqlSidebar {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 16px;
+  height: calc(100vh - 140px);
+  overflow-y: auto;
+  position: sticky;
+  top: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.SidebarHeaderSpan {
+  font-size: 12px;
+  font-weight: 700;
+  color: #627d98;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding-left: 4px;
+  display: block;
+}
+
+.DjangoSidebarList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.DjangoSidebarBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  color: #334e68;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.DjangoSidebarBtn:hover {
+  background: #f0f7ff;
+  border-color: #8bb8e8;
+  color: #0b5cab;
+}
+
+.DjangoSidebarBtn.active {
+  background: #e6f4ff;
+  border-color: #2f80c5;
+  color: #0b5cab;
+}
+
+.DjangoSidebarNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #f0f4f8;
+  color: #486581;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.DjangoSidebarBtn.active .DjangoSidebarNum {
+  background: #2f80c5;
+  color: #ffffff;
+}
+
+/* Content Area */
+.DjangoSqlContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.DjangoTopicCard {
+  background: #ffffff;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.CardHeaderTitle h2 {
+  font-size: 24px;
+  color: #0c4a6e;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.CardHeaderTitle p {
+  color: #475569;
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.DjangoSection {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 20px;
+}
+
+.DjangoSection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.DjangoSection h3 {
+  font-size: 17px;
+  color: #0c4a6e;
+  margin: 0 0 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Dynamic Explanation block */
+.DjangoExplanationBox {
+  background: #fffdf0;
+  border: 1px solid #f0d776;
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.DjangoExplanationBox h4 {
+  color: #856404;
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.DjangoExplanationBox p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #856404;
+}
+
+.DjangoGridTwo {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 20px;
+}
+
+/* Bullet points styling */
+.DjangoPointsList {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  color: #334e68;
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.DjangoPointsList li {
+  margin-bottom: 8px;
+}
+
+/* Code box editor workspace */
+.DjangoCodeContainer {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.DjangoCodeHeader {
+  background: #1e1e1e;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2d3748;
+}
+
+.DjangoCodeFilename {
+  color: #858585;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+}
+
+.DjangoCopyBtn {
+  background: transparent;
+  border: none;
+  color: #858585;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.DjangoCopyBtn:hover {
+  color: #38bdf8;
+}
+
+.DjangoCodeBox {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 16px;
+  margin: 0;
+  overflow: auto;
+  max-height: 480px;
+}
+
+/* Flowchart image container */
+.DjangoImageCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 14px;
+  border: 1px solid #d9e2ec;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.DjangoImageWrapper {
+  position: relative;
+  cursor: zoom-in;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.DjangoImageWrapper:hover {
+  transform: scale(1.01);
+}
+
+.DjangoImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.DjangoZoomBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(16, 42, 67, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.DjangoCaption {
+  color: #627d98;
+  font-size: 12px;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Lightbox overlay */
+.DjangoLightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.DjangoLightboxContent {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+}
+
+.DjangoLightboxImage {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.DjangoLightboxClose {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
+}
+
+.DjangoLightboxClose:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1024px) {
+  .DjangoSqlLayout {
+    grid-template-columns: 1fr;
+  }
+  .DjangoSqlSidebar {
+    position: static;
+    height: auto;
+  }
+  .DjangoGridTwo {
+    grid-template-columns: 1fr;
+  }
+}

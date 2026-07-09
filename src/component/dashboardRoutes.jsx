@@ -11,6 +11,9 @@ import CmdGuide from "./Notes_Documentation/CmdGuide";
 import ChatbotIntegrationTeluguGuide from "./Notes_Documentation/ChatbotIntegrationTeluguGuide";
 import LearningHub from "./Notes_Documentation/LearningHub";
 import ProjectBoilerplate from "./Notes_Documentation/ProjectBoilerplate";
+import PythonBackendPortal from "./Notes_Documentation/PythonBackendPortal";
+import PythonBasicsToAdvance from "./Notes_Documentation/PythonBasicsToAdvance";
+import DjangoSqlBasicsToAdvance from "./Notes_Documentation/DjangoSqlBasicsToAdvance";
 
 // import Index from './pages/JS/Index';
 // import GitGuide from './pages/GitGuide';
@@ -21,6 +24,21 @@ import ProjectBoilerplate from "./Notes_Documentation/ProjectBoilerplate";
 // import ReactHookForm from './pages/React/ReactHookForm';
 
 const dashboardRoutes = [
+  {
+    path: 'django-sql-basics-to-advance',
+    element: <DjangoSqlBasicsToAdvance />,
+    roles: ['admin', 'user'],
+  },
+  {
+    path: 'python-basics-to-advance',
+    element: <PythonBasicsToAdvance />,
+    roles: ['admin', 'user'],
+  },
+  {
+    path: 'python-backend',
+    element: <PythonBackendPortal />,
+    roles: ['admin', 'user'],
+  },
   {
     path: 'project-boilerplate',
     element: <ProjectBoilerplate />,
