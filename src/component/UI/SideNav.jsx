@@ -13,7 +13,7 @@ import {
 import { NavLink } from 'react-router-dom';
 
 import { PiFileJsxBold } from "react-icons/pi";
-import { FaSquareJs, FaGit, FaTerminal, FaCode } from "react-icons/fa6";
+import { FaSquareJs, FaGit, FaTerminal, FaCode, FaPython } from "react-icons/fa6";
 import { RiReactjsFill } from "react-icons/ri";
 import { MdWork, MdMenuBook } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
@@ -24,6 +24,8 @@ const SideNav = () => {
   const menuItems = [
     { text: 'Frontend UI Masterclass', path: '/dashboard/frontend-masterclass', icon: <FaLaptopCode /> },
     { text: 'HRMS Developer Learning Hub', path: '/dashboard/learning-hub', icon: <MdMenuBook /> },
+    { text: 'Python Basics to Advance', path: '/dashboard/python-basics-to-advance', icon: <MdMenuBook /> },
+    { text: 'Django & SQL Basics to Advance', path: '/dashboard/django-sql-basics-to-advance', icon: <MdMenuBook /> },
     { text: 'JavaScript', path: '/dashboard/jsindex', icon: <FaSquareJs /> },
     { text: 'JSX', path: '/dashboard/jsx', icon: <PiFileJsxBold /> },
     { text: 'React', path: '/dashboard/mytabs', icon: <RiReactjsFill /> },
@@ -39,6 +41,7 @@ const SideNav = () => {
     { text: 'Phase 4: Core HRMS Modules', path: '/dashboard/Phase4CodeGuide', icon: <MdWork /> },
     { text: 'Phase 5: External Libraries', path: '/dashboard/ExternalLibrariesGuide', icon: <MdWork /> },
     { text: 'Project Boilerplate', path: '/dashboard/project-boilerplate', icon: <FaCode /> },
+    { text: 'Python Backend', path: '/dashboard/python-backend', icon: <FaPython /> },
   ];
 
   return (
