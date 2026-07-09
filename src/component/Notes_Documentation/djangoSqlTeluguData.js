@@ -503,10 +503,10 @@ class CustomPayrollAPI(APIView):
     title: "9. Celery & Redis Tasks (సెలేరీ & రెడిస్ బ్యాక్‌గ్రౌండ్ టాస్క్స్)",
     description: "Asynchronous background processing, tasks queues, and celery-beat cron scheduling.",
     imageUrl: "/django_rest_flow.png",
+    telugu: "Celery async task runner engine background workers processing tasks queues systems. Redis broker load management details routing process automation rules.",
     what: "Celery anedhi heavy tasks queue process checker broker Redis middleware links processing.",
     why: "Slow bulk mailers operations backend async executions server CPU performance optimizations.",
     how: "Configure shared tasks decorators delayed triggers setups.",
-    telugu: "Celery async task runner engine background workers processing tasks queues systems. Redis broker load management details routing process automation rules.",
     rules: "Worker service instance online status tracking configuration parameters.",
     where: "Monthly payroll bulk slips creations PDF dispatch tasks loops scheduling.",
     examples: {
@@ -731,85 +731,67 @@ class Migration(migrations.Migration):
   },
   {
     id: "django-deployment",
-    title: "12. Production Deployment (లోకల్ నుండి సర్వర్ డిప్లాయ్మెంట్)",
-    description: "Django static files, Docker containerization, Gunicorn application servers, and Nginx reverse proxy.",
+    title: "12. PR, WinSCP & PuTTY Flow (పి.ఆర్, విన్‌ఎస్‌సీపీ & పుట్టి డిప్లాయ్మెంట్)",
+    description: "Real-world company deployment workflow using Git PRs, local Vite builds, WinSCP upload, and PuTTY system controls.",
     imageUrl: "/django_rest_flow.png",
-    telugu: "Production deployment processes local code server VPS target environments setup dynamic containers handling Nginx proxy setup details.",
-    what: "Gunicorn WSGI web runtime containers, Nginx reverse proxy routing systems setups.",
-    why: "Enables public network accessibility for security, high availability parameters integrations.",
-    how: "Docker compose setups database containers mappings.",
-    rules: "Production debug false parameters configuration SECRET KEY environment setup checks.",
-    where: "Production cloud setups AWS / VPS deployment parameters configurations.",
+    telugu: "Real-world company app update workflow: GitHub/GitLab lo Pull Request (PR) merge chesinaka, local terminal lo git pull and build runtime files run chesi, WinSCP client thoti static /dist folders files direct serve paths ki transfer chesi, PuTTY tool inside terminal commands runtime servers commands reload chese process sequence map.",
+    what: "PR merge code sync chesthundhi, WinSCP local build files server index folders ki send chesthundi, PuTTY terminal commands execution handles commands.",
+    why: "Manual files copy speeds are extremely fast and secure, and server-side configurations updates require secure command access.",
+    how: "WinSCP remote directory mappings configurations, PuTTY SSH keys linkages controls.",
+    rules: "Never copy files directly to system /root paths without user permissions, backup old builds files before replacement directories.",
+    where: "Live corporate web hosting management pipelines updates.",
     examples: {
       low: {
-        prereq: "Django settings awareness.",
-        code: `# LOW DIFFICULTY: Preparing settings.py for production and gathering static files
-# settings.py
-DEBUG = False # Disables detailed error logs for security
-ALLOWED_HOSTS = ['api.mycompany.com', '127.0.0.1']
+        prereq: "Git pull and build scripts awareness.",
+        code: `# LOW DIFFICULTY: Pulling merged PR branch locally and compiling production build folder
+# Step 1: Pull the latest approved, merged changes from remote main branch
+git checkout main
+git pull origin main
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Run in terminal to gather all CSS/JS images into one directory:
-# python manage.py collectstatic`,
-        filename: "prod_settings_basic.py",
+# Step 2: Compile the production-ready build files locally (creates /dist folder)
+npm run build`,
+        filename: "local_build.sh",
         explanation: [
-          "DEBUG = False - protects database structures by disabling debug screens on errors.",
-          "collectstatic - copies admin panel and app static files into a single root folder for Nginx to serve."
+          "git pull origin main - downloads the fresh code changes merged via the PR onto your local machine.",
+          "npm run build - bundles and minifies assets (creates static HTML/CSS/JS files inside /dist folder)."
         ]
       },
       medium: {
-        prereq: "Docker and Docker Compose basic knowledge.",
-        code: `# MEDIUM DIFFICULTY: Multi-container deployment setup using Docker Compose
-# docker-compose.yml
-version: '3.8'
+        prereq: "WinSCP interface navigation and SFTP connections parameters.",
+        code: `# MEDIUM DIFFICULTY: Transferring build files to production server using WinSCP
+# Step 1: Open WinSCP and login to target remote server using SFTP protocol:
+# Host: api.mycompany.com | Port: 22 | Username: ubuntu | Private Key: my-ssh-key.ppk
 
-services:
-  web:
-    build: .
-    command: gunicorn my_company_project.wsgi:application --bind 0.0.0.0:8000
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    environment:
-      - DEBUG=False
-  db:
-    image: postgres:15
-    environment:
-      - POSTGRES_DB=company_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secure_password`,
-        filename: "docker-compose.yml",
+# Step 2: Drag and drop files from local window to remote server target folder:
+# Local Folder: D:\\my_project\\dist\\* (Your local build outputs)
+# Remote Destination: /var/www/my_project/dist/ (Where Nginx reads static assets)`,
+        filename: "winscp_transfer.txt",
         explanation: [
-          "gunicorn ... --bind 0.0.0.0:8000 - boots high performance WSGI server to run Django inside container.",
-          "postgres:15 - spins up a matching PostgreSQL database container automatically linked to our web container."
+          "SFTP connection - secure channel to transfer files over SSH port 22.",
+          "Drag & Drop /var/www/... - overwrites server static files with the fresh local /dist assets directly."
         ]
       },
       high: {
-        prereq: "Linux servers, reverse proxy, Nginx configuration syntax.",
-        code: `# HIGH DIFFICULTY: Nginx Server Block configuring Reverse Proxy and SSL
-# /etc/nginx/sites-available/my_company_api
+        prereq: "PuTTY terminal SSH controls, database migration releases, Nginx/Gunicorn service reloads.",
+        code: `# HIGH DIFFICULTY: Running server updates and service reloads inside PuTTY SSH terminal
+# Step 1: Open PuTTY, enter host (api.mycompany.com), load authentication SSH private key (.ppk) and Open terminal.
+# Step 2: Navigate to target project folder on remote server:
+cd /var/www/my_project/
 
-server {
-    listen 80;
-    server_name api.mycompany.com;
+# Step 3: Run database migrations if any models changed:
+source venv/bin/activate
+python manage.py migrate
 
-    location /static/ {
-        alias /code/staticfiles/; # Serves static files directly (super fast)
-    }
+# Step 4: Reload backend Gunicorn WSGI process to load fresh python code changes:
+sudo systemctl restart gunicorn
 
-    location / {
-        proxy_pass http://127.0.0.1:8000; # Forwards API requests to Gunicorn WSGI
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}`,
-        filename: "nginx_config.conf",
+# Step 5: Reload Nginx reverse proxy server to serve new static assets instantly:
+sudo systemctl reload nginx`,
+        filename: "putty_ssh_reload.sh",
         explanation: [
-          "proxy_pass http://127.0.0.1:8000 - acts as a reverse proxy, shielding Gunicorn server by accepting internet requests and forwarding them locally.",
-          "location /static/ - serves assets directly from cache, avoiding Django computation overhead entirely."
+          "python manage.py migrate - triggers database schema upgrades on the production server.",
+          "systemctl restart gunicorn - restarts the Gunicorn daemon process to apply new python backend views and ORM rules.",
+          "systemctl reload nginx - forces Nginx to reload configuration files and serve newly uploaded WinSCP assets without causing server downtime."
         ]
       }
     }

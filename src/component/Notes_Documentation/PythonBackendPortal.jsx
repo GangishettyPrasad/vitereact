@@ -155,13 +155,105 @@ export default function PythonBackendPortal() {
   }, []);
 
   // Handle Dynamic Topic Retrieval
+  // Retrieve current active example based on language selection
   const activeTopic = useMemo(() => {
     if (loadedTopicsMap[selectedTopicId]) {
-      return loadedTopicsMap[selectedTopicId];
+      const topic = loadedTopicsMap[selectedTopicId];
+      if (lang === "te") {
+        // Return Telugu-augmented placeholder properties for loaded items
+        return {
+          ...topic,
+          what: topic.telugu || topic.what,
+          why: "లైవ్ సర్వీసెస్ లో డేటా ఆర్గనైజ్ చేయడానికి మరియు సిస్టమ్ పెర్ఫార్మెన్స్ పెంచడానికి దీనిని వాడతాము.",
+          when: "లార్జ్ స్కేల్ ప్రాజెక్ట్స్ రన్ చేసేటప్పుడు, ఏపీఐ రౌటింగ్ కంట్రోల్స్ కి ఇది చాలా అవసరం.",
+          internal: "పైథాన్ వర్చువల్ మెషిన్ (PVM) ఇంటర్నల్ గా బైట్‌కోడ్స్ రీడ్ చేసి మెమరీ అలొకేట్ చేస్తుంది."
+        };
+      }
+      return topic;
     }
     
     // Auto-generate placeholder contents for not-yet-loaded curriculum topics
     const targetChap = CHAPTERS_LIST.find(c => c.id === expandedChapter) || CHAPTERS_LIST[0];
+    
+    if (lang === "te") {
+      return {
+        id: selectedTopicId,
+        name: selectedTopicId.replace(/-/g, ' ').toUpperCase(),
+        description: `${targetChap.title} యొక్క పూర్తి విశ్లేషణ మరియు రియల్-టైమ్ కోడింగ్ స్టాండర్డ్స్.`,
+        what: `${targetChap.title} అనేది పైథాన్ బ్యాకెండ్ డెవలప్‌మెంట్‌లో ఒక ముఖ్యమైన పునాది, ఇది సిస్టమ్ ఆర్కిటెక్చర్ మరియు రన్‌టైమ్ రౌటింగ్‌ను డిజైన్ చేస్తుంది.`,
+        why: "డేటా మోడల్స్ మేనేజ్ చేయడానికి, ఏపీఐ సెక్యూరిటీ పెంచడానికి, మరియు తక్కువ మెమరీతో ఎక్కువ కనెక్టివిటీ సాధించడానికి ఈ లేయర్ వాడతాము.",
+        when: "మీరు లార్జ్-స్కేల్ వెబ్ సర్వీసెస్, డిస్ట్రిబ్యూటెడ్ బ్యాక్‌గ్రౌండ్ టాస్క్స్ లేదా డేటాబేస్ రిలేషన్షిప్స్ బిల్డ్ చేసేటప్పుడు దీనిని ఉపయోగించాలి.",
+        internal: "పైథాన్ కోడ్ ముందుగా బైట్‌కోడ్ (.pyc) లాగా కంపైల్ అయ్యి, ఆ తర్వాత పైథాన్ వర్చువల్ మెషిన్ (PVM) ద్వారా లైన్-బై-లైన్ రన్ అవుతుంది.",
+        syntax: `# Standard Enterprise Template
+def execute_backend_logic(payload: dict) -> dict:
+    # Business logic goes here
+    return {"status": "success", "processed_data": payload}`,
+        flowDiagram: `+-----------------------------------------+
+|             Client Request              |
++-----------------------------------------+
+                     |
+                     v
++-----------------------------------------+
+|           FastAPI / Web Router          |
++-----------------------------------------+
+                     |
+                     v
++-----------------------------------------+
+|           Database / ORM layer          |
++-----------------------------------------+`,
+        english: "This module ensures that developers build reliable backend services that adhere to industrial PEP and clean architecture design principles.",
+        telugu: "Ee backend module scale-up configurations, robust systems build cheyyadaniki, business logic control flows design cheyyadaniki chala clear specifications standard protocols provide chesthundi.",
+        analogy: "రైలు పట్టాల లాంటిది. రైలు (డేటా రిక్వెస్ట్స్) వేగంగా వెళ్ళడానికి పట్టాలు (ఫోల్డర్ ఆర్కిటెక్చర్) కరెక్ట్‌గా ఉండాలి.",
+        hrms: "HRMS సిస్టమ్‌లో యూజర్ లాగిన్ డీటెయిల్స్, శాలరీ రికార్డ్స్ డేటాబేస్ కి కనెక్ట్ చేయడానికి ఇది ఉపయోగపడుతుంది.",
+        payroll: "పేరోల్ కాలిక్యులేషన్స్ లో పన్నులు, పీఎఫ్ కటింగ్స్ లెక్కించడానికి ఈ మోడ్యూల్ సహాయపడుతుంది.",
+        beginner: "మొదట చిన్న వేరియబుల్స్ రాయడం నేర్చుకోండి, తర్వాత డేటాబేస్ కి కనెక్ట్ చేయండి.",
+        advanced: "అడ్వాన్స్డ్ డెవలపర్స్ మల్టీ-త్రెడింగ్, కనెక్షన్ పూలింగ్ మరియు డాకర్ కంటైనర్స్ వాడతారు.",
+        code: `import asyncio
+
+async def main():
+    print("Initiating enterprise service...")
+    await asyncio.sleep(1)
+    print("System active and running.")
+
+asyncio.run(main())`,
+        codeFilename: "main_service.py",
+        bestPractices: [
+          "టైప్ హింట్స్ వాడండి.",
+          "పాస్‌వర్డ్స్ కోడ్‌లో రాయకుండా .env ఫైల్స్ ఉపయోగించండి.",
+          "ప్రతి కోడ్‌కి యూనిట్ టెస్ట్స్ రాయండి."
+        ],
+        commonMistakes: [
+          "క్లీన్ ఫోల్డర్ స్ట్రక్చర్ వాడకపోవడం.",
+          "డేటాబేస్ కనెక్షన్ క్లోజ్ చేయకపోవడం.",
+          "సెక్యూరిటీ కీస్ పబ్లిక్ గా ఉంచడం."
+        ],
+        performanceTips: [
+          "రెడిస్ క్యాచింగ్ ఉపయోగించండి.",
+          "నాన్-బ్లాకింగ్ ఏసింక్ డేటాబేస్ లైబ్రరీస్ వాడండి.",
+          "మెమరీ లీక్స్ లేకుండా చూసుకోండి."
+        ],
+        interviews: [
+          {
+            q: "How does SQLAlchemy handle session connections?",
+            a: "SQLAlchemy uses a Session object which represents a transactional context. We yield the session in dependency injection and commit it when the transaction succeeds, or roll it back on exceptions."
+          }
+        ],
+        challenge: {
+          desc: "Implement a validated search endpoint structure with proper return models.",
+          reqs: ["Type annotations are required.", "Handle validation exceptions cleanly."]
+        },
+        miniProject: {
+          desc: "Mini REST Employee Directory Service",
+          steps: [
+            "Configure standard routers.",
+            "Write Pydantic schema schemas.",
+            "Implement basic database repository calls."
+          ]
+        },
+        summary: "Understanding these engineering standards prepares backend developers to build, test, and deploy clean, maintainable, and highly concurrent web services."
+      };
+    }
+
     return {
       id: selectedTopicId,
       name: selectedTopicId.replace(/-/g, ' ').toUpperCase(),
@@ -238,7 +330,7 @@ asyncio.run(main())`,
       },
       summary: "Understanding these engineering standards prepares backend developers to build, test, and deploy clean, maintainable, and highly concurrent web services."
     };
-  }, [selectedTopicId, loadedTopicsMap, expandedChapter]);
+  }, [selectedTopicId, loadedTopicsMap, expandedChapter, lang]);
 
   // Handle Search Filtering
   const filteredChapters = useMemo(() => {
@@ -404,25 +496,31 @@ asyncio.run(main())`,
       {/* Portal Header */}
       <div className="PythonPortalHeader">
         <div className="PythonHeaderTitle">
-          <div className="PythonBadge">Python Backend Roadmap</div>
+          <div className="PythonBadge">{lang === 'te' ? 'పైథాన్ బ్యాకెండ్ రథం' : 'Python Backend Roadmap'}</div>
           <h1>
             <span role="img" aria-label="python">🐍</span>
-            Python Backend Masterclass Portal
+            {lang === 'te' ? 'పైథాన్ బ్యాకెండ్ మాస్టర్‌క్లాస్ పోర్టల్' : 'Python Backend Masterclass Portal'}
           </h1>
-          <p>Learn core Python, OOP, Databases, FastAPI APIs, Security, and Production Deployment workflows.</p>
+          <p>
+            {lang === 'te' 
+              ? 'కోర్ పైథాన్, ఊప్స్, డేటాబేస్లు, ఫాస్ట్ ఏపీఐలు, సెక్యూరిటీ మరియు డిప్లాయ్మెంట్ నేర్చుకోండి.' 
+              : 'Learn core Python, OOP, Databases, FastAPI APIs, Security, and Production Deployment workflows.'}
+          </p>
         </div>
         <div className="PythonHeaderActions">
           {/* Progress Tracker Info */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#f0f9ff', padding: '6px 12px', borderRadius: '6px', border: '1px solid #bae6fd' }}>
             <MdCheckCircle style={{ color: '#0284c7' }} />
-            <span style={{ fontSize: '13px', fontWeight: '700', color: '#0369a1' }}>Progress: {totalLoadedCompleted} Topics Cleared</span>
+            <span style={{ fontSize: '13px', fontWeight: '700', color: '#0369a1' }}>
+              {lang === 'te' ? `ప్రోగ్రెస్: ${totalLoadedCompleted} కంప్లీట్` : `Progress: ${totalLoadedCompleted} Topics Cleared`}
+            </span>
           </div>
           {/* Search bar */}
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
             <MdSearch style={{ position: 'absolute', left: '10px', color: '#64748b' }} />
             <input 
               type="text" 
-              placeholder="Search curriculum..."
+              placeholder={lang === 'te' ? 'సెర్చ్ చేయండి...' : 'Search curriculum...'}
               className="PythonSearchInput"
               style={{ paddingLeft: '32px' }}
               value={searchQuery}
@@ -453,7 +551,7 @@ asyncio.run(main())`,
         {/* Navigation Sidebar (25 Chapters) */}
         <div className="PythonSidebar">
           <div className="PythonSidebarTitle">
-            <span>Course Chapters</span>
+            <span>{lang === 'te' ? 'కోర్సు చాప్టర్లు' : 'Course Chapters'}</span>
             <span style={{ fontSize: '11px', color: '#94a3b8' }}>25 Chapters</span>
           </div>
           <div className="SidebarButtonsList">
@@ -510,7 +608,9 @@ asyncio.run(main())`,
               <div className="TopicCardTitle">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#0284c7', marginBottom: '6px' }}>
                   <MdCode />
-                  <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Topic Guide</span>
+                  <span style={{ fontSize: '12px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    {lang === 'te' ? 'టాపిక్ గైడ్' : 'Topic Guide'}
+                  </span>
                 </div>
                 <h2>{activeTopic.name}</h2>
                 <p>{activeTopic.description}</p>
@@ -518,7 +618,7 @@ asyncio.run(main())`,
               {completedTopics[activeTopic.id] && (
                 <div className="ProgressStatusBadge">
                   <MdCheck />
-                  Completed
+                  {lang === 'te' ? 'పూర్తయింది' : 'Completed'}
                 </div>
               )}
             </div>
@@ -527,20 +627,20 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdInfoOutline />
-                Core Concept Details
+                {lang === 'te' ? 'కాన్సెప్ట్ వివరాలు' : 'Core Concept Details'}
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <p style={{ margin: 0, fontSize: '14.5px', lineHeight: '1.6', color: '#334155' }}>
-                  <strong>What is it?</strong> {activeTopic.what}
+                  <strong>{lang === 'te' ? 'ఇది ఏమిటి? (What):' : 'What is it?'}</strong> {activeTopic.what}
                 </p>
                 <p style={{ margin: 0, fontSize: '14.5px', lineHeight: '1.6', color: '#334155' }}>
-                  <strong>Why do we use it?</strong> {activeTopic.why}
+                  <strong>{lang === 'te' ? 'ఎందుకు వాడతాము? (Why):' : 'Why do we use it?'}</strong> {activeTopic.why}
                 </p>
                 <p style={{ margin: 0, fontSize: '14.5px', lineHeight: '1.6', color: '#334155' }}>
-                  <strong>When should we use it?</strong> {activeTopic.when}
+                  <strong>{lang === 'te' ? 'ఎప్పుడు వాడాలి? (When):' : 'When should we use it?'}</strong> {activeTopic.when}
                 </p>
                 <p style={{ margin: 0, fontSize: '14.5px', lineHeight: '1.6', color: '#334155' }}>
-                  <strong>How does it work internally?</strong> {activeTopic.internal}
+                  <strong>{lang === 'te' ? 'ఇంటర్నల్ వర్కింగ్ (Internal):' : 'How does it work internally?'}</strong> {activeTopic.internal}
                 </p>
               </div>
             </div>
@@ -549,48 +649,55 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdAutorenew />
-                System Flow Diagram
+                {lang === 'te' ? 'ఫ్లోచార్ట్ డయాగ్రాం' : 'System Flow Diagram'}
               </h3>
               <div className="AsciiDiagramContainer">
                 <pre className="AsciiDiagram">{activeTopic.flowDiagram}</pre>
               </div>
             </div>
 
-            {/* Double-column description (English vs Telugu) */}
+            {/* Dynamic Concept Explanation */}
             <div className="SubTopicSection">
               <h3>
                 <MdPlayCircleOutline />
-                Concept Explanations
+                {lang === 'te' ? 'సులభమైన వివరణ' : 'Concept Explanations'}
               </h3>
-              <div className="DualColumnExplanation">
-                <div className="ExplanationColumn">
-                  <h4>English Explanation</h4>
-                  <p>{activeTopic.english}</p>
+              {lang === 'te' ? (
+                <div style={{ background: '#fffdf0', border: '1px solid #f0d776', padding: '16px', borderRadius: '8px', color: '#856404' }}>
+                  <h4 style={{ margin: '0 0 6px', fontWeight: '700' }}>💡 తెలుగు వివరణ (Tanglish)</h4>
+                  <p style={{ margin: 0, fontSize: '14.5px', lineHeight: '1.65' }}>{activeTopic.telugu}</p>
                 </div>
-                <div className="ExplanationColumn telugu">
-                  <h4>Telugu Explanation (Tanglish)</h4>
-                  <p>{activeTopic.telugu}</p>
+              ) : (
+                <div className="DualColumnExplanation">
+                  <div className="ExplanationColumn">
+                    <h4>English Explanation</h4>
+                    <p>{activeTopic.english}</p>
+                  </div>
+                  <div className="ExplanationColumn telugu">
+                    <h4>Telugu Explanation (Tanglish)</h4>
+                    <p>{activeTopic.telugu}</p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Analogies and Case Studies */}
             <div className="SubTopicSection">
               <h3>
                 <MdInfoOutline />
-                Real-Time Case Studies & Analogies
+                {lang === 'te' ? 'రియల్-టైమ్ కేస్ స్టడీస్ & అనలాగి' : 'Real-Time Case Studies & Analogies'}
               </h3>
               <div className="AnalogyGrid">
                 <div className="AnalogyCard">
-                  <h4>Real-Time Analogy</h4>
+                  <h4>{lang === 'te' ? 'రియల్-టైమ్ పోలిక (Analogy)' : 'Real-Time Analogy'}</h4>
                   <p>{activeTopic.analogy}</p>
                 </div>
                 <div className="AnalogyCard">
-                  <h4>HRMS Case Study</h4>
+                  <h4>{lang === 'te' ? 'HRMS ఉపయోగం' : 'HRMS Case Study'}</h4>
                   <p>{activeTopic.hrms}</p>
                 </div>
                 <div className="AnalogyCard">
-                  <h4>Payroll Case Study</h4>
+                  <h4>{lang === 'te' ? 'పేరోల్ ఉపయోగం' : 'Payroll Case Study'}</h4>
                   <p>{activeTopic.payroll}</p>
                 </div>
               </div>
@@ -600,15 +707,15 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdHelpOutline />
-                Depth Explanations
+                {lang === 'te' ? 'స్థాయి వివరణలు (Levels)' : 'Depth Explanations'}
               </h3>
               <div className="DepthExplanationGrid">
                 <div className="DepthCard beginner">
-                  <h4>Beginner Explanation</h4>
+                  <h4>{lang === 'te' ? 'బిగినర్స్ వివరణ' : 'Beginner Explanation'}</h4>
                   <p>{activeTopic.beginner}</p>
                 </div>
                 <div className="DepthCard advanced">
-                  <h4>Advanced Explanation</h4>
+                  <h4>{lang === 'te' ? 'అడ్వాన్స్డ్ వివరణ' : 'Advanced Explanation'}</h4>
                   <p>{activeTopic.advanced}</p>
                 </div>
               </div>
@@ -618,7 +725,7 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdCode />
-                Code Implementation
+                {lang === 'te' ? 'కోడ్ ఉదాహరణ' : 'Code Implementation'}
               </h3>
               <div className="PythonCodeContainer">
                 <div className="PythonCodeHeader">
@@ -650,23 +757,23 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdBuild />
-                Engineering Best Practices
+                {lang === 'te' ? 'ఉత్తమ పద్ధతులు & తప్పులు (Best Practices)' : 'Engineering Best Practices'}
               </h3>
               <div className="BestPracticesGrid">
                 <div className="BestPracticesCard success">
-                  <h4>Best Practices</h4>
+                  <h4>{lang === 'te' ? 'ఉత్తమ పద్ధతులు' : 'Best Practices'}</h4>
                   <ul>
                     {activeTopic.bestPractices.map((bp, i) => <li key={i}>{bp}</li>)}
                   </ul>
                 </div>
                 <div className="BestPracticesCard danger">
-                  <h4>Common Mistakes</h4>
+                  <h4>{lang === 'te' ? 'సాధారణ తప్పులు' : 'Common Mistakes'}</h4>
                   <ul>
                     {activeTopic.commonMistakes.map((cm, i) => <li key={i}>{cm}</li>)}
                   </ul>
                 </div>
                 <div className="BestPracticesCard warning">
-                  <h4>Performance Tips</h4>
+                  <h4>{lang === 'te' ? 'పెర్ఫార్మెన్స్ టిప్స్' : 'Performance Tips'}</h4>
                   <ul>
                     {activeTopic.performanceTips.map((pt, i) => <li key={i}>{pt}</li>)}
                   </ul>
@@ -678,7 +785,7 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdHelpOutline />
-                Technical Interview Q&A
+                {lang === 'te' ? 'ఇంటర్వ్యూ ప్రశ్నలు & సమాధానాలు' : 'Technical Interview Q&A'}
               </h3>
               <div className="InterviewList">
                 {activeTopic.interviews.map((item, index) => (
@@ -694,21 +801,21 @@ asyncio.run(main())`,
             <div className="SubTopicSection">
               <h3>
                 <MdInput />
-                Practice & Assessment
+                {lang === 'te' ? 'ప్రాక్టీస్ ఛాలెంజ్' : 'Practice & Assessment'}
               </h3>
               <div className="PracticeGrid">
                 <div className="PracticeCard">
-                  <h4>Coding Challenge</h4>
+                  <h4>{lang === 'te' ? 'కోడింగ్ ఛాలెంజ్' : 'Coding Challenge'}</h4>
                   <p>{activeTopic.challenge.desc}</p>
-                  <h5>Requirements:</h5>
+                  <h5>{lang === 'te' ? 'నిబంధనలు:' : 'Requirements:'}</h5>
                   <ul>
                     {activeTopic.challenge.reqs.map((req, i) => <li key={i}>{req}</li>)}
                   </ul>
                 </div>
                 <div className="PracticeCard">
-                  <h4>Mini Project</h4>
+                  <h4>{lang === 'te' ? 'మినీ ప్రాజెక్ట్' : 'Mini Project'}</h4>
                   <p>{activeTopic.miniProject.desc}</p>
-                  <h5>Implementation Steps:</h5>
+                  <h5>{lang === 'te' ? 'డెవలప్‌మెంట్ స్టెప్స్:' : 'Implementation Steps:'}</h5>
                   <ul>
                     {activeTopic.miniProject.steps.map((st, i) => <li key={i}>{st}</li>)}
                   </ul>
@@ -719,7 +826,7 @@ asyncio.run(main())`,
             {/* Topic Summary */}
             <div className="SubTopicSection">
               <div className="SummaryBox">
-                <p><strong>Summary:</strong> {activeTopic.summary}</p>
+                <p><strong>{lang === 'te' ? 'సారాంశం (Summary):' : 'Summary:'}</strong> {activeTopic.summary}</p>
               </div>
             </div>
 
