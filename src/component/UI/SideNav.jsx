@@ -24,6 +24,7 @@ const SideNav = () => {
   const menuItems = [
     { text: 'Frontend UI Masterclass', path: '/dashboard/frontend-masterclass', icon: <FaLaptopCode /> },
     { text: 'HRMS Developer Learning Hub', path: '/dashboard/learning-hub', icon: <MdMenuBook /> },
+    { text: 'MERN Stack Basics to Advance', path: '/dashboard/mern-basics-to-advance', icon: <FaLaptopCode /> },
     { text: 'Python Basics to Advance', path: '/dashboard/python-basics-to-advance', icon: <MdMenuBook /> },
     { text: 'Django & SQL Basics to Advance', path: '/dashboard/django-sql-basics-to-advance', icon: <MdMenuBook /> },
     { text: 'JavaScript', path: '/dashboard/jsindex', icon: <FaSquareJs /> },

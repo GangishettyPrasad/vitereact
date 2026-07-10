@@ -14,6 +14,7 @@ import ProjectBoilerplate from "./Notes_Documentation/ProjectBoilerplate";
 import PythonBackendPortal from "./Notes_Documentation/PythonBackendPortal";
 import PythonBasicsToAdvance from "./Notes_Documentation/PythonBasicsToAdvance";
 import DjangoSqlBasicsToAdvance from "./Notes_Documentation/DjangoSqlBasicsToAdvance";
+import MernBasicsToAdvance from "./Notes_Documentation/MernBasicsToAdvance";
 
 // import Index from './pages/JS/Index';
 // import GitGuide from './pages/GitGuide';
@@ -24,6 +25,11 @@ import DjangoSqlBasicsToAdvance from "./Notes_Documentation/DjangoSqlBasicsToAdv
 // import ReactHookForm from './pages/React/ReactHookForm';
 
 const dashboardRoutes = [
+  {
+    path: 'mern-basics-to-advance',
+    element: <MernBasicsToAdvance />,
+    roles: ['admin', 'user'],
+  },
   {
     path: 'django-sql-basics-to-advance',
     element: <DjangoSqlBasicsToAdvance />,
